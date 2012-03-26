@@ -11,7 +11,7 @@ package
 		
 		public function EVTest() 
 		{
-			
+			trace("testtest");
 		}
 		
 	}

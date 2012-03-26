@@ -1,4 +1,9 @@
 
 *.as3proj
+
+/bin/*.swf
+/bin/*.html
+/bin/js/*.js
+
 /obj
-/bin
+
