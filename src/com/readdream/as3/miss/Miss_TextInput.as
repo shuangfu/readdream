@@ -3,6 +3,7 @@ package com.readdream.as3.miss
 	import com.greensock.plugins.TintPlugin;
 	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenLite;
+	import com.greensock.TweenMax;
 	import com.readdream.as3.robot.Robot_TextFormater;
 	import flash.display.LineScaleMode;
 	import flash.display.Shape;
@@ -85,6 +86,9 @@ package com.readdream.as3.miss
 			{
 				//set font style to UNFOCUS
 				textField.text = _defaultText;
+			} else {
+				//set textField to blur
+				TweenMax.to(textField, 0.25, {blurFilter:{blurX:2, blurY:2, quality:3}});
 			}
 			textField.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_UNFOCUS));
 			////////////////////
@@ -108,6 +112,8 @@ package com.readdream.as3.miss
 			if (textField.text == _defaultText) 
 			{
 				textField.text = "";
+			} else {
+				TweenMax.to(textField, 0.25, {blurFilter:{blurX:0, blurY:0}});
 			}
 			
 		}
