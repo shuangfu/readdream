@@ -1,5 +1,6 @@
 package com.readdream.as3.miss 
 {
+	import com.readdream.as3.robot.Robot_TextFormater;
 	import flash.display.LineScaleMode;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -21,22 +22,21 @@ package com.readdream.as3.miss
 	{
 		private var _tiWidth:Number;
 		private var _tiHeight:Number
-		private var _wordType:String;
 		private var _psw:Boolean;
 		private var _textSize:Number;
 		private var borderShape:Shape;
-
+		private var _defaultText:String;
 		
 		private var textField:TextField;
-		private var textFont:TextFormat;
 		
-		public function Miss_TextInput(_tiWidth:Number = 120, _tiHeight:Number = 35 , _wordType:String = "nomal", _psw:Boolean = false, _textSize:Number = 12) 
+		
+		public function Miss_TextInput(_tiWidth:Number = 120, _tiHeight:Number = 35 , _psw:Boolean = false, _textSize:Number = 12,_defaultText:String = "默认文本") 
 		{
 			this._tiWidth = _tiWidth;
 			this._tiHeight = _tiHeight;
-			this._wordType = _wordType;
 			this._psw = _psw;
 			this._textSize = _textSize;
+			this._defaultText = _defaultText;
 			
 			drawBorder();
 			addTextField();
@@ -54,7 +54,20 @@ package com.readdream.as3.miss
 		private function focusOutHandler(e:FocusEvent):void 
 		{
 			//remove KEY_DOWN event listener
-			stage.removeEventListener(KeyboardEvent.KEY_DOWN,keyDownHandler);
+			if (this.stage) 
+			{
+				if (stage.hasEventListener(KeyboardEvent.KEY_DOWN)) {
+					stage.removeEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+				}
+			}
+			
+			//whether has content
+			if (textField.text == null || textField.text == "") 
+			{
+				//set font style to UNFOCUS
+				textField.text = _defaultText;
+			}
+			textField.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_UNFOCUS));
 		}
 		
 		private function mouseClickHandler(e:MouseEvent):void 
@@ -62,7 +75,16 @@ package com.readdream.as3.miss
 			stage.focus = textField;
 			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			////////////////////
-			//apply effect
+			//apply border effect
+			
+			////////////////////
+			//apply text font style
+			textField.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_FOCUS));
+			textField.defaultTextFormat = Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_FOCUS);
+			if (textField.text == _defaultText) 
+			{
+				textField.text = "";
+			}
 			
 		}
 		
@@ -80,33 +102,28 @@ package com.readdream.as3.miss
 		
 		private function addTextField():void 
 		{
-			//font settings
-			textFont = new TextFormat();
-			textFont.size = _textSize;
-			textFont.color = 0x000000;
-			textFont.font = "宋体" ;
-			
-			
 			//text field init
 			textField = new TextField();
 			//textField.autoSize = TextFieldAutoSize.LEFT;
 			textField.autoSize = TextFieldAutoSize.NONE;
 			
-			textField.border = true;
-			textField.maxChars = Math.floor((_tiWidth - 40) / (_textSize * 2));
+			//textField.border = true;
+			textField.maxChars = Math.floor((_tiWidth - 40) / _textSize * 2);
 			//trace(textField.maxChars);
 			textField.multiline = false;
 			textField.type = TextFieldType.INPUT;
+
 			textField.displayAsPassword = _psw;
-			textField.setTextFormat(textFont);
-			textField.defaultTextFormat = textFont;
 			//textField.border = true;
-			textField.x = 20;
+			
 			textField.width = _tiWidth - 40;
-			textField.height = _textSize + 4;
+			textField.height = _textSize + 6;
 			textField.y = (_tiHeight - textField.height) / 2;
-			textField.text = "默认文字";
+			textField.x = 20;
 			addChild(textField);
+			
+			//init text style
+			focusOutHandler(null);
 		}
 		
 		private function drawBorder():void {
@@ -126,13 +143,7 @@ package com.readdream.as3.miss
 			borderShape.filters = filtersArray;
 		}
 		
-		private function showDefaultStatus():void {
-			
-		}
-		
-		
-		
-		
+
 		public function get tiHeight():Number 
 		{
 			return _tiHeight;
@@ -151,16 +162,6 @@ package com.readdream.as3.miss
 		public function set tiWidth(value:Number):void 
 		{
 			_tiWidth = value;
-		}
-		
-		public function get wordType():String 
-		{
-			return _wordType;
-		}
-		
-		public function set wordType(value:String):void 
-		{
-			_wordType = value;
 		}
 		
 		public function get psw():Boolean 
@@ -182,7 +183,5 @@ package com.readdream.as3.miss
 		{
 			_textSize = value;
 		}
-		
 	}
-
 }
