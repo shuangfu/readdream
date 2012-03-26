@@ -1,7 +1,11 @@
 name:			width		height
 
 Arrow			24		46		//左右耳朵箭头尺寸
+
 HotThumb		960		300		//热门活动缩略图尺寸
 HotThumb_image		700		280		//热门活动缩略图图片尺寸
 HotThumb_comp		700		100		//热门活动缩略图说明尺寸
 
+MatchThumb_true		480		480		//活动缩略图大号尺寸
+MatchThumb_false	240		200		//活动缩略图小号尺寸
+MatchThumb_true_pic	460		340		//活动缩略图大号内图片尺寸
