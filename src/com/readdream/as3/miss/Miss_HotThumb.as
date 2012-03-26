@@ -5,6 +5,7 @@ package com.readdream.as3.miss
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
 	import com.readdream.as3.robot.Robot_PicLoader;
+	import com.readdream.as3.robot.Robot_TextFormater;
 	import com.readdream.as3.VO.Vo_Match;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -88,15 +89,26 @@ package com.readdream.as3.miss
 		 * */
 		private function initData(obj:Vector.<Vo_Match>):void 
 		{
+			//把传入obj内容赋值给voMatch
 			voMatch = obj;
 			
-			for (; index < voMatch.length * 3; index++) //按照传入比赛活动个数复制三遍传入loader数组。
+			////////////////////////////////////////////
+			//按照传入比赛活动个数复制三遍传入loader数组。
+			for (; index < voMatch.length * 3; index++) 
 			{
 				trace(obj[index % obj.length].picture[0]);
 				loader.push(new Robot_PicLoader(obj[index % obj.length].picture[0], 0, 0, imageWidth, imageHeight));
+				
+				//////////////
+				//全部图片变暗
 				TweenMax.to(loader[index], 0.05, {colorTransform:{tint:0x000000, tintAmount:0.5}});
 			}
-			index = Math.floor(index / 2);//把图片下标移动到中间位置
+			//////////////////////////
+			//把图片下标移动到中间位置
+			index = Math.floor(index / 2);
+			
+			///////////////////
+			//中间显示内容变亮
 			TweenMax.to(loader[index], 0.05, {colorTransform:{tint:0x000000, tintAmount:0}});
 		}
 		
@@ -105,7 +117,6 @@ package com.readdream.as3.miss
 		 * */
 		private function setMask():void 
 		{
-			
 			var masker:Miss_Masker = new Miss_Masker(hotThumbWidth - (gap * 2), hotThumbHeight - (gap * 2) );
 			this.mask = masker;
 			masker.x = 10;
@@ -118,11 +129,14 @@ package com.readdream.as3.miss
 		 * */		
 		private function setupImage():void 
 		{
-			
+			////////////////////////
+			//所有图片加载到父容器内
 			for (temp = -3 ; temp < 3; temp++) {
 				addChildAt(loader[(index + temp + loader.length) % loader.length], 0);
 			}
 			
+			////////////////////////
+			//初始化最初显示图片位置
 			TweenLite.to(loader[(index - 3 + loader.length) % loader.length], 0.01, { x: left2FlankImageX, y: allImageY, ease: Linear.easeNone } )
 			TweenLite.to(loader[(index - 2 + loader.length) % loader.length], 0.01, { x: left2FlankImageX, y: allImageY, ease: Linear.easeNone } )
 			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], 0.01, { x: leftFlankImageX, y: allImageY, ease: Linear.easeNone } )
@@ -136,6 +150,8 @@ package com.readdream.as3.miss
 		 */
 		private function setupLabelComp():void 
 		{
+			//////////////////////
+			//创建活动内容显示对象
 			labelComp = new Sprite();
 			labelComp.x = 0;
 			labelComp.y = compY;
@@ -143,10 +159,14 @@ package com.readdream.as3.miss
 			labelComp.graphics.drawRect(0,0,imageWidth,compHeight);
 			labelComp.graphics.endFill();
 			
+			//////////////////
+			//添加当前活动图标
 			matchIcon = new Robot_PicLoader(voMatch[index % voMatch.length].matchIcon, 0, 0, iconWidth, iconHeight);
 			matchIcon.x = iconX;
 			matchIcon.y = iconY;
 			
+			//////////////
+			//添加活动标题
 			MatchTitle = new TextField();
 			MatchTitle.x = iconX + matchIcon.width +20;
 			MatchTitle.y = 20;
@@ -154,6 +174,8 @@ package com.readdream.as3.miss
 			MatchTitle.width = imageWidth -iconX -matchIcon.width - 20;
 			MatchTitle.text = voMatch[index % voMatch.length].matchTitle;
 			
+			//////////////
+			//添加活动简介
 			MatchComp = new TextField();
 			MatchComp.text = "        "+ voMatch[index % voMatch.length].matchComp;
 			MatchComp.x = 0;
@@ -162,17 +184,10 @@ package com.readdream.as3.miss
 			MatchComp.width = imageWidth;
 			MatchComp.wordWrap = true;
 			
-			var TitleFormat:TextFormat = new TextFormat();
-			TitleFormat.size = 21;
-			TitleFormat.bold = true;
-			TitleFormat.color = 0xFFFFFF;
-			
-			var ContentFormat:TextFormat = new TextFormat();
-			ContentFormat.size = 12;
-			ContentFormat.color = 0x989898;
-
-			MatchTitle.setTextFormat(TitleFormat);
-			MatchComp.setTextFormat(ContentFormat);
+			//////////////
+			//设置文字格式
+			MatchTitle.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.HOTTHUMB_MATCHTITLE));
+			MatchComp.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.HOTTHUMB_MATCHCOMP));
 			
 			labelComp.addChild(matchIcon);
 			labelComp.addChild(MatchTitle);
@@ -180,6 +195,8 @@ package com.readdream.as3.miss
 			
 			loader[index%loader.length].addChild(labelComp);
 			
+			/////////////////////////////////////////////////////////
+			//监听鼠标移入&移出当前活动图片事件(弹出活动内容显示对象)
 			loader[index%loader.length].addEventListener(MouseEvent.ROLL_OVER, LoaderMouseRollOverHandler);
 			loader[index%loader.length].addEventListener(MouseEvent.ROLL_OUT, LoaderMouseRollOutHandler);
 		}
@@ -207,9 +224,13 @@ package com.readdream.as3.miss
 		 */
 		private function setupArrow():void 
 		{
+			//////////////
+			//添加箭头按钮
 			buttonArrow = new Miss_Arrow(gap, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2), hotThumbWidth - Miss_Arrow.arrowWidth - gap , hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2));
 			addChild(buttonArrow);
 			
+			//////////////////
+			//监听箭头点击事件
 			buttonArrow.LeftSelect.addEventListener(MouseEvent.CLICK, leftSelectClickHandler);
 			buttonArrow.RightSelect.addEventListener(MouseEvent.CLICK, rightSelectClickHandler);
 		}
@@ -220,18 +241,31 @@ package com.readdream.as3.miss
 		 */
 		private function leftSelectClickHandler(e:MouseEvent):void 
 		{
+			////////////////////////////////
+			//移除箭头点击事件，防止连续点击
 			buttonArrow.LeftSelect.removeEventListener(MouseEvent.CLICK, leftSelectClickHandler);
 			buttonArrow.RightSelect.removeEventListener(MouseEvent.CLICK, rightSelectClickHandler);	
+			
+			//////////////////////
+			//当先显示图片下标偏移
 			index--;
+			
+			////////////////////////////
+			//如果为负数进行修正以防溢出
 			if (index < 0) {
 				index = loader.length - 1;
 			}			
+			
+			//////////////////////////////////////////
+			//如果当前下标前两张图片为空，即创建该对象
 			if (loader[(index - 2 + loader.length) % loader.length].parent == null) {
 				loader[(index - 2 + loader.length) % loader.length].x = left2FlankImageX;
 				loader[(index - 2 + loader.length) % loader.length].y = allImageY;
 				addChildAt(loader[(index - 2 + loader.length) % loader.length],0);
 			}
 			
+			////////////////////////
+			//控制图片移动和变换颜色
 			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, { x: leftFlankImageX, y: allImageY, ease: Linear.easeNone,onComplete:onCompleteHandler } ); //最左边移动到左边
 			TweenMax.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//左边变黑
 			TweenLite.to(loader[(index + loader.length) % loader.length], rollEffect, { x: centerImageX, y: allImageY,  ease: Linear.easeNone } );//左边移动到中间
@@ -240,9 +274,16 @@ package com.readdream.as3.miss
 			TweenMax.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//右边变黑
 			TweenLite.to(loader[(index + 2 + loader.length) % loader.length], rollEffect, { x: right2FlankImageX, y: allImageY, ease: Linear.easeNone } );//右边移动到最右边
 			
+			////////////////////
+			//设置最前面图片位置
 			loader[(index - 2 + loader.length) % loader.length].x = left2FlankImageX;
 			loader[(index - 2 + loader.length) % loader.length].y = allImageY;
+			
+			
 			setupLabelComp();
+			
+			///////////////////////////////////////////
+			//卸载后面事件对于弹出活动内容显示对象的监听			
 			if(loader[(index + 1 + loader.length) % loader.length].hasEventListener(MouseEvent.ROLL_OVER)){
 				loader[	(index + 1 + loader.length) % loader.length].removeEventListener(MouseEvent.ROLL_OVER, LoaderMouseRollOverHandler);
 				loader[	(index + 1 + loader.length) % loader.length].removeEventListener(MouseEvent.ROLL_OUT, LoaderMouseRollOutHandler);
@@ -255,15 +296,25 @@ package com.readdream.as3.miss
 		 */
 		private function rightSelectClickHandler(e:MouseEvent):void 
 		{
+			////////////////////////////////
+			//移除箭头点击事件，防止连续点击
 			buttonArrow.LeftSelect.removeEventListener(MouseEvent.CLICK, leftSelectClickHandler);
 			buttonArrow.RightSelect.removeEventListener(MouseEvent.CLICK, rightSelectClickHandler);	
+			
+			//////////////////////
+			//当先显示图片下标偏移
 			index++;
+
+			//////////////////////////////////////////
+			//如果当前下标前两张图片为空，即创建该对象
 			if (loader[(index + 2 + loader.length) % loader.length].parent == null) {
 				loader[(index + 2 + loader.length) % loader.length].x = right2FlankImageX;
 				loader[(index + 2 + loader.length) % loader.length].y = allImageY;
 				addChildAt(loader[(index + 2 + loader.length) % loader.length],0);
 			}
 			
+			////////////////////////
+			//控制图片移动和变换颜色
 			TweenLite.to(loader[(index - 2 + loader.length) % loader.length], rollEffect, { x: left2FlankImageX, y: allImageY, ease: Linear.easeNone,onComplete:onCompleteHandler } );//左边移动到最左边
 			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, { x: leftFlankImageX, y: allImageY, ease: Linear.easeNone } ); //中间移动到左边
 			TweenMax.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//左边变黑
@@ -272,12 +323,15 @@ package com.readdream.as3.miss
 			TweenLite.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, { x: rightFlankImageX, y: allImageY, ease: Linear.easeNone } );//最右边移动到右边
 			TweenMax.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//右边变黑
 			
+			////////////////////
+			//设置最前面图片位置
 			loader[(index + 2 + loader.length) % loader.length].x = right2FlankImageX;
 			loader[(index + 2 + loader.length) % loader.length].y = allImageY;
-			setupLabelComp();
-			loader[(index - 1 + loader.length) % loader.length].removeEventListener(MouseEvent.ROLL_OVER, LoaderMouseRollOverHandler);
-			loader[(index - 1 + loader.length) % loader.length].removeEventListener(MouseEvent.ROLL_OUT, LoaderMouseRollOutHandler);
 			
+			setupLabelComp();
+			
+			///////////////////////////////////////////
+			//卸载后面事件对于弹出活动内容显示对象的监听	
 			if(loader[(index - 1 + loader.length) % loader.length].hasEventListener(MouseEvent.ROLL_OVER)){
 				loader[(index - 1 + loader.length) % loader.length].removeEventListener(MouseEvent.ROLL_OVER, LoaderMouseRollOverHandler);
 				loader[(index - 1 + loader.length) % loader.length].removeEventListener(MouseEvent.ROLL_OUT, LoaderMouseRollOutHandler);
