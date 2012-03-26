@@ -1,5 +1,8 @@
 package com.readdream.as3.miss 
 {
+	import com.greensock.plugins.TintPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	import com.greensock.TweenLite;
 	import com.readdream.as3.robot.Robot_TextFormater;
 	import flash.display.LineScaleMode;
 	import flash.display.Shape;
@@ -22,33 +25,49 @@ package com.readdream.as3.miss
 	{
 		private var _tiWidth:Number;
 		private var _tiHeight:Number
-		private var _psw:Boolean;
 		private var _textSize:Number;
 		private var borderShape:Shape;
 		private var _defaultText:String;
-		
+		private var _contentType:String;
 		private var textField:TextField;
 		
 		
-		public function Miss_TextInput(_tiWidth:Number = 120, _tiHeight:Number = 35 , _psw:Boolean = false, _textSize:Number = 12,_defaultText:String = "默认文本") 
+		public function Miss_TextInput(_tiWidth:Number = 120, _tiHeight:Number = 35 , _textSize:Number = 12,_defaultText:String = "默认文本",_contentType:String = "normal") 
 		{
 			this._tiWidth = _tiWidth;
 			this._tiHeight = _tiHeight;
-			this._psw = _psw;
 			this._textSize = _textSize;
 			this._defaultText = _defaultText;
-			
+			this._contentType = _contentType;
+			TweenPlugin.activate([TintPlugin]);
 			drawBorder();
 			addTextField();
 			registerEvent();
+			
 		}
 		
 		private function registerEvent():void 
 		{
 			textField.addEventListener(FocusEvent.FOCUS_OUT, focusOutHandler);
 			this.addEventListener(MouseEvent.CLICK, mouseClickHandler);
-			//this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
-			//this.addEventListener(MouseEvent.ROLL_OVER,rollOverHandler);
+			this.addEventListener(MouseEvent.ROLL_OUT, rollOutHandler);
+			this.addEventListener(MouseEvent.ROLL_OVER,rollOverHandler);
+		}
+		
+		private function rollOverHandler(e:MouseEvent):void 
+		{
+			if (stage.focus != textField) 
+			{
+				TweenLite.to(borderShape, 0.3, {tint:0xa1a1a1});
+			}
+		}
+		
+		private function rollOutHandler(e:MouseEvent):void 
+		{
+			if (stage.focus != textField) 
+			{
+				TweenLite.to(borderShape, 0.3, {tint:0x000000});
+			}
 		}
 		
 		private function focusOutHandler(e:FocusEvent):void 
@@ -68,14 +87,19 @@ package com.readdream.as3.miss
 				textField.text = _defaultText;
 			}
 			textField.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_UNFOCUS));
+			////////////////////
+			//apply border effect
+			TweenLite.to(borderShape, 0.3, {tint:0x000000});
 		}
 		
 		private function mouseClickHandler(e:MouseEvent):void 
 		{
-			stage.focus = textField;
-			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			////////////////////
 			//apply border effect
+			TweenLite.to(borderShape, 0.3, { tint:0x5080D8 } );
+			
+			stage.focus = textField;
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
 			
 			////////////////////
 			//apply text font style
@@ -104,6 +128,21 @@ package com.readdream.as3.miss
 		{
 			//text field init
 			textField = new TextField();
+			//content type email / password / normal
+			switch (_contentType) 
+			{
+				case "email":
+					textField.restrict = "a-zA-Z0-9_\\-@\\.";
+				break;
+				case "password":
+					textField.displayAsPassword = true;
+				break;
+				case "normal":
+					
+				break;
+				default:
+			}
+			
 			//textField.autoSize = TextFieldAutoSize.LEFT;
 			textField.autoSize = TextFieldAutoSize.NONE;
 			
@@ -113,7 +152,7 @@ package com.readdream.as3.miss
 			textField.multiline = false;
 			textField.type = TextFieldType.INPUT;
 
-			textField.displayAsPassword = _psw;
+			
 			//textField.border = true;
 			
 			textField.width = _tiWidth - 40;
@@ -138,7 +177,7 @@ package com.readdream.as3.miss
 			addChild(borderShape);
 			
 			//add filter
-			var dropShadow:DropShadowFilter = new DropShadowFilter(2,75,0x000000,0.8,4,4,0.3,1); 
+			var dropShadow:DropShadowFilter = new DropShadowFilter(2,75,0x000000,0.8,4,4,0.4,1); 
 			var filtersArray:Array = new Array(dropShadow); 
 			borderShape.filters = filtersArray;
 		}
@@ -164,16 +203,6 @@ package com.readdream.as3.miss
 			_tiWidth = value;
 		}
 		
-		public function get psw():Boolean 
-		{
-			return _psw;
-		}
-		
-		public function set psw(value:Boolean):void 
-		{
-			_psw = value;
-		}
-		
 		public function get textSize():Number 
 		{
 			return _textSize;
@@ -182,6 +211,16 @@ package com.readdream.as3.miss
 		public function set textSize(value:Number):void 
 		{
 			_textSize = value;
+		}
+		
+		public function get contentType():String 
+		{
+			return _contentType;
+		}
+		
+		public function set contentType(value:String):void 
+		{
+			_contentType = value;
 		}
 	}
 }

@@ -17,7 +17,7 @@ package
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			var ti:Miss_TextInput = new Miss_TextInput(230,30);
+			var ti:Miss_TextInput = new Miss_TextInput(230,30,13,"hi","email");
 			//ti.width = 150;
 			//ti.height = 35;
 			addChild(ti);
