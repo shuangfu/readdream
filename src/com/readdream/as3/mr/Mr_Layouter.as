@@ -8,10 +8,11 @@ package com.readdream.as3.mr
 	 */
 	public class Mr_Layouter 
 	{
-		private var _container : DisplayObjectContainer;
-		public function Mr_Layouter(_container:DisplayObjectContainer,dataArr:Array) 
+		public function Mr_Layouter() 
 		{
-			this._container = _container;
+			
+		}
+		public static function layouter(_container:DisplayObjectContainer,dataArr:Array) :void {
 			if (_container != null && dataArr != null) 
 			{
 				for each (var obj:Object in dataArr) 
@@ -22,17 +23,6 @@ package com.readdream.as3.mr
 				}
 			}
 		}
-		
-		public function get container():DisplayObjectContainer 
-		{
-			return _container;
-		}
-		
-		public function set container(value:DisplayObjectContainer):void 
-		{
-			_container = value;
-		}
-		
 	}
 
 }

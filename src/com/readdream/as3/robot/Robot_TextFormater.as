@@ -14,11 +14,18 @@ package com.readdream.as3.robot
 		public static const HOTTHUMB_MATCHCOMP:String = "hotthumb_matchcomp";
 		public static const TABBUTTON_TEXT:String = "tabbutton_text";
 		
+		public static const NAVIGATOR_NORMAL_BOLD:String = "navigator_normal_bold";
+		public static const NAVIGATOR_NORMAL_REGULAR:String = "navigator_normal_regular";
+		public static const NAVIGATOR_ACTIVED_BOLD:String = "navigator_actived_bold";
+		public static const NAVIGATOR_ACTIVED_REGULAR:String = "navigator_actived_regular";
+		public static const NAVIGATOR_MOUSEON_BOLD:String = "navigator_mouseOn_bold";
+		public static const NAVIGATOR_MOUSEON_REGULAR:String = "navigator_mouseOn_regular";
+		
+		
 		public function Robot_TextFormater()
 		{
 		
 		}
-		
 		public static function getTextFormat(formatType:String):TextFormat
 		{
 			var textFont :TextFormat;
@@ -49,7 +56,7 @@ package com.readdream.as3.robot
 				case "hotthumb_matchcomp":
 					//font settings
 					textFont = new TextFormat();
-					textFont.size = 12;
+					textFont.size = 14;
 					textFont.color = 0x989898;
 					textFont.font = "宋体";
 					return textFont;
@@ -61,6 +68,47 @@ package com.readdream.as3.robot
 					textFont.bold = true;
 					textFont.font = "宋体";
 					return textFont;
+				case "navigator_normal_bold":
+					textFont.font = "宋体";
+					textFont.bold = true;
+					return textFont;
+				case "navigator_normal_regular":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x000000;
+					textFont.font = "宋体";
+					return textFont;
+				case "navigator_actived_bold":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0xffffff;
+					textFont.font = "宋体";
+					textFont.bold = true;
+					return textFont;
+				case "navigator_actived_regular":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0xffffff;
+					textFont.font = "宋体";
+					return textFont;
+				case "navigator_mouseOn_bold":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x5080D8;
+					textFont.font = "宋体";
+					textFont.bold = true;
+					return textFont;
+				case "navigator_mouseOn_regular":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x5080D8;
+					textFont.font = "宋体";
+					textFont.bold = true;
 				default: 
 					return null;
 			}
@@ -68,3 +116,6 @@ package com.readdream.as3.robot
 	}
 
 }
+
+
+				
