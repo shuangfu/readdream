@@ -69,6 +69,10 @@ package com.readdream.as3.robot
 					textFont.font = "宋体";
 					return textFont;
 				case "navigator_normal_bold":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x000000;
 					textFont.font = "宋体";
 					textFont.bold = true;
 					return textFont;
