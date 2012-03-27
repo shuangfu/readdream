@@ -11,7 +11,6 @@ package com.readdream.as3.miss
 		
 		public function Miss_MatchThumb() 
 		{
-			super();
 			
 		}
 		

@@ -6,7 +6,7 @@ package com.readdream.as3.miss
 	import com.greensock.TweenMax;
 	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.robot.Robot_TextFormater;
-	import com.readdream.as3.VO.Vo_Match;
+	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
 	import flash.text.TextField;

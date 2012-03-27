@@ -23,7 +23,7 @@ package com.readdream.as3.miss
 		 * 左边箭头X坐标 int | 右箭头Y坐标 int | 右箭头X坐标 int | 右箭头Y坐标 int
 		 * 
 		 * */		
-		public function Miss_Arrow(leftArrowX:int,leftArrowY:int,rightArrowX:int,rightArrowY:int) 
+		public function Miss_Arrow(leftArrowX:Number,leftArrowY:Number,rightArrowX:Number,rightArrowY:Number) 
 		{
 			LeftNoSelect = new Robot_PicLoader("assets/LeftCircleNoSelect.png",leftArrowX, leftArrowY, 24, 46);
 			LeftSelect = new Robot_PicLoader("assets/LeftCircleSelect.png",leftArrowX, leftArrowY, 24, 46);

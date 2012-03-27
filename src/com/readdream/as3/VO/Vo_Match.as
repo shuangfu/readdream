@@ -1,4 +1,4 @@
-package com.readdream.as3.VO 
+package com.readdream.as3.vo 
 {
 	/**
 	 * Match实体类
