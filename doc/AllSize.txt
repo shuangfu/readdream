@@ -9,3 +9,5 @@ HotThumb_comp		700		100		//热门活动缩略图说明尺寸
 MatchThumb_true		480		480		//活动缩略图大号尺寸
 MatchThumb_false	240		200		//活动缩略图小号尺寸
 MatchThumb_true_pic	460		340		//活动缩略图大号内图片尺寸
+
+MatchReveal_picture	640		400		//活动内容图尺寸

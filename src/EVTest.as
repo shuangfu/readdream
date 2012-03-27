@@ -1,18 +1,24 @@
 package  
 {
 	import com.readdream.as3.miss.Miss_Arrow;
+	import com.readdream.as3.miss.Miss_BrokenLine;
 	import com.readdream.as3.miss.Miss_HotThumb;
+	import com.readdream.as3.miss.Miss_MatchReveal;
+	import com.readdream.as3.miss.Miss_TabButton;
 	import com.readdream.as3.robot.Robot_PicLoader;
-	import com.readdream.as3.VO.Vo_Match;
+	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
+	import flash.display.CapsStyle;
+    import flash.display.LineScaleMode;
+	import flash.geom.Point;
 	
 	/**
 	 * ...
 	 * @author evstar
 	 */
-	[SWF(width="960",height="300",frameRate="60",backgroundColor="#ffffff")]
+	[SWF(width="1440",height="900",frameRate="60",backgroundColor="#ffffff")]
 	public class EVTest extends Sprite 
 	{
 		
@@ -20,6 +26,42 @@ package
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
+			//test();
+			//helloMissHotThumb();
+			//helloMissTabButton();
+			helloMissMatchReveal();
+
+		}
+		
+		private function test():void 
+		{
+			Miss_BrokenLine.drawLine(graphics, new Point(50, 50), new Point(50, 65), 1, 0x000000, 1);
+		}
+		
+		private function helloMissMatchReveal():void 
+		{
+			var match:Vo_Match = new Vo_Match();
+			match.matchApplyUsers = 123;
+			match.matchTitle = "22度观察";
+			match.matchComp = "《22度观察》是深圳卫视2009年初重磅推出的新锐话题栏目。节目汇聚国内外政治、《22度观察》LOGO经济、文化等各领域精英翘楚，以新锐独到的全球化视角，对新闻热点和重大社会思潮展开深入、理性和建设性的探讨。《22度观察》从北纬22度的深圳出发，聚合全球知识力量，观天下风云，察中国变迁；在纷繁世界，寻找独立理性声音；用新锐视角，挖掘前沿价值判断。";
+			match.matchIcon = "assets/focus1icon.jpg"
+			match.matchContent = "节目特点:\n\n\n1、内容定位：对当前经济政策、社会事件或思潮提供新锐的思想、观点和评论\n\n2、功能定位：提供有价值的思想智慧及独到见地。\n\n3、形态定位：演播室谈话，外采，评论\n\n4、嘉宾定位：政府有关部门领导/国内外权威专家/社会名流/重大事件及话题的当事人/资深媒体人或评论员 节目亮点:\n\n\n1、具有独立灵魂并能促进中国社会进步的新锐话题节目\n\n2、官员、学者、媒体及业界的重量级嘉宾，对中国问题有深远的思考能力及良好的表达\n\n3、深入浅出、亦庄亦谐；逻辑严谨、表达率性；权威声音、多元视角\n\n4、演播室时尚新颖，给观众带来崭新时尚的视觉体验，追求收视与影响力的双丰收"
+			match.matchFrom = "深圳卫视";
+			match.matchType = "新锐话题栏目";
+			match.picture = new Array("assets/focus1.jpg", "assets/observe1.jpg", "assets/observe2.jpg", "assets/observe3.jpg", "assets/observe4.jpg", "assets/observe5.jpg");
+			var miss:Miss_MatchReveal = new Miss_MatchReveal(match);
+			addChild(miss);
+		}
+		
+		
+		
+		private function helloMissTabButton():void 
+		{
+			var miss:Miss_TabButton = new Miss_TabButton("概况");
+			addChild(miss);
+		}
+		
+		private function helloMissHotThumb() :void {
 			var vr:Vector.<Vo_Match> = new Vector.<Vo_Match>;
 			vr[0] = new Vo_Match();
 			vr[1] = new Vo_Match();

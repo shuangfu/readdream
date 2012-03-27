@@ -12,6 +12,7 @@ package com.readdream.as3.robot
 		public static const TEXTINPUT_FOCUS:String = "textinput_focus";
 		public static const HOTTHUMB_MATCHTITLE:String = "hotthumb_matchtitle";
 		public static const HOTTHUMB_MATCHCOMP:String = "hotthumb_matchcomp";
+		public static const TABBUTTON_TEXT:String = "tabbutton_text";
 		
 		public function Robot_TextFormater()
 		{
@@ -50,6 +51,14 @@ package com.readdream.as3.robot
 					textFont = new TextFormat();
 					textFont.size = 12;
 					textFont.color = 0x989898;
+					textFont.font = "宋体";
+					return textFont;
+				case "tabbutton_text":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x000000;
+					textFont.bold = true;
 					textFont.font = "宋体";
 					return textFont;
 				default: 
