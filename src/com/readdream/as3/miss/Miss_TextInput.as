@@ -4,6 +4,7 @@ package com.readdream.as3.miss
 	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
+	import com.readdream.as3.event.TextInputEvent;
 	import com.readdream.as3.robot.Robot_TextFormater;
 	import flash.display.LineScaleMode;
 	import flash.display.Shape;
@@ -33,18 +34,16 @@ package com.readdream.as3.miss
 		private var textField:TextField;
 		
 		
-		public function Miss_TextInput(_tiWidth:Number = 120, _tiHeight:Number = 35 , _textSize:Number = 12,_defaultText:String = "默认文本",_contentType:String = "normal") 
+		public function Miss_TextInput(_tiWidth:Number = 120, _tiHeight:Number = 35 ,_defaultText:String = "默认文本",_contentType:String = "normal") 
 		{
 			this._tiWidth = _tiWidth;
 			this._tiHeight = _tiHeight;
-			this._textSize = _textSize;
 			this._defaultText = _defaultText;
 			this._contentType = _contentType;
 			TweenPlugin.activate([TintPlugin]);
 			drawBorder();
 			addTextField();
 			registerEvent();
-			
 		}
 		
 		private function registerEvent():void 
@@ -88,8 +87,12 @@ package com.readdream.as3.miss
 				textField.text = _defaultText;
 			} else {
 				//set textField to blur
-				TweenMax.to(textField, 0.25, {blurFilter:{blurX:2, blurY:2, quality:3}});
+				if (textField.text != _defaultText) 
+				{
+					TweenMax.to(textField, 0.25, {blurFilter:{blurX:2, blurY:2, quality:3}});
+				}
 			}
+			
 			textField.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_UNFOCUS));
 			////////////////////
 			//apply border effect
@@ -126,7 +129,8 @@ package com.readdream.as3.miss
 			//a key was pressed, check if it was Enter => charCode 13.
 			if( e.charCode == 13 ){
 			  //ok, enter was pressed. Do your thing.
-				trace("We pressed enter, doSomething" );
+				var _textEvent:TextInputEvent = new TextInputEvent(TextInputEvent.INPUT_COMPLETE,textField.text);                
+                dispatchEvent(_textEvent);
 			}
 		}
 		
@@ -148,6 +152,9 @@ package com.readdream.as3.miss
 				break;
 				default:
 			}
+			//get the size of font
+			var tempTextFormat:TextFormat = Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_UNFOCUS);
+			_textSize = tempTextFormat.size.toString();
 			
 			//textField.autoSize = TextFieldAutoSize.LEFT;
 			textField.autoSize = TextFieldAutoSize.NONE;
@@ -162,7 +169,7 @@ package com.readdream.as3.miss
 			//textField.border = true;
 			
 			textField.width = _tiWidth - 40;
-			textField.height = _textSize + 6;
+			textField.height = _textSize + 4;
 			textField.y = (_tiHeight - textField.height) / 2;
 			textField.x = 20;
 			addChild(textField);
@@ -174,7 +181,7 @@ package com.readdream.as3.miss
 		private function drawBorder():void {
 			//draw border
 			borderShape = new Shape();
-			borderShape.graphics.lineStyle(1, 0x5080D8, 1, true, LineScaleMode.NONE);
+			borderShape.graphics.lineStyle(1, 0x000000, 1, true, LineScaleMode.NONE);
 			borderShape.graphics.moveTo(0, 0);
 			borderShape.graphics.lineTo(_tiWidth,0);
 			borderShape.graphics.lineTo(_tiWidth,_tiHeight);
