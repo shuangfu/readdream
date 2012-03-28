@@ -4,6 +4,7 @@ package com.readdream.as3.miss
 	import com.greensock.easing.Linear;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
+	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.robot.Robot_TextFormater;
 	import com.readdream.as3.vo.Vo_Match;
@@ -117,7 +118,7 @@ package com.readdream.as3.miss
 		 * */
 		private function setMask():void 
 		{
-			var masker:Miss_Masker = new Miss_Masker(hotThumbWidth - (gap * 2), hotThumbHeight - (gap * 2) );
+			var masker:Sprite = Mr_Dresser.getMasker(hotThumbWidth - (gap * 2), hotThumbHeight - (gap * 2) );
 			this.mask = masker;
 			masker.x = 10;
 			masker.y = 10;

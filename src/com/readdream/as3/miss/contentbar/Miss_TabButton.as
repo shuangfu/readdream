@@ -1,6 +1,8 @@
-package com.readdream.as3.miss 
+package com.readdream.as3.miss.contentbar 
 {
 	import com.greensock.TweenLite;
+	import com.readdream.as3.event.MatchReveal_TabbarEvent;
+	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.mr.Mr_Layouter;
 	import com.readdream.as3.robot.Robot_TextFormater;
 	import flash.display.GradientType;
@@ -30,15 +32,15 @@ package com.readdream.as3.miss
 		
 		public function Miss_TabButton(text:String) 
 		{
-			setDefault();
+
 			initData(text);
 			addEventListener(MouseEvent.CLICK, sprDefaultCLICKHandler);
-			trace(width);
-			trace(height);
 		}
 		
 		private function initData(str:String):void 
 		{
+			setupActivate();
+			setupDefault();
 			var txt:TextField = new TextField();
 			txt.text = str;
 			txt.selectable = false;
@@ -46,16 +48,18 @@ package com.readdream.as3.miss
 			txt.autoSize = TextFieldAutoSize.LEFT;
 			txt.x = (this.width / 2) - (txt.width / 2);
 			txt.y = (this.height / 2) - (txt.height / 2);
-			addChildAt(txt, 1);
+			addChildAt(txt, 2);
 		}
 		
 		private function sprDefaultCLICKHandler(e:MouseEvent):void 
 		{
-				setActivate();
+			setActivate();
+			var _matchreveal_tabbarevent:MatchReveal_TabbarEvent = new MatchReveal_TabbarEvent(MatchReveal_TabbarEvent.TabButton_CLICK);         
+            dispatchEvent(_matchreveal_tabbarevent);
 		}
 		
 		
-		private function setDefault():void {
+		private function setupDefault():void {
 			defaultShape = new Shape();
 			var matix:Matrix = new Matrix();
 			matix.createGradientBox(70, 40, Math.PI / 2, 0, 0);
@@ -67,34 +71,38 @@ package com.readdream.as3.miss
 			
 			///////////
 			//绘制边框
-			Miss_DrawLine.drawLine(sprDefault, 0, 0, 0, buttonHeight, 1, 0xCCCCCC); 							//左边框
-			Miss_DrawLine.drawLine(sprDefault, buttonWidth, 0, buttonWidth, buttonHeight, 1, 0xCCCCCC);			//右边框
-			Miss_DrawLine.drawLine(sprDefault, 2, buttonHeight, buttonWidth - 2, buttonHeight, 1, 0xE5E5E5);	//下边框
-			Miss_DrawLine.drawLine(sprDefault, 0, 0, buttonWidth, 0, 1, 0xCCCCCC);								//上边框
+			Mr_Dresser.drawLine(sprDefault, 0, 0, 0, buttonHeight, 1, 0xCCCCCC); 							//左边框
+			Mr_Dresser.drawLine(sprDefault, buttonWidth, 0, buttonWidth, buttonHeight, 1, 0xCCCCCC);			//右边框
+			Mr_Dresser.drawLine(sprDefault, 2, buttonHeight, buttonWidth - 2, buttonHeight, 1, 0xE5E5E5);	//下边框
+			Mr_Dresser.drawLine(sprDefault, 0, 0, buttonWidth, 0, 1, 0xCCCCCC);								//上边框
 			
 			sprActivate.visible = false;
 			sprDefault.visible = true;
 		}
 		
-		private function setActivate():void {
+		private function setupActivate():void {
 			activateShape = new Shape();
 			activateShape.graphics.beginFill(0xF1F1F1);
 			activateShape.graphics.drawRect(2, 3, buttonWidth-3, buttonHeight-2);
 			activateShape.graphics.endFill();
-			
 			sprActivate.addChild(activateShape);
 			addChildAt(sprActivate,0);
-			
 			///////////
 			//绘制边框
-			Miss_DrawLine.drawLine(sprActivate, 0, 0, 0, buttonHeight, 1, 0xCCCCCC); 								//左边框
-			Miss_DrawLine.drawLine(sprActivate, 1, 1, 1, buttonHeight, 1, 0xE9E9E9);								//左边框内线
-			Miss_DrawLine.drawLine(sprActivate, buttonWidth, 0, buttonWidth, buttonHeight, 1, 0xCCCCCC);			//右边框
-			Miss_DrawLine.drawLine(sprActivate, buttonWidth - 1, 1, buttonWidth - 1, buttonHeight, 1, 0xE9E9E9);	//右边框内线
-			Miss_DrawLine.drawLine(sprActivate, 0, 0, buttonWidth, 0, 1, 0xCCCCCC);									//上边框
-			Miss_DrawLine.drawLine(sprActivate, 1, 1, buttonWidth - 1, 1, 1, 0xE1E1E1);								//上边框下一层
-			Miss_DrawLine.drawLine(sprActivate, 1, 2, buttonWidth - 1, 2, 1, 0xE9E9E9);								//上边框下两层
-			
+			Mr_Dresser.drawLine(sprActivate, 0, 0, 0, buttonHeight, 1, 0xCCCCCC); 								//左边框
+			Mr_Dresser.drawLine(sprActivate, 1, 1, 1, buttonHeight, 1, 0xE9E9E9);								//左边框内线
+			Mr_Dresser.drawLine(sprActivate, buttonWidth, 0, buttonWidth, buttonHeight, 1, 0xCCCCCC);			//右边框
+			Mr_Dresser.drawLine(sprActivate, buttonWidth - 1, 1, buttonWidth - 1, buttonHeight, 1, 0xE9E9E9);	//右边框内线
+			Mr_Dresser.drawLine(sprActivate, 0, 0, buttonWidth, 0, 1, 0xCCCCCC);									//上边框
+			Mr_Dresser.drawLine(sprActivate, 1, 1, buttonWidth - 1, 1, 1, 0xE1E1E1);								//上边框下一层
+			Mr_Dresser.drawLine(sprActivate, 1, 2, buttonWidth - 1, 2, 1, 0xE9E9E9);								//上边框下两层
+		}
+		
+		public function setDefault():void {
+			sprActivate.visible = false;
+			sprDefault.visible = true;
+		}
+		public function setActivate():void {
 			sprDefault.visible = false;
 			sprActivate.visible = true;
 		}
