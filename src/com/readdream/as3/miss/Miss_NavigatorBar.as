@@ -33,7 +33,9 @@ package com.readdream.as3.miss
 				}
 			}
 		}
-		private
+		private function hideChildList():void {
+			
+		}
 		
 		
 		
