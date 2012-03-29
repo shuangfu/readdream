@@ -3,6 +3,7 @@ package com.readdream.as3.miss.matchthumb
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;
+	import flash.text.TextField;
 	
 	/**
 	 * ...
@@ -14,7 +15,7 @@ package com.readdream.as3.miss.matchthumb
 		private const activateBackground:uint = 0xECECEC;		//激活背景颜色
 		private const SprCompHeight:int = 100;
 		public const compPicWidth:int = 460; 					//大图片 宽度
-		public const compPicHeight:int = 340; 					//小图片 高度	
+		public const compPicHeight:int = 340; 					//小图片 高度	 
 		public const sizeWidth:int = 480;
 		public const sizeHeight:int = 400;
 		

@@ -1,7 +1,7 @@
 package com.readdream.as3.miss.navigatorBar
 {
 	import com.greensock.TweenLite;
-	import com.readdream.as3.VO.Vo_NavigatorElement;
+	import com.readdream.as3.vo.Vo_NavigatorElement;
 	import de.polygonal.ds.TreeIterator;
 	import de.polygonal.ds.TreeNode;
 	import flash.display.GraphicsGradientFill;

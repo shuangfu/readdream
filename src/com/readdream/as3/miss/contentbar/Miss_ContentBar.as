@@ -152,11 +152,13 @@ package com.readdream.as3.miss.contentbar
 			matchComp.width = 240;
 			matchComp.wordWrap = true;
 			matchComp.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.CONTENTBAR_MATCHCOMP));
-			
+			matchComp.mouseWheelEnabled = false;
+						
 			matchContent.autoSize = TextFieldAutoSize.LEFT;
 			matchContent.width = 240;
 			matchContent.wordWrap = true;
 			matchContent.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.CONTENTBAR_MATCHCONTENT));
+			matchContent.mouseWheelEnabled = false;
 		}
 		
 		private function initDetails():void 

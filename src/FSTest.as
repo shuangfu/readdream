@@ -5,8 +5,8 @@ package
 	import com.readdream.as3.miss.Miss_TextInput;
 	import com.readdream.as3.miss.navigatorBar.Miss_NavigatorBar;
 	import com.readdream.as3.mr.Mr_Layouter;
-	import com.readdream.as3.VO.Vo_Match;
-	import com.readdream.as3.VO.Vo_NavigatorElement;
+	import com.readdream.as3.vo.Vo_Match;
+	import com.readdream.as3.vo.Vo_NavigatorElement;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
