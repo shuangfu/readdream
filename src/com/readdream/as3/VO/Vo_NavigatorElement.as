@@ -11,7 +11,7 @@ package com.readdream.as3.VO
 		private var _fatherNid:uint;
 		private var _url:String;
 		
-		public function Vo_NavigatorElement(_nid:uint,_lable:String,_fatherNid:uint,_url:String) 
+		public function Vo_NavigatorElement(_nid:uint,_lable:String,_url:String,_fatherNid:int = -1) 
 		{
 			this._fatherNid = _fatherNid;
 			this._nid = _nid;
