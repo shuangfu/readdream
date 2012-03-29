@@ -16,11 +16,11 @@ package com.readdream.as3.miss.contentbar
 	 */
 	public class Miss_LabelPicture extends Sprite 
 	{
-		private const contentBarPicWidth:int = 640;
-		private const contentBarPicHeight:int = 400;
+		private const contentBarPicWidth:int = 636;
+		private const contentBarPicHeight:int = 396;
 		
-		private const contentBarPicX:Number = 40;
-		private const contentBarPicY:Number = 40;
+		private const contentBarPicX:Number = 42;
+		private const contentBarPicY:Number = 42;
 		
 		
 		private var loader:Vector.<Robot_PicLoader> = new Vector.<Robot_PicLoader>;
@@ -45,7 +45,7 @@ package com.readdream.as3.miss.contentbar
 			//图片加载进入loader
 			for each (var temp:String in vo.picture)
 			{
-				loader.push(new Robot_PicLoader(temp, 2, 2, contentBarPicWidth - 4, contentBarPicHeight - 4));
+				loader.push(new Robot_PicLoader(temp, 0, 0, contentBarPicWidth, contentBarPicHeight));
 			}
 		
 			///////////////////////
@@ -57,12 +57,6 @@ package com.readdream.as3.miss.contentbar
 			lblPicture.addChild(masker);
 			lblPicture.mask = masker;
 		
-			/////////////////////////
-			//为lblPicture添加阴影
-			var filter:BitmapFilter = getBitmapFilter();
-			var myFilters:Array = new Array();
-			myFilters.push(filter);
-			lblPicture.filters = myFilters;
 		}
 		
 		
@@ -79,32 +73,19 @@ package com.readdream.as3.miss.contentbar
 			//摆放图片位置
 			for (var index:int = 0; index < loader.length; index++)
 			{
-				loader[index].x = (loader[index].width + 2) * index;
-				loader[index].y = 0;
+				TweenLite.to(loader[index], 0.1,{ x:(loader[index].width  * index), y:0 } );
+				//loader[index].x = loader[index].width  * index;
+				//loader[index].y = 0;
 			}
 			addChild(lblPicture);
 		}
 		
-		private function getBitmapFilter():BitmapFilter
-		{
-			var color:Number = 0x000000;
-			var angle:Number = 90;
-			var alpha:Number = 0.65;
-			var blurX:Number = 4;
-			var blurY:Number = 8;
-			var distance:Number = 4;
-			var strength:Number = 0.65;
-			var inner:Boolean = false;
-			var knockout:Boolean = false;
-			var quality:Number = BitmapFilterQuality.HIGH;
-			return new DropShadowFilter(distance, angle, color, alpha, blurX, blurY, strength, quality, inner, knockout);
-		}
 		
-		private function movePicture(i:int):void {
+		public function movePicture(i:int):void {
 			var location :int = 0;
 			location = location - i;
 			for (var index:int = 0; index < loader.length; index ++ ) {
-				TweenLite.to(loader[index], 0.35, { x: (loader[index].width * location), y: 0, ease: Linear.easeNone } )
+				TweenLite.to(loader[index], 0.35, { x: (loader[index].width * location), y: 0 } );
 				location++;
 			}
 		}		

@@ -2,6 +2,8 @@ package com.readdream.as3.miss
 {
 	import com.greensock.easing.Circ;
 	import com.greensock.easing.Linear;
+	import com.greensock.plugins.RoundPropsPlugin;
+	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
 	import com.readdream.as3.mr.Mr_Dresser;
@@ -78,6 +80,8 @@ package com.readdream.as3.miss
 		 * */		
 		public function Miss_HotThumb(obj:Vector.<Vo_Match>) 
 		{
+			TweenPlugin.activate([RoundPropsPlugin]);
+			
 			initData(obj);
 			setMask();
 			setupImage();
@@ -267,13 +271,13 @@ package com.readdream.as3.miss
 			
 			////////////////////////
 			//控制图片移动和变换颜色
-			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, { x: leftFlankImageX, y: allImageY, ease: Linear.easeNone,onComplete:onCompleteHandler } ); //最左边移动到左边
+			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, { x: leftFlankImageX, y: allImageY, ease: Linear.easeNone,roundProps:["x","y"],onComplete:onCompleteHandler } ); //最左边移动到左边
 			TweenMax.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//左边变黑
-			TweenLite.to(loader[(index + loader.length) % loader.length], rollEffect, { x: centerImageX, y: allImageY,  ease: Linear.easeNone } );//左边移动到中间
+			TweenLite.to(loader[(index + loader.length) % loader.length], rollEffect, { x: centerImageX, y: allImageY, roundProps:["x","y"], ease: Linear.easeNone } );//左边移动到中间
 			TweenMax.to(loader[(index + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0}});//中间变亮
-			TweenLite.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, { x: rightFlankImageX, y: allImageY, ease: Linear.easeNone } );//中间移动到右边
+			TweenLite.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, { x: rightFlankImageX, y: allImageY,roundProps:["x","y"], ease: Linear.easeNone } );//中间移动到右边
 			TweenMax.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//右边变黑
-			TweenLite.to(loader[(index + 2 + loader.length) % loader.length], rollEffect, { x: right2FlankImageX, y: allImageY, ease: Linear.easeNone } );//右边移动到最右边
+			TweenLite.to(loader[(index + 2 + loader.length) % loader.length], rollEffect, { x: right2FlankImageX, y: allImageY, roundProps:["x","y"],ease: Linear.easeNone } );//右边移动到最右边
 			
 			////////////////////
 			//设置最前面图片位置
@@ -316,12 +320,12 @@ package com.readdream.as3.miss
 			
 			////////////////////////
 			//控制图片移动和变换颜色
-			TweenLite.to(loader[(index - 2 + loader.length) % loader.length], rollEffect, { x: left2FlankImageX, y: allImageY, ease: Linear.easeNone,onComplete:onCompleteHandler } );//左边移动到最左边
-			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, { x: leftFlankImageX, y: allImageY, ease: Linear.easeNone } ); //中间移动到左边
+			TweenLite.to(loader[(index - 2 + loader.length) % loader.length], rollEffect, { x: left2FlankImageX, y: allImageY,roundProps:["x","y"], ease: Linear.easeNone,onComplete:onCompleteHandler } );//左边移动到最左边
+			TweenLite.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, { x: leftFlankImageX, y: allImageY,roundProps:["x","y"], ease: Linear.easeNone } ); //中间移动到左边
 			TweenMax.to(loader[(index - 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//左边变黑
-			TweenLite.to(loader[(index + loader.length) % loader.length], rollEffect, { x: centerImageX, y: allImageY, ease: Linear.easeNone } );//右边移动到中间
+			TweenLite.to(loader[(index + loader.length) % loader.length], rollEffect, { x: centerImageX, y: allImageY,roundProps:["x","y"], ease: Linear.easeNone } );//右边移动到中间
 			TweenMax.to(loader[(index + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0}});//中间变亮
-			TweenLite.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, { x: rightFlankImageX, y: allImageY, ease: Linear.easeNone } );//最右边移动到右边
+			TweenLite.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, { x: rightFlankImageX, y: allImageY,roundProps:["x","y"], ease: Linear.easeNone } );//最右边移动到右边
 			TweenMax.to(loader[(index + 1 + loader.length) % loader.length], rollEffect, {colorTransform:{tint:0x000000, tintAmount:0.5}});//右边变黑
 			
 			////////////////////

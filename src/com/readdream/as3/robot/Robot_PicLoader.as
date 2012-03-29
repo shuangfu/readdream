@@ -19,7 +19,7 @@ package com.readdream.as3.robot
 	public class Robot_PicLoader extends Sprite 
 	{
 		public var loader:ImageLoader;
-		private var sec:int;
+		public var sec:int;
 		
 		/**
 		*图片加载器 
@@ -33,7 +33,7 @@ package com.readdream.as3.robot
 			
 			function onImageLoad(event:LoaderEvent):void
 			{
-				TweenLite.from(event.target.content, 1, { alpha:0 } );
+				TweenLite.from(event.target.content, 0.3, { alpha:0 } );
 			}		
 		}
 		

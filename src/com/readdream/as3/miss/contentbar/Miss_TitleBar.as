@@ -18,10 +18,10 @@ package com.readdream.as3.miss.contentbar
 	{
 		private const barWidth:Number = 980;
 		private const barHeight:Number = 100;
-		private const matchIconX:Number = 40;
-		private const matchIconY:Number = 20;
-		private const matchIconWidth:Number = 60;
-		private const matchIconHeight:Number = 60;
+		private const matchIconX:Number = 50;
+		private const matchIconY:Number = 30;
+		private const matchIconWidth:Number = 40;
+		private const matchIconHeight:Number = 40;
 		private const matchTitleX:Number = matchIconX + matchIconWidth + 30;
 		private const matchTitleY:Number = 25;
 		
@@ -30,6 +30,7 @@ package com.readdream.as3.miss.contentbar
 		private var txtType:TextField;
 		private var txtApplyUsers:TextField;
 		private var txtFrom:TextField;
+		private var txtUsersNum:TextField;
 		private var dottedLine:Sprite;
 		private var dottedLine2:Sprite;
 		private var border:Sprite;
@@ -39,9 +40,9 @@ package com.readdream.as3.miss.contentbar
 		 */
 		public function Miss_TitleBar(vo:Vo_Match) 
 		{
-			//graphics.beginFill(0xEEEEEE);
-			//graphics.drawRect(0, 0, barWidth, barHeight);
-			//graphics.endFill();
+			graphics.beginFill(0xFFFFFF);
+			graphics.drawRect(0, 0, barWidth, barHeight);
+			graphics.endFill();
 			
 			initData(vo);
 			setupImage();
@@ -49,7 +50,10 @@ package com.readdream.as3.miss.contentbar
 		
 		private function initData(vo:Vo_Match):void 
 		{
+
 			picIcon = new Robot_PicLoader(vo.matchIcon, 0, 0, matchIconWidth, matchIconHeight);
+			Mr_Dresser.addShadowFilter(picIcon,0,90,0.65,4,8, 2);
+ 
 			
 			txtTitle = new TextField();
 			txtTitle.text = vo.matchTitle;
@@ -62,8 +66,14 @@ package com.readdream.as3.miss.contentbar
 			txtType.autoSize = TextFieldAutoSize.LEFT;
 			txtType.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TABBAR_TEXT));
 			
+			txtUsersNum = new TextField();
+			txtUsersNum.text = vo.matchApplyUsers.toString();
+			txtUsersNum.autoSize = TextFieldAutoSize.LEFT;
+			//txtUsersNum.border = true;
+			txtUsersNum.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TABBAR_APPLYUSER_NUM));
+			
 			txtApplyUsers = new TextField();
-			txtApplyUsers.text = vo.matchApplyUsers + "人参与";
+			txtApplyUsers.text = "人参与";
 			txtApplyUsers.autoSize = TextFieldAutoSize.LEFT;
 			txtApplyUsers.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TABBAR_APPLYUSER));
 			
@@ -91,8 +101,9 @@ package com.readdream.as3.miss.contentbar
 			objArr[3] = { stuff:dottedLine, xPos:(matchTitleX + txtType.width + 5), yPos:(matchTitleY + txtTitle.height + 5) };
 			objArr[4] = { stuff:txtFrom, xPos:(matchTitleX + txtType.width + 5 + 7), yPos:(matchTitleY + txtTitle.height + 5) };
 			objArr[5] =	{ stuff:dottedLine2, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5), yPos:(matchTitleY + txtTitle.height + 5) };
-			objArr[6] = { stuff:txtApplyUsers, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5 + 7), yPos:(matchTitleY + txtTitle.height + 5) };
-			objArr[7] = { stuff:border, xPos:0, yPos:0 };
+			objArr[6] = { stuff:txtUsersNum, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5 + 7), yPos:(matchTitleY + txtTitle.height + 5 - 2.5) };
+			objArr[7] = { stuff:txtApplyUsers, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5 + 7+ txtUsersNum.width - 2), yPos:(matchTitleY + txtTitle.height + 5 - 0.5) };
+			objArr[8] = { stuff:border, xPos:0, yPos:0 };
 			Mr_Layouter.layouter(this, objArr);
 		}
 		

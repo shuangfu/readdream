@@ -10,12 +10,14 @@ package com.readdream.as3.mr
 	import flash.geom.Point;
 	
 	/**
-	 * ...
+	 * 美女化妆师
 	 * @author evstar
 	 */
 	public class Mr_Dresser extends Sprite 
 	{
-		
+		/**
+		 * 美女化妆师
+		 */
 		public function Mr_Dresser() 
 		{
 			
@@ -61,27 +63,17 @@ package com.readdream.as3.mr
 			/////////////////////////
 			//添加阴影
 			if(shadow){
-				var filter:BitmapFilter = getBitmapFilter();
-				var myFilters:Array = new Array();
-				myFilters.push(filter);
-				background.filters = myFilters;
+				addShadowFilter(background);
 			}
 			return background;
 		}
 		
-		private static function getBitmapFilter():BitmapFilter
+		public static function addShadowFilter(spr:Sprite,color:Number = 0x000000,angle:Number = 90,alpha:Number = 0.65,blurX:Number = 4,blurY:Number = 8,distance:Number = 4,strength:Number = 0.65,inner:Boolean = false,knockout:Boolean = false,quality:Number = BitmapFilterQuality.HIGH):void
 		{
-			var color:Number = 0x000000;
-			var angle:Number = 90;
-			var alpha:Number = 0.65;
-			var blurX:Number = 4;
-			var blurY:Number = 8;
-			var distance:Number = 4;
-			var strength:Number = 0.65;
-			var inner:Boolean = false;
-			var knockout:Boolean = false;
-			var quality:Number = BitmapFilterQuality.HIGH;
-			return new DropShadowFilter(distance, angle, color, alpha, blurX, blurY, strength, quality, inner, knockout);
+			var filter:BitmapFilter = new DropShadowFilter(distance, angle, color, alpha, blurX, blurY, strength, quality, inner, knockout);
+			var myFilters:Array = new Array();
+			myFilters.push(filter);
+			spr.filters = myFilters;
 		}
 		
 		/**
@@ -96,13 +88,16 @@ package com.readdream.as3.mr
 		 * @param	color
 		 * @param	alpha
 		 */
-		public static function drawBorderByLine(container:Sprite, uLP:Point, uRP:Point, dRP:Point, dLP:Point, thickness:Number = NaN , color:uint = 0 , alpha:Number = 1):void {
-			container.graphics.lineStyle(thickness, color, alpha, true);
+		public static function drawBorderByLine(container:Sprite, uLP:Point, uRP:Point, dRP:Point, dLP:Point, thickness1:Number = NaN , color1:uint = 0 , alpha1:Number = 1):void {
+			trace("border color:" + color1);
+			container.graphics.lineStyle(thickness1, color1, alpha1, true);
+			trace("border color2:" + color1);
 			container.graphics.moveTo(uLP.x, uLP.y);
 			container.graphics.lineTo(uRP.x, uRP.y);
 			container.graphics.lineTo(dRP.x, dRP.y);
 			container.graphics.lineTo(dLP.x, dLP.y);
 			container.graphics.lineTo(uLP.x, uLP.y);
+			container.graphics.lineStyle();
 		}
 		
 		/**
@@ -118,9 +113,12 @@ package com.readdream.as3.mr
 		 */
 		public static function drawLine(container:Sprite, xPos1:Number, yPos1:Number, xPos2:Number, yPos2:Number, thickness:Number = NaN, color:uint = 0, alpha:Number = 1 ):void
 		{
+			trace("line color:" + color);
 			container.graphics.lineStyle(thickness, color, alpha, true);
+			trace("line color2:" + color);
 			container.graphics.moveTo(xPos1, yPos1);
 			container.graphics.lineTo(xPos2, yPos2);
+			container.graphics.lineStyle();
 		}
 		
 		

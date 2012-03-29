@@ -35,6 +35,10 @@ package com.readdream.as3.miss.contentbar
 			btnOverview = new Miss_TabButton("概述");
 			btnDetails = new Miss_TabButton("详情");
 			btnRelated = new Miss_TabButton("相关");
+			btnOverview.name = "sprOverview";
+			btnDetails.name = "sprDetails";
+			btnRelated.name = "sprRelated";
+			
 			activateFlag = btnOverview;
 			activateFlag.setActivate();
 			///////////////////
@@ -60,6 +64,9 @@ package com.readdream.as3.miss.contentbar
 				activateFlag.setDefault();
 				activateFlag = (e.currentTarget as Miss_TabButton);
 			}
+			var btnName:String = e.currentTarget.name;
+			var event1:MatchReveal_TabbarEvent = new MatchReveal_TabbarEvent(MatchReveal_TabbarEvent.TABBAR_CHANGE,btnName);
+			dispatchEvent(event1);
 		}
 		
 		private function setupButton():void 

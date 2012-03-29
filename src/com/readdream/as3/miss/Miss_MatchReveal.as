@@ -1,5 +1,7 @@
 package com.readdream.as3.miss 
 {
+	import com.greensock.TweenMax;
+	import com.readdream.as3.event.MatchReveal_TabbarEvent;
 	import com.readdream.as3.miss.contentbar.Miss_ContentBar;
 	import com.readdream.as3.miss.contentbar.Miss_TabBar;
 	import com.readdream.as3.miss.contentbar.Miss_TitleBar;
@@ -7,6 +9,7 @@ package com.readdream.as3.miss
 	import com.readdream.as3.mr.Mr_Layouter;
 	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.geom.Point;
 	
 	/**
@@ -35,19 +38,29 @@ package com.readdream.as3.miss
 			initData(vo);
 			drawBorder();
 			setupBar();
+			
+			
 		}
 		
 		private function drawBorder():void 
 		{
 			border = new Sprite();
 			Mr_Dresser.drawBorderByLine(border, new Point(0, 0), new Point(980, 0), new Point(980, 700), new Point(0, 700), 1, 0x000000, 0.30);
+			
 		}
 		
 		private function initData(vo:Vo_Match):void 
 		{
 			titleBar = new Miss_TitleBar(vo);
 			tabBar = new Miss_TabBar();
-			contentBar = new Miss_ContentBar(vo);
+			tabBar.addEventListener(MatchReveal_TabbarEvent.TABBAR_CHANGE, tabBarChangeHandler);
+			contentBar = new Miss_ContentBar(vo);		
+
+		}
+		
+		private function tabBarChangeHandler(e:MatchReveal_TabbarEvent):void 
+		{
+			contentBar.setActivate(e.btnName);
 			
 		}
 		
@@ -59,11 +72,9 @@ package com.readdream.as3.miss
 			objArr[2] = { stuff:contentBar, xPos:contentBarX, yPos:contentBarY };
 			objArr[3] = { stuff:border, xPos:0, yPos:0 };
 			Mr_Layouter.layouter(this, objArr);
-		}
-		
-		
-		
-		
+			Mr_Dresser.addShadowFilter(this);
+			
+		}		
 	}
 
 }

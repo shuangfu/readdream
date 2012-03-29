@@ -1,5 +1,10 @@
 package com.readdream.as3.miss.contentbar 
 {
+	import com.greensock.easing.Cubic;
+	import com.greensock.plugins.MotionBlurPlugin;
+	import com.greensock.plugins.TweenPlugin;
+	import com.greensock.TweenLite;
+	import com.readdream.as3.event.MatchReveal_ContentBarEvent;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.vo.Vo_Match;
@@ -9,6 +14,7 @@ package com.readdream.as3.miss.contentbar
 	import flash.display.JointStyle;
 	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	import flash.filters.BitmapFilter;
 	import flash.filters.BitmapFilterQuality;
 	import flash.filters.DropShadowFilter;
@@ -25,6 +31,7 @@ package com.readdream.as3.miss.contentbar
 		
 		public function Miss_LabelPictureList(vo:Vo_Match) 
 		{
+			TweenPlugin.activate([MotionBlurPlugin]);
 			initData(vo);
 			setupPicture(vo);
 		}
@@ -62,22 +69,25 @@ package com.readdream.as3.miss.contentbar
 				thumbLoader[index].x = temp * (index + 1) - (thumbLoader[index].width / 2);
 				thumbLoader[index].y = 0;
 				lblList.addChild(thumbLoader[index]);
-				//thumbLoader[index].addEventListener(MouseEvent.ROLL_OVER, ldrMouseRollOverHandler);
+				thumbLoader[index].addEventListener(MouseEvent.ROLL_OVER, ldrMouseRollOverHandler);
 			}
 			addChild(lblList);
 			
 			lblSelect.graphics.lineStyle(5, 0x828282, 1, true, "normal", CapsStyle.ROUND, JointStyle.ROUND);
 			//lblSelect.graphics.lineGradientStyle(GradientType.LINEAR,[0x939393,0xB5B5B5],[1,1],[0,255],null,SpreadMethod.REFLECT,"rgb",1)
 			lblSelect.graphics.drawRect(0, 0, thumbLoader[0].width + 3, thumbLoader[0].height + 3);
-			lblSelect.x = thumbLoader[2].x -2;
-			lblSelect.y = thumbLoader[2].y -2;
+			lblSelect.x = thumbLoader[0].x -2;
+			lblSelect.y = thumbLoader[0].y -2;
 			addChild(lblSelect);
 		}
 		
-		//private function ldrMouseRollOverHandler(e:Event):void 
-		//{
-			//
-		//}
+		private function ldrMouseRollOverHandler(e:MouseEvent):void 
+		{
+			var rdEvent:MatchReveal_ContentBarEvent = new MatchReveal_ContentBarEvent(MatchReveal_ContentBarEvent.PICTURE_CHANGE, ((e.currentTarget as Sprite).getChildAt(0) as Robot_PicLoader).sec);
+			dispatchEvent(rdEvent);
+			var tempXPos:int = (e.currentTarget as Sprite).x - 2;
+			TweenLite.to(lblSelect, 0.2, {x: tempXPos,motionBlur:true,ease:Cubic.easeInOut} );
+		}
 	}
 
 }
