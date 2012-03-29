@@ -10,4 +10,10 @@ MatchThumb_true		480		480		//活动缩略图大号尺寸
 MatchThumb_false	240		200		//活动缩略图小号尺寸
 MatchThumb_true_pic	460		340		//活动缩略图大号内图片尺寸
 
+MatchReveal		980		700		//活动详情尺寸
 MatchReveal_picture	640		400		//活动内容图尺寸
+MatchReveal_titlebar	980		100		//titlebar尺寸
+	matchIcon	 60		 60		//titlebar中活动图标尺寸
+matchReveal_TabBar	980		 40		//tabBar尺寸
+matchReveal_ContentBar	980		560		//contentBar尺寸
+		 

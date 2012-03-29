@@ -8,12 +8,48 @@ package com.readdream.as3.robot
 	 */
 	public final class Robot_TextFormater
 	{
-		public static const TEXTINPUT_UNFOCUS:String = "textinput_unfocus";
-		public static const TEXTINPUT_FOCUS:String = "textinput_focus";
+		
 		public static const HOTTHUMB_MATCHTITLE:String = "hotthumb_matchtitle";
 		public static const HOTTHUMB_MATCHCOMP:String = "hotthumb_matchcomp";
 		public static const TABBUTTON_TEXT:String = "tabbutton_text";
 
+		public static const TABBAR_TITLE:String = "tabbar_title";
+		public static const TABBAR_TEXT:String = "tabbar_text";
+		public static const TABBAR_APPLYUSER:String = "tabbar_applyuser";
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		public static const TEXTINPUT_UNFOCUS:String = "textinput_unfocus";
+		public static const TEXTINPUT_FOCUS:String = "textinput_focus";
 		public static const NAVIGATOR_NORMAL_BOLD:String = "navigator_normal_bold";
 		public static const NAVIGATOR_NORMAL_REGULAR:String = "navigator_normal_regular";
 		public static const NAVIGATOR_ACTIVED_BOLD:String = "navigator_actived_bold";
@@ -31,20 +67,6 @@ package com.readdream.as3.robot
 			var textFont :TextFormat;
 			switch (formatType)
 			{
-				case "textinput_unfocus": 
-					//font settings
-					textFont = new TextFormat();
-					textFont.size = 14;
-					textFont.color = 0xa1a1a1;
-					textFont.font = "宋体";
-					return textFont;
-				case "textinput_focus":
-					//font settings
-					textFont = new TextFormat();
-					textFont.size = 14;
-					textFont.color = 0x000000;
-					textFont.font = "宋体";
-					return textFont;
 				case "hotthumb_matchtitle":
 					//font settings
 					textFont = new TextFormat();
@@ -66,6 +88,228 @@ package com.readdream.as3.robot
 					textFont.size = 14;
 					textFont.color = 0x000000;
 					textFont.bold = true;
+					textFont.font = "宋体";
+					return textFont;
+				case "tabbar_title":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 30;
+					textFont.color = 0x000000;
+					textFont.bold = true;
+					textFont.font = "黑体";
+					return textFont;
+				case "tabbar_text":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 12;
+					textFont.color = 0xB2B2B2;
+					textFont.font = "宋体";
+					return textFont;
+				case "tabbar_applyuser":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 12;
+					textFont.color = 0xA6A6A6;
+					textFont.italic = true;
+					textFont.font = "黑体";
+					return textFont;
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				case "textinput_unfocus": 
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0xa1a1a1;
+					textFont.font = "宋体";
+					return textFont;
+				case "textinput_focus":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x000000;
 					textFont.font = "宋体";
 					return textFont;
 				case "navigator_normal_bold":
@@ -128,6 +372,3 @@ package com.readdream.as3.robot
 	}
 
 }
-
-
-				

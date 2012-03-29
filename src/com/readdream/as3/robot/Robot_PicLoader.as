@@ -19,13 +19,15 @@ package com.readdream.as3.robot
 	public class Robot_PicLoader extends Sprite 
 	{
 		public var loader:ImageLoader;
+		private var sec:int;
 		
 		/**
 		*图片加载器 
 		*图片路径 String | 图片X坐标 int | 图片Y坐标 int | 图片宽度 int | 图片高度 int
 		*/
-		public function Robot_PicLoader(pUrl:String,xPos:Number = 0 , yPos:Number = 0 , picWidth:Number = 0 , picHeight:Number = 0) 
+		public function Robot_PicLoader(pUrl:String, xPos:Number = 0 , yPos:Number = 0 , picWidth:Number = 0 , picHeight:Number = 0, sec:int = 0 ) 
 		{
+			this.sec = sec;
 			loader = new ImageLoader(pUrl, { name: "photo1", container: this, x: xPos, y: yPos, width: picWidth, height: picHeight, onComplete: onImageLoad } );
 			loader.load();
 			

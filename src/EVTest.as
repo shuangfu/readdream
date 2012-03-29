@@ -1,10 +1,10 @@
 package  
 {
 	import com.readdream.as3.miss.Miss_Arrow;
-	import com.readdream.as3.miss.Miss_BrokenLine;
 	import com.readdream.as3.miss.Miss_HotThumb;
 	import com.readdream.as3.miss.Miss_MatchReveal;
-	import com.readdream.as3.miss.Miss_TabButton;
+	import com.readdream.as3.miss.contentbar.Miss_TabButton;
+	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;
@@ -26,7 +26,11 @@ package
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
+			
 			//test();
+			
+			
+			//drawDottedLine();
 			//helloMissHotThumb();
 			//helloMissTabButton();
 			helloMissMatchReveal();
@@ -35,7 +39,22 @@ package
 		
 		private function test():void 
 		{
-			Miss_BrokenLine.drawLine(graphics, new Point(50, 50), new Point(50, 65), 1, 0x000000, 1);
+			Mr_Dresser.drawDottedLine(this.graphics, new Point(10, 10), new Point(100, 100));
+			var masker:Sprite = Mr_Dresser.getMasker(50, 50);
+			var demo:Mr_Dresser = new Mr_Dresser();
+			Mr_Dresser.drawBorder(masker, 0x000000, 4,true);
+			demo.x = 110;
+			demo.y = 110;
+			addChild(demo);
+		}
+		
+		
+		/**
+		 * 画虚线
+		 */
+		private function drawDottedLine():void 
+		{
+			Mr_Dresser.drawDottedLine(graphics, new Point(50, 50), new Point(50, 65), 1, 0x000000, 1);
 		}
 		
 		private function helloMissMatchReveal():void 
@@ -71,7 +90,7 @@ package
 			vr[0].picture = new Array("assets/focus1.jpg");
 			vr[0].matchTitle = "22度观察";
 			vr[0].matchComp = "《22度观察》是深圳卫视2009年初重磅推出的新锐话题栏目。节目汇聚国内外政治、《22度观察》LOGO经济、文化等各领域精英翘楚，以新锐独到的全球化视角，对新闻热点和重大社会思潮展开深入、理性和建设性的探讨。《22度观察》从北纬22度的深圳出发，聚合全球知识力量，观天下风云，察中国变迁；在纷繁世界，寻找独立理性声音；用新锐视角，挖掘前沿价值判断。";
-			vr[0].matchIcon = "assets/focus1icon.jpg"
+			vr[0].matchIcon = "assets/focus1icon.jpg";
 			vr[1].picture = new Array("assets/focus2.jpg");
 			vr[1].matchTitle = "年代秀";
 			vr[1].matchComp = "《年代秀》是一档由深圳广播电影电视集团深圳卫视制作的全明星代际互动综艺秀，引进国外大热综艺节目《Generation show》的模式，由10位明星嘉宾领衔五个年代小组通过年代答题、游戏竞技等环节进行同场PK，并且结合影像、实物、音乐表演、时尚秀等元素寻找浓浓的当年情。2011年8月19日，《年代秀》迎来了大运专场，邀请了世界冠军乐靖宜、刘璇、杨威及神秘嘉宾郎平和体育节目主持人韩乔生作客。";
