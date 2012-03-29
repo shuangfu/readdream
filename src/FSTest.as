@@ -93,7 +93,7 @@ package
 			//missNavElements.x = 50;
 			//missNavElements.y = 50;
 			//addChild(missNavElements);
-			var scollbar:Miss_ScrollBarMagician = new Miss_ScrollBarMagician(missNavElements,300);
+			var scollbar:Miss_ScrollBarMagician = new Miss_ScrollBarMagician(missNavElements,288);
 
 			addChild(scollbar);
 		}
