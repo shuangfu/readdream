@@ -45,7 +45,7 @@ package com.readdream.as3.miss.navigatorBar
 		{
 			var scaleHeight:Number;
 			scaleHeight = Capabilities.screenResolutionY;
-			trace(scaleHeight);
+			//trace(scaleHeight);
 			this.graphics.beginFill(0xECECEC);
 			//this.graphics.beginFill(0x00ff00);
 			//this.graphics.drawRect(0, 0, 240, scaleHeight);
@@ -124,7 +124,7 @@ package com.readdream.as3.miss.navigatorBar
 				childContainer.addChild(nodeIterator.childData);
 				nodeIterator.nextChild();
 				tempYpos++;
-				trace("-- "+tempYpos);
+				//trace("-- "+tempYpos);
 			}
 			//在菜单最底层显示，以方便关闭时被遮罩
 			childContainer.y = nodeData.y + 30;//子菜单容器初始所在Y坐标+30
