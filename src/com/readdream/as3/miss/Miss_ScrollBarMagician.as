@@ -20,8 +20,14 @@ package com.readdream.as3.miss
 		private var contentObj:DisplayObjectContainer;
 		private var _height:Number;
 		private var tempMouseY:Number = 0;
-		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer,_height:Number) 
+		private var scrollBarX:Number;
+		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer,_height:Number,scrollBarX:Number = 0) 
 		{
+			
+			if (scrollBarX == 0) {
+				scrollBarX = contentObj.width + 15;
+			}
+			this.scrollBarX = scrollBarX;
 			masker = new Sprite();
 			scrollButton = new Sprite();
 			scrollBar = new Sprite();
@@ -35,24 +41,23 @@ package com.readdream.as3.miss
 			scrollButton.graphics.beginFill(0xff0000);
 			scrollButton.graphics.drawRect(0,0,10,_height);
 			scrollButton.graphics.endFill();
-			scrollButton.x = contentObj.width - 10;
+			scrollButton.x = scrollBarX;
 			
 			
 			
 			scrollBar.graphics.beginFill(0x00ff00);
 			scrollBar.graphics.drawRect(0,0,4,_height);
 			scrollBar.graphics.endFill();
-			scrollBar.x = contentObj.width - 7;
+			scrollBar.x = scrollBarX+3;
 			
 			addChild(contentObj);
 			if (contentObj.height > _height) 
 			{
-				trace("need scroll");
 				addChild(masker);
 				addChild(scrollBar);
 				addChild(scrollButton);
 				scrollButton.height = scrollBar.height * (masker.height / contentObj.height);
-				stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+				
 				scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			}
 			contentObj.mask = masker;
@@ -61,7 +66,9 @@ package com.readdream.as3.miss
 		
 		private function changeHandler(e:MouseEvent):void 
 		{
-			
+			if(!stage.hasEventListener(MouseEvent.MOUSE_WHEEL)){
+					stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+				}
 			trace(scrollBar.stage);
 			trace("----"+contentObj.height);
 			scrollButton.height = scrollBar.height * (masker.height / contentObj.height);
@@ -93,7 +100,7 @@ package com.readdream.as3.miss
 			if (stage != null) {
 				stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
 				stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
-				scrollButton.startDrag(false, new Rectangle(contentObj.width - 10, 0, 0, masker.height - scrollButton.height));
+				scrollButton.startDrag(false, new Rectangle(scrollBarX, 0, 0, masker.height - scrollButton.height));
 				//tempMouseY = e.stageY;
 			}
 		}

@@ -6,6 +6,7 @@ package com.readdream.as3.miss.contentbar
 	import com.greensock.TweenMax;
 	import com.readdream.as3.event.MatchReveal_ContentBarEvent;
 	import com.readdream.as3.event.MatchReveal_TabbarEvent;
+	import com.readdream.as3.miss.Miss_ScrollBarMagician;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.mr.Mr_Layouter;
 	import com.readdream.as3.robot.Robot_PicLoader;
@@ -61,6 +62,8 @@ package com.readdream.as3.miss.contentbar
 		private var dottedLine2:Sprite;
 		private var dottedLine3:Sprite;
 		private var dottedLine4:Sprite;
+		private var sprRight:Sprite = new Sprite();
+		private var sprRightScroll:Miss_ScrollBarMagician;
 		private var txtExplain:TextField;
 		private var lblPicture:Sprite;
 		private var flag:String = "sprOverview";
@@ -151,12 +154,19 @@ package com.readdream.as3.miss.contentbar
 			matchComp.autoSize = TextFieldAutoSize.LEFT;
 			matchComp.width = 240;
 			matchComp.wordWrap = true;
+			matchComp.mouseWheelEnabled = false;
 			matchComp.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.CONTENTBAR_MATCHCOMP));
 			
 			matchContent.autoSize = TextFieldAutoSize.LEFT;
 			matchContent.width = 240;
 			matchContent.wordWrap = true;
 			matchContent.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.CONTENTBAR_MATCHCONTENT));
+			matchContent.mouseWheelEnabled = false;
+
+			matchContent.y = matchComp.height + 20;
+			sprRight.addChild(matchComp);
+			sprRight.addChild(matchContent);
+			sprRightScroll = new Miss_ScrollBarMagician(sprRight, 480);
 		}
 		
 		private function initDetails():void 
@@ -214,8 +224,7 @@ package com.readdream.as3.miss.contentbar
 			var overviewArr:Array = new Array();
 			overviewArr[0] = { stuff:lblPicture, xPos:contentBarPicX, yPos:contentBarPicY };
 			overviewArr[1] = { stuff:lblList, xPos:lblListX, yPos:lblListY };
-			overviewArr[2] = { stuff:matchComp, xPos:matchCompX, yPos:matchCompY };
-			overviewArr[3] = { stuff:matchContent, xPos:matchCompX, yPos:matchCompY + matchComp.height + 20 };
+			overviewArr[2] = { stuff:sprRightScroll, xPos:matchCompX, yPos:matchCompY };
 			Mr_Layouter.layouter(sprOverview, overviewArr);
 			
 			var detailsArr:Array = new Array();

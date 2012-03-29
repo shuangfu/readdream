@@ -61,26 +61,42 @@ package
 			match.matchInformation5 = "活动元数据5";
 			match.matchImportint = 1;
 			match.picture = new Array("assets/focus1.jpg", "assets/observe1.jpg", "assets/observe2.jpg", "assets/observe3.jpg", "assets/observe4.jpg", "assets/observe5.jpg");
+			var match2:Vo_Match = new Vo_Match();
+			match2.matchApplyUsers = 12345;
+			match2.matchTitle = "二十二度观察";
+			match2.matchComp = "《22度观察》是深圳卫视2009年初重磅推出的新锐话题栏目。节目汇聚国内外政治、《22度观察》LOGO经济、文化等各领域精英翘楚，以新锐独到的全球化视角，对新闻热点和重大社会思潮展开深入、理性和建设性的探讨。《22度观察》从北纬22度的深圳出发，聚合全球知识力量，观天下风云，察中国变迁；在纷繁世界，寻找独立理性声音；用新锐视角，挖掘前沿价值判断。";
+			match2.matchIcon = "assets/focus1icon.jpg"
+			match2.matchContent = "节目特点:\n\n1、内容定位：对当前经济政策、社会事件或思潮提供新锐的思想、观点和评论\n2、功能定位：提供有价值的思想智慧及独到见地。\n3、形态定位：演播室谈话，外采，评论\n4、嘉宾定位：政府有关部门领导/国内外权威专家/社会名流/重大事件及话题的当事人/资深媒体人或评论员 \n\n节目亮点:\n\n1、具有独立灵魂并能促进中国社会进步的新锐话题节目\n2、官员、学者、媒体及业界的重量级嘉宾，对中国问题有深远的思考能力及良好的表达\n3、深入浅出、亦庄亦谐；逻辑严谨、表达率性；权威声音、多元视角\n4、演播室时尚新颖，给观众带来崭新时尚的视觉体验，追求收视与影响力的双丰收"
+			match2.matchFrom = "深圳卫视";
+			match2.matchType = "新锐话题栏目";
+			match2.matchInformation1 = "活动元数据1";
+			match2.matchInformation2 = "活动元数据2";
+			match2.matchInformation3 = "活动元数据3";
+			match2.matchInformation4 = "活动元数据4";
+			match2.matchInformation5 = "活动元数据5";
+			match2.matchImportint = 0;
+			match2.picture = new Array("assets/focus1.jpg", "assets/observe1.jpg", "assets/observe2.jpg", "assets/observe3.jpg", "assets/observe4.jpg", "assets/observe5.jpg");
 			var demo:Miss_MatchThumb = new Miss_MatchThumb(match);
-			//var demo2:Miss_MatchThumb = new Miss_MatchThumb(match);
-			//var demo3:Miss_MatchThumb = new Miss_MatchThumb(match);
-			//var demo4:Miss_MatchThumb = new Miss_MatchThumb(match);
+			var demo2:Miss_MatchThumb = new Miss_MatchThumb(match2);
+			var demo3:Miss_MatchThumb = new Miss_MatchThumb(match2);
+			var demo4:Miss_MatchThumb = new Miss_MatchThumb(match2);
+			var demo5:Miss_MatchThumb = new Miss_MatchThumb(match2);
 			//var demo5:Miss_MatchThumb = new Miss_MatchThumb(match);
-			demo.x = 100;
+			demo2.x = 340;
+			demo2.y = 100;
+			addChild(demo2);
+			demo3.x = 100;
+			demo3.y = 300
+			addChild(demo3);
+			demo4.x = 340;
+			demo4.y = 300;
+			addChild(demo4);
+			demo5.x = 100;
+			demo5.y = 100;
+			addChild(demo5);
+			demo.x = 340 + demo2.width;
 			demo.y = 100;
 			addChild(demo);
-			//demo2.x = 340;
-			//demo2.y = 100;
-			//addChild(demo2);
-			//demo3.x = 100;
-			//demo3.y = 300
-			//addChild(demo3);
-			//demo4.x = 340;
-			//demo4.y = 300;
-			//addChild(demo4);
-			//demo5.x = 700;
-			//demo5.y = 300;
-			//addChild(demo5);
 		}
 		
 		private function test():void 

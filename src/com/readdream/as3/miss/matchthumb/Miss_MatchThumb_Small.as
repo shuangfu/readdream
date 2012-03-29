@@ -98,8 +98,6 @@ package com.readdream.as3.miss.matchthumb
 			sprContent.graphics.endFill();
 			
 			var masker:Sprite = Mr_Dresser.getMasker(241, 201, 0xFFFFFF);
-			//masker.x = 1;
-			//masker.y = 1;
 			addChild(masker);
 			this.mask = masker;
 			
@@ -123,8 +121,7 @@ package com.readdream.as3.miss.matchthumb
 			matchComp.selectable = false;
 			matchComp.type = TextFieldType.DYNAMIC;
 			matchComp.wordWrap = true;
-			matchComp.width = 210;
-			
+			matchComp.width = 210;			
 			matchComp.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.MATCHTHUMB_MATCHCOMP));
 			
 			Mr_Dresser.addShadowFilter(matchIcon, 0, 90, 0.65, 4, 8, 2);
