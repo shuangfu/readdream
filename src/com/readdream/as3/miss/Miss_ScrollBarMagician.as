@@ -18,11 +18,11 @@ package com.readdream.as3.miss
 		private var scrollButton:Sprite;
 		private var scrollBar:Sprite;
 		private var contentObj:DisplayObjectContainer;
-		private var _maskeHeight:Number;
+		private var _maskerHeight:Number;
 		private var tempMouseY:Number = 0;
 
 		private var scrollBarX:Number;
-		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer,_height:Number,scrollBarX:Number = 0) 
+		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer,_maskerHeight:Number,scrollBarX:Number = 0) 
 
 		{
 			
@@ -33,27 +33,27 @@ package com.readdream.as3.miss
 			masker = new Sprite();
 			scrollButton = new Sprite();
 			scrollBar = new Sprite();
-			this._maskeHeight = _maskeHeight;
-			trace(_maskeHeight);
+			this._maskerHeight = _maskerHeight;
+			trace(_maskerHeight);
 			this.contentObj = contentObj;
 			masker.graphics.beginFill(0x00ff00);
-			masker.graphics.drawRect(0, 0, contentObj.width, _maskeHeight);
+			masker.graphics.drawRect(0, 0, contentObj.width, _maskerHeight);
 			masker.graphics.endFill();
 			
 			scrollButton.graphics.beginFill(0xff0000);
-			scrollButton.graphics.drawRect(0,0,10,_maskeHeight);
+			scrollButton.graphics.drawRect(0,0,10,_maskerHeight);
 			scrollButton.graphics.endFill();
 			scrollButton.x = scrollBarX;
 			
 			
 			
 			scrollBar.graphics.beginFill(0x00ff00);
-			scrollBar.graphics.drawRect(0,0,4,_maskeHeight);
+			scrollBar.graphics.drawRect(0,0,4,_maskerHeight);
 			scrollBar.graphics.endFill();
 			scrollBar.x = scrollBarX+3;
 			
 			addChild(contentObj);
-			if (contentObj.height > _maskeHeight) 
+			if (contentObj.height > _maskerHeight) 
 			{
 				addChild(masker);
 				addChild(scrollBar);
@@ -72,15 +72,15 @@ package com.readdream.as3.miss
 				}
 			trace(scrollBar.stage);
 			trace("----"+contentObj.height);
-			if (contentObj.height > _height && scrollBar.stage == null) 
+			if (contentObj.height > _maskerHeight && scrollBar.stage == null) 
 
-			scrollButton.height = scrollBar.height * (_maskeHeight / contentObj.height);
-			if (contentObj.height + contentObj.y <  _maskeHeight && contentObj.y < 0) {
+			scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
+			if (contentObj.height + contentObj.y <  _maskerHeight && contentObj.y < 0) {
 				//如果变小了，并且比滑动区域小，就改变坐标
-				contentObj.y =  _maskeHeight - contentObj.height;
+				contentObj.y =  _maskerHeight - contentObj.height;
 				scrollButton.y = scrollBar.height - scrollButton.height;
 			}
-			if (contentObj.height + contentObj.y > _maskeHeight && contentObj.y > 0) 
+			if (contentObj.height + contentObj.y > _maskerHeight && contentObj.y > 0) 
 
 			{
 				contentObj.y = 0;
@@ -89,7 +89,7 @@ package com.readdream.as3.miss
 			//trace(scrollBar.stage);
 			//trace("----"+contentObj.height);
 			trace("点了");
-			if (contentObj.height > _maskeHeight && scrollBar.stage == null) 
+			if (contentObj.height > _maskerHeight && scrollBar.stage == null) 
 			{
 				trace("加滚动条");
 				//trace("=-=-=-" + masker.height);
@@ -98,7 +98,7 @@ package com.readdream.as3.miss
 				addChild(masker);
 				addChild(scrollBar);
 				addChild(scrollButton);
-			} else if(contentObj.height <= _maskeHeight && scrollBar.stage != null) {
+			} else if(contentObj.height <= _maskerHeight && scrollBar.stage != null) {
 				trace("移除滚动条");
 				contentObj.y = 0;
 				scrollButton.y = 0;
@@ -126,26 +126,26 @@ package com.readdream.as3.miss
 			var _delta:int = e.delta;
 			var newYpos:Number = scrollButton.y + -_delta * 3;
 			//trace(newYpos);
-			if (newYpos >= 0 && newYpos < _maskeHeight - scrollButton.height) {
+			if (newYpos >= 0 && newYpos < _maskerHeight - scrollButton.height) {
 				trace("not bottom");
 				trace(newYpos);
-				trace(_maskeHeight);
+				trace(_maskerHeight);
 				trace(contentObj.height);
 				trace(contentObj.y);
-				trace(_maskeHeight - scrollButton.height);
+				trace(_maskerHeight - scrollButton.height);
 				scrollButton.y = newYpos;
-				contentObj.y =- contentObj.height * (scrollButton.y / _maskeHeight);
+				contentObj.y =- contentObj.height * (scrollButton.y / _maskerHeight);
 			}
-			if (newYpos >= _maskeHeight - scrollButton.height) 
+			if (newYpos >= _maskerHeight - scrollButton.height) 
 			{
 				trace("bottom");
 				trace(newYpos);
-				trace(_maskeHeight);
+				trace(_maskerHeight);
 				trace(contentObj.height);
 				trace(contentObj.y);
-				trace(_maskeHeight - scrollButton.height);
-				scrollButton.y = _maskeHeight - scrollButton.height;
-				contentObj.y = _maskeHeight - contentObj.height;
+				trace(_maskerHeight - scrollButton.height);
+				scrollButton.y = _maskerHeight - scrollButton.height;
+				contentObj.y = _maskerHeight - contentObj.height;
 			}
 			if (newYpos < 0)
 			{
@@ -163,7 +163,7 @@ package com.readdream.as3.miss
 		
 		private function mouseMoveHandler(e:MouseEvent):void 
 		{
-			contentObj.y = - contentObj.height * (scrollButton.y / _maskeHeight);
+			contentObj.y = - contentObj.height * (scrollButton.y / _maskerHeight);
 			//scrollButton.y = tempMouseY + e.localY;
 		}
 	}
