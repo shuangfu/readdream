@@ -51,7 +51,7 @@ package com.readdream.as3.miss.matchthumb
 			initStyle();
 			setupImage();
 			
-
+		trace("---------------------" + this.width);
 			
 		}
 		
@@ -80,13 +80,13 @@ package com.readdream.as3.miss.matchthumb
 		
 		private function initStyle():void
 		{
-			Mr_Dresser.drawBorderByLine(sprContent, new Point(0, 0), new Point(240, 0), new Point(240, 400), new Point(0, 400), 1, 0xC6C6C6, 1);
+			Mr_Dresser.drawBorderByLine(sprContent, new Point(0, 0), new Point(240, 0), new Point(240, 400), new Point(0, 400), 0.5, 0xC6C6C6, 1);
 			sprLine.graphics.beginFill(0xffffff,0)
 			sprLine.graphics.drawRect(0, 0, 239, 1);
 			sprLine.graphics.endFill();
 			sprLine.opaqueBackground = 0xFFFFFF;
 			
-			Mr_Dresser.drawLine(sprContent, 0, 200, 240, 200, 1, 0xc5c5c5, 1);
+			Mr_Dresser.drawLine(sprContent, 1, 200, 239, 200, 1, 0xc5c5c5, 1);
 
 			Mr_Dresser.drawLine(sprContent, 1, 201, 239, 201, 1, 0xD8D8D8, 1);
 
@@ -97,8 +97,10 @@ package com.readdream.as3.miss.matchthumb
 			sprContent.graphics.endFill();
 			
 			var masker:Sprite = Mr_Dresser.getMasker(241, 201, 0xFFFFFF);
+			masker.x = masker.y = 0;
+			trace("masker width: "+masker.width);
 			addChild(masker);
-			this.mask = masker;
+			sprContent.mask = masker;
 			
 			matchTitle.autoSize = TextFieldAutoSize.LEFT;
 			matchTitle.selectable = false;

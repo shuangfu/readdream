@@ -30,7 +30,7 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 			
-			//helloMissMatchThumb();
+			helloMissMatchThumb();
 			
 			
 			
@@ -40,7 +40,7 @@ package
 			//drawDottedLine();
 			//helloMissHotThumb();
 			//helloMissTabButton();
-			helloMissMatchReveal();
+			//helloMissMatchReveal();
 
 		}
 		
@@ -91,12 +91,12 @@ package
 			demo4.x = 340;
 			demo4.y = 300;
 			addChild(demo4);
-			demo5.x = 100;
-			demo5.y = 100;
+			demo5.x = 600;
+			demo5.y = 600;
 			addChild(demo5);
 			demo.x = 340 + demo2.width;
 			demo.y = 100;
-			addChild(demo);
+			//addChild(demo);
 		}
 		
 		private function test():void 

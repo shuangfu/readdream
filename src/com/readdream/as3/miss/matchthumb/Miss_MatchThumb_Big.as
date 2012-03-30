@@ -60,6 +60,7 @@ package com.readdream.as3.miss.matchthumb
 			initData(vo);
 			initStyle();
 			setupImage();
+			
 		}
 		
 		private function initData(vo:Vo_Match):void
@@ -135,7 +136,7 @@ package com.readdream.as3.miss.matchthumb
 			
 			sprPicContainer.addChild(sprPic);
 			sprPicContainer.addChild(masker);
-			sprArrow = new Miss_Arrow(-24, ((290 - Miss_Arrow.arrowHeight) / 2), masker.width, (290 - Miss_Arrow.arrowHeight) / 2);
+			sprArrow = new Miss_Arrow(0, ((290 - Miss_Arrow.arrowHeight) / 2), masker.width-24, (290 - Miss_Arrow.arrowHeight) / 2);
 			sprArrow.leftSelect.x -= 1;
 			sprPic.mask = masker;
 			
