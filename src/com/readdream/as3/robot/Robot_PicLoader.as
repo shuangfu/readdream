@@ -28,7 +28,7 @@ package com.readdream.as3.robot
 		public function Robot_PicLoader(pUrl:String, xPos:Number = 0 , yPos:Number = 0 , picWidth:Number = 0 , picHeight:Number = 0, sec:int = 0 ) 
 		{
 			this.sec = sec;
-			loader = new ImageLoader(pUrl, { name: "photo1", container: this, x: xPos, y: yPos, width: picWidth, height: picHeight, onComplete: onImageLoad } );
+			loader = new ImageLoader(pUrl, { name: "photo1", container: this, x: xPos, y: yPos, width: picWidth, height: picHeight, scaleMode:"stretch",onComplete: onImageLoad } );
 			loader.load();
 			
 			function onImageLoad(event:LoaderEvent):void

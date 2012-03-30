@@ -60,6 +60,8 @@ package com.readdream.as3.miss.matchthumb
 			initData(vo);
 			initStyle();
 			setupImage();
+			
+			trace("------------------",this.width);
 		}
 		
 		private function initData(vo:Vo_Match):void
@@ -75,7 +77,6 @@ package com.readdream.as3.miss.matchthumb
 			
 			matchComp = new TextField();
 			matchComp.text = vo.matchComp.slice(0, 75);
-		
 		}
 		
 		private function initStyle():void
@@ -135,7 +136,7 @@ package com.readdream.as3.miss.matchthumb
 			
 			sprPicContainer.addChild(sprPic);
 			sprPicContainer.addChild(masker);
-			sprArrow = new Miss_Arrow(-24, ((290 - Miss_Arrow.arrowHeight) / 2), masker.width, (290 - Miss_Arrow.arrowHeight) / 2);
+			sprArrow = new Miss_Arrow(0, ((290 - Miss_Arrow.arrowHeight) / 2), masker.width-24, (290 - Miss_Arrow.arrowHeight) / 2);
 			sprArrow.leftSelect.x -= 1;
 			sprPic.mask = masker;
 			
@@ -182,10 +183,10 @@ package com.readdream.as3.miss.matchthumb
 		
 		private function mouseRollOutHandler(e:MouseEvent):void
 		{
-			TweenLite.to(sprArrow.leftNoSelect, 0.15, {x: -24});
-			TweenLite.to(sprArrow.rightNoSelect, 0.15, {x: (masker.width), onComplete: onRollOutCompleteHandler});
+			TweenLite.to(sprArrow.leftNoSelect, 0.15, {x: -24,overwrite:true});
+			TweenLite.to(sprArrow.rightNoSelect, 0.15, {x: (masker.width), onComplete: onRollOutCompleteHandler,overwrite:true});
 			
-			TweenLite.to(sprComp, 0.15, {y: 50});
+			TweenLite.to(sprComp, 0.15, {y: 50,overwrite:true});
 		}
 		
 		private function onRollOutCompleteHandler():void

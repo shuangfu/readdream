@@ -19,9 +19,11 @@ package com.readdream.as3.miss
 		
 		public function Miss_Architect(stuffArr:Array) 
 		{
+			//this.opaqueBackground = 0x000000;
 			this.stuffArr = stuffArr;
 			//initConnect();
 			build();
+			trace("kuan Du",this.width);
 		}
 		
 		public function build() :void{
@@ -36,7 +38,6 @@ package com.readdream.as3.miss
 			trace("big: " + noOfBigImg);
 			trace("small: " + noOfSmallImg);
 			while (noOfBigImg > 0 || noOfSmallImg > 0){
-				
 				if (swapFlagInt == 2) {
 						swapFlagInt = 0;
 						swapFlag = !swapFlag;
@@ -47,6 +48,7 @@ package com.readdream.as3.miss
 					placeSmall();
 				}
 			}
+			trace("come " + this.height + this.scaleY);
 		}
 		private function placeSmall():void
 		{
@@ -66,9 +68,11 @@ package com.readdream.as3.miss
 					}
 					var tempBit:int;
 
-					stuffArr[smallFlag].x = xSpace * 240 + rectNum % 2 * 480;
+					stuffArr[smallFlag].x = xSpace * 240 + (rectNum % 2) * 480;
 					stuffArr[smallFlag].y = ySpace * 200 + 400 * Math.floor(rectNum / 2);
 					addChild(stuffArr[smallFlag]);
+					trace("x: " + stuffArr[smallFlag].x);
+					trace("width: " + stuffArr[smallFlag].width);
 					usedFlag[smallFlag] = true;
 					noOfSmallImg--;
 					smallImgNum++;
@@ -90,9 +94,11 @@ package com.readdream.as3.miss
 					bigFlag++;
 				}
 				//放大图
-				stuffArr[bigFlag].x = (rectNum % 2) * 480;
+				stuffArr[bigFlag].x = Math.floor(rectNum % 2) * 480;
 				stuffArr[bigFlag].y = (Math.floor(rectNum / 2)) * 400;
 				addChild(stuffArr[bigFlag]);
+				trace("x: " + stuffArr[bigFlag].x);
+				trace("width: " + stuffArr[bigFlag].width);
 				usedFlag[bigFlag] = true;
 				rectNum++;
 				noOfBigImg--;
