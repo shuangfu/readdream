@@ -19,7 +19,7 @@ package
 	 * ...
 	 * @author fs
 	 */
-	[SWF(width="1200",height="1600",frameRate="60",backgroundColor="#ffffff")]
+	[SWF(width="1600",height="1600",frameRate="60",backgroundColor="#ffffff")]
 	public class FSTest extends Sprite 
 	{
 		
@@ -30,8 +30,8 @@ package
 			//var ti1:Miss_TextInput = new Miss_TextInput(230, 30);
 			//var ti2:Miss_TextInput = new Miss_TextInput(230,30);
 			//var ti3:Miss_TextInput = new Miss_TextInput(230,30);
-			//ti.width = 150;
-			//ti.height = 35;
+			//ti1.width = 150;
+			//ti1.height = 35;
 			//ti1.addEventListener(TextInputEvent.INPUT_COMPLETE, inputCompleteHandler);
 			//var objArr:Array = new Array();
 			//objArr.push( { stuff:ti1, xPos:10, yPos:10 } );
@@ -39,6 +39,7 @@ package
 			//objArr.push( { stuff:ti3, xPos:10, yPos:90 } );
 			//var layOuter:Mr_Layouter = new Mr_Layouter(this, objArr);
 			//Mr_Layouter.layouter(this, objArr);
+			//addChild(ti1);
 			
 			//var ne:Miss_NavigatorElement = new Miss_NavigatorElement(new Vo_NavigatorElement(1, "我是一个兵", "hhh",0));
 			//addChild(ne);
@@ -100,9 +101,6 @@ package
 			var ms:Miss_MotherShip = new Miss_MotherShip();
 			addChild(ms);
 		}
-		
-
-		
 	}
 
 }
