@@ -29,6 +29,7 @@ package com.readdream.as3.robot
 		{
 			this.sec = sec;
 			loader = new ImageLoader(pUrl, { name: "photo1", container: this, x: xPos, y: yPos, width: picWidth, height: picHeight,onComplete: onImageLoad } );
+
 			loader.load();
 			
 			function onImageLoad(event:LoaderEvent):void

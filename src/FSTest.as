@@ -1,6 +1,7 @@
 package  
 {
 	import com.readdream.as3.event.TextInputEvent;
+	import com.readdream.as3.miss.Miss_MotherShip;
 	import com.readdream.as3.miss.Miss_ScrollBarMagician;
 	import com.readdream.as3.miss.Miss_TextInput;
 	import com.readdream.as3.miss.navigatorBar.Miss_NavigatorBar;
@@ -18,7 +19,7 @@ package
 	 * ...
 	 * @author fs
 	 */
-	[SWF(width="1200",height="1600",frameRate="60",backgroundColor="#ffffff")]
+	[SWF(width="1600",height="1600",frameRate="60",backgroundColor="#ffffff")]
 	public class FSTest extends Sprite 
 	{
 		
@@ -26,18 +27,19 @@ package
 		{
 			stage.align = StageAlign.TOP_LEFT; 
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			var ti1:Miss_TextInput = new Miss_TextInput(230, 30);
-			var ti2:Miss_TextInput = new Miss_TextInput(230,30);
-			var ti3:Miss_TextInput = new Miss_TextInput(230,30);
-			//ti.width = 150;
-			//ti.height = 35;
-			ti1.addEventListener(TextInputEvent.INPUT_COMPLETE, inputCompleteHandler);
-			var objArr:Array = new Array();
-			objArr.push( { stuff:ti1, xPos:10, yPos:10 } );
-			objArr.push( { stuff:ti2, xPos:10, yPos:50 } );
-			objArr.push( { stuff:ti3, xPos:10, yPos:90 } );
+			//var ti1:Miss_TextInput = new Miss_TextInput(230, 30);
+			//var ti2:Miss_TextInput = new Miss_TextInput(230,30);
+			//var ti3:Miss_TextInput = new Miss_TextInput(230,30);
+			//ti1.width = 150;
+			//ti1.height = 35;
+			//ti1.addEventListener(TextInputEvent.INPUT_COMPLETE, inputCompleteHandler);
+			//var objArr:Array = new Array();
+			//objArr.push( { stuff:ti1, xPos:10, yPos:10 } );
+			//objArr.push( { stuff:ti2, xPos:10, yPos:50 } );
+			//objArr.push( { stuff:ti3, xPos:10, yPos:90 } );
 			//var layOuter:Mr_Layouter = new Mr_Layouter(this, objArr);
-			Mr_Layouter.layouter(this, objArr);
+			//Mr_Layouter.layouter(this, objArr);
+			//addChild(ti1);
 			
 			//var ne:Miss_NavigatorElement = new Miss_NavigatorElement(new Vo_NavigatorElement(1, "我是一个兵", "hhh",0));
 			//addChild(ne);
@@ -89,21 +91,16 @@ package
 			dataArr.push(voElement17);
 			dataArr.push(voElement18);
 			dataArr.push(voElement19);  
-			var missNavElements :Miss_NavigatorBar = new Miss_NavigatorBar(dataArr);
+			//var missNavElements :Miss_NavigatorBar = new Miss_NavigatorBar(dataArr);
 			//missNavElements.x = 50;
 			//missNavElements.y = 50;
 			//addChild(missNavElements);
-			var scollbar:Miss_ScrollBarMagician = new Miss_ScrollBarMagician(missNavElements,288);
+			//var scollbar:Miss_ScrollBarMagician = new Miss_ScrollBarMagician(missNavElements,288);
 
-			addChild(scollbar);
+			//addChild(missNavElements);
+			var ms:Miss_MotherShip = new Miss_MotherShip();
+			addChild(ms);
 		}
-		
-		private function inputCompleteHandler(e:TextInputEvent):void 
-		{
-			trace(e.text);
-		}
-
-		
 	}
 
 }

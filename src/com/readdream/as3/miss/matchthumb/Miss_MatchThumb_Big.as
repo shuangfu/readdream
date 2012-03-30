@@ -61,6 +61,7 @@ package com.readdream.as3.miss.matchthumb
 			initStyle();
 			setupImage();
 			
+
 		}
 		
 		private function initData(vo:Vo_Match):void
@@ -76,7 +77,6 @@ package com.readdream.as3.miss.matchthumb
 			
 			matchComp = new TextField();
 			matchComp.text = vo.matchComp.slice(0, 75);
-		
 		}
 		
 		private function initStyle():void
@@ -183,10 +183,10 @@ package com.readdream.as3.miss.matchthumb
 		
 		private function mouseRollOutHandler(e:MouseEvent):void
 		{
-			TweenLite.to(sprArrow.leftNoSelect, 0.15, {x: -24});
-			TweenLite.to(sprArrow.rightNoSelect, 0.15, {x: (masker.width), onComplete: onRollOutCompleteHandler});
+			TweenLite.to(sprArrow.leftNoSelect, 0.15, {x: -24,overwrite:true});
+			TweenLite.to(sprArrow.rightNoSelect, 0.15, {x: (masker.width), onComplete: onRollOutCompleteHandler,overwrite:true});
 			
-			TweenLite.to(sprComp, 0.15, {y: 50});
+			TweenLite.to(sprComp, 0.15, {y: 50,overwrite:true});
 		}
 		
 		private function onRollOutCompleteHandler():void

@@ -48,8 +48,8 @@ package com.readdream.as3.miss.navigatorBar
 			//trace(scaleHeight);
 			this.graphics.beginFill(0xECECEC);
 			//this.graphics.beginFill(0x00ff00);
-			//this.graphics.drawRect(0, 0, 240, scaleHeight);
-			this.graphics.drawRect(0, 0, 240, 100);
+			this.graphics.drawRect(0, 0, 240, scaleHeight);
+			//this.graphics.drawRect(0, 0, 240, 100);
 			this.graphics.endFill();
 		}
 

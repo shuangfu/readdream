@@ -51,7 +51,7 @@ package com.readdream.as3.miss.matchthumb
 			initStyle();
 			setupImage();
 			
-		trace("---------------------" + this.width);
+
 			
 		}
 		
@@ -153,19 +153,20 @@ package com.readdream.as3.miss.matchthumb
 		{
 			sprLine.opaqueBackground = 0xD8D8D8;
 			
-			TweenLite.to(sprContent, 0.3, { delay:0.3,y: -200 , onStart:onStart } );
+			TweenLite.to(sprContent, 0, { delay:0.3, onStart:onStart} );
 		}
 		
 		private function onStart():void 
 		{
-			sprContent.opaqueBackground = activateBackground;
+			sprContent.opaqueBackground = activateBackground; 
+			TweenLite.to(sprContent, 0.3, { y: -200} );
 		}
 		
 		private function MouseRollOutHandler(e:MouseEvent):void 
 		{
 			sprContent.opaqueBackground = defaultBackground;
 			sprLine.opaqueBackground = 0xFFFFFF;
-			TweenLite.to(sprContent, 0.2, { y: 0 } );
+			TweenLite.to(sprContent, 0.2, { y: 0 ,overwrite:true} );
 			
 			
 		}

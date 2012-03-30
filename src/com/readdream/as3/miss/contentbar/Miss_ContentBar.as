@@ -168,6 +168,7 @@ package com.readdream.as3.miss.contentbar
 			sprRight.addChild(matchComp);
 			sprRight.addChild(matchContent);
 			sprRightScroll = new Miss_ScrollBarMagician(sprRight, 480);
+
 		}
 		
 		private function initDetails():void 
