@@ -156,17 +156,21 @@ package com.readdream.as3.miss.contentbar
 			matchComp.wordWrap = true;
 			matchComp.mouseWheelEnabled = false;
 			matchComp.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.CONTENTBAR_MATCHCOMP));
-			
+			matchComp.mouseWheelEnabled = false;
+						
 			matchContent.autoSize = TextFieldAutoSize.LEFT;
 			matchContent.width = 240;
 			matchContent.wordWrap = true;
 			matchContent.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.CONTENTBAR_MATCHCONTENT));
 			matchContent.mouseWheelEnabled = false;
+<<<<<<< HEAD
+=======
 
 			matchContent.y = matchComp.height + 20;
 			sprRight.addChild(matchComp);
 			sprRight.addChild(matchContent);
 			sprRightScroll = new Miss_ScrollBarMagician(sprRight, 480);
+>>>>>>> 4e68bd25a641c9c571a9c5c39e02e8369c7ffc80
 		}
 		
 		private function initDetails():void 

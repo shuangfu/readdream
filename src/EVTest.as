@@ -30,7 +30,7 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 			
-			helloMissMatchThumb();
+			//helloMissMatchThumb();
 			
 			
 			
@@ -40,7 +40,7 @@ package
 			//drawDottedLine();
 			//helloMissHotThumb();
 			//helloMissTabButton();
-			//helloMissMatchReveal();
+			helloMissMatchReveal();
 
 		}
 		

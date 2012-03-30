@@ -7,7 +7,7 @@ package com.readdream.as3.miss.navigatorBar
 	import com.readdream.as3.event.NavigatorBarElementMoveEvent;
 	import com.readdream.as3.event.NavigatorBarEvent;
 	import com.readdream.as3.robot.Robot_TextFormater;
-	import com.readdream.as3.VO.Vo_NavigatorElement;
+	import com.readdream.as3.vo.Vo_NavigatorElement;
 	import de.polygonal.ds.TreeIterator;
 	import de.polygonal.ds.TreeNode;
 	import flash.display.Shape;

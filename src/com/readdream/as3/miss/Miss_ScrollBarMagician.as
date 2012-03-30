@@ -58,7 +58,7 @@ package com.readdream.as3.miss
 				addChild(masker);
 				addChild(scrollBar);
 				addChild(scrollButton);
-				scrollButton.height = scrollBar.height * (masker.height / contentObj.height);			
+				scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
 				scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			}
 			contentObj.mask = masker;
@@ -67,6 +67,8 @@ package com.readdream.as3.miss
 
 		private function changeHandler(e:MouseEvent):void 
 		{
+			trace(stage.hasEventListener(MouseEvent.MOUSE_WHEEL));
+
 			if(!stage.hasEventListener(MouseEvent.MOUSE_WHEEL)){
 					stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
 				}
@@ -74,8 +76,12 @@ package com.readdream.as3.miss
 			trace("----"+contentObj.height);
 			if (contentObj.height > _maskerHeight && scrollBar.stage == null) 
 
+
+
+
 			scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
 			if (contentObj.height + contentObj.y <  _maskerHeight && contentObj.y < 0) {
+
 				//如果变小了，并且比滑动区域小，就改变坐标
 				contentObj.y =  _maskerHeight - contentObj.height;
 				scrollButton.y = scrollBar.height - scrollButton.height;
@@ -126,7 +132,9 @@ package com.readdream.as3.miss
 			var _delta:int = e.delta;
 			var newYpos:Number = scrollButton.y + -_delta * 3;
 			//trace(newYpos);
+
 			if (newYpos >= 0 && newYpos < _maskerHeight - scrollButton.height) {
+
 				trace("not bottom");
 				trace(newYpos);
 				trace(_maskerHeight);
