@@ -7,9 +7,9 @@ package com.readdream.as3.miss.matchthumb
 	import com.readdream.as3.robot.Robot_TextFormater;
 	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;
-<<<<<<< HEAD
-	import flash.text.TextField;
-=======
+
+
+
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.events.TimerEvent;
@@ -18,7 +18,7 @@ package com.readdream.as3.miss.matchthumb
 	import flash.text.TextFieldAutoSize;
 	import flash.text.TextFieldType;
 	import flash.utils.Timer;
->>>>>>> 4e68bd25a641c9c571a9c5c39e02e8369c7ffc80
+
 	
 	/**
 	 * ...
@@ -28,13 +28,7 @@ package com.readdream.as3.miss.matchthumb
 	{
 		private const defaultBackground:uint = 0xF8F8F8; 		//默认背景颜色
 		private const activateBackground:uint = 0xECECEC;		//激活背景颜色
-<<<<<<< HEAD
-		private const SprCompHeight:int = 100;
-		public const compPicWidth:int = 460; 					//大图片 宽度
-		public const compPicHeight:int = 340; 					//小图片 高度	 
-		public const sizeWidth:int = 480;
-		public const sizeHeight:int = 400;
-=======
+
 		private const SprCompHeight:Number = 100;
 		private const compPicWidth:Number = 460; 					//大图片 宽度
 		private const compPicHeight:Number = 340; 					//小图片 高度	
@@ -44,8 +38,7 @@ package com.readdream.as3.miss.matchthumb
 		private const matchTitleY:Number = 360
 		private const SprCompY:Number = 350;
 		
-		
->>>>>>> 4e68bd25a641c9c571a9c5c39e02e8369c7ffc80
+ 
 		
 		private var matchTitle:TextField;
 		private var matchComp:TextField;

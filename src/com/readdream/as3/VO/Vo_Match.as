@@ -20,12 +20,25 @@ package com.readdream.as3.vo
 		private var _matchInformation3:String;			//活动元数据3
 		private var _matchInformation4:String;			//活动元数据4
 		private var _matchInformation5:String;			//活动元数据5
-		private var _matchImportint:int;				//活动重要性
+		private var _matchImportant:int;				//活动重要性
 		
 		
-		public function Vo_Match() 
+		public function Vo_Match(_picture:Array = null,_matchIcon:String = "",_matchTitle:String = "",_matchComp:String = "",_matchType:String = "",_matchFrom:String = "",_matchApplyUsers:int = 0,_matchContent:String = "",_matchInformation1:String = "",_matchInformation2:String = "",_matchInformation3:String = "",_matchInformation4:String = "",_matchInformation5:String = "",_matchImportant:int = 0) 
 		{
-			
+			this._picture = _picture;
+			this._matchIcon = _matchIcon;
+			this._matchTitle = _matchTitle;
+			this._matchComp = _matchComp;
+			this._matchType = _matchType;
+			this._matchFrom = _matchFrom;
+			this._matchApplyUsers = _matchApplyUsers;
+			this._matchContent = _matchContent;
+			this._matchInformation1 = _matchInformation1;
+			this._matchInformation2 = _matchInformation2;
+			this._matchInformation3 = _matchInformation3;
+			this._matchInformation4 = _matchInformation4;
+			this._matchInformation5 = _matchInformation5;
+			this._matchImportant = _matchImportant;
 		}
 		
 		/**
@@ -218,14 +231,14 @@ package com.readdream.as3.vo
 		 * 活动重要性
 		 * 是否大图小图
 		 */
-		public function get matchImportint():int 
+		public function get matchImportant():int 
 		{
-			return _matchImportint;
+			return _matchImportant;
 		}
 		
-		public function set matchImportint(value:int):void 
+		public function set matchImportant(value:int):void 
 		{
-			_matchImportint = value;
+			_matchImportant = value;
 		}
 		
 	}

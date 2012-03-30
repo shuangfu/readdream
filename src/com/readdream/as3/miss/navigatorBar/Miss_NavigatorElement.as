@@ -1,6 +1,7 @@
 package com.readdream.as3.miss.navigatorBar
 {
 	import com.greensock.plugins.AutoAlphaPlugin;
+	import com.greensock.plugins.TintPlugin;
 	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenLite;
 	import com.greensock.TweenMax;
@@ -38,6 +39,7 @@ package com.readdream.as3.miss.navigatorBar
 		public function Miss_NavigatorElement(_vo:Vo_NavigatorElement)
 		{
 			TweenPlugin.activate([AutoAlphaPlugin]);
+			TweenPlugin.activate([TintPlugin]);
 			_expanding = false;//默认每个节点都未展开
 			_activedFlag = false;
 			this._vo = _vo;

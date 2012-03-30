@@ -18,7 +18,7 @@ package com.readdream.as3.miss
 		{
 			this.vo = vo;
 			
-			if (vo.matchImportint == 1) {
+			if (vo.matchImportant == 1) {
 				addChild(new Miss_MatchThumb_Big(vo));
 			}else {
 				addChild(new Miss_MatchThumb_Small(vo));
