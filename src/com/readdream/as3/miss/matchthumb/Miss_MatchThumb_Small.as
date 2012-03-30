@@ -40,7 +40,6 @@ package com.readdream.as3.miss.matchthumb
 		private var sprMatchComp:Sprite;
 		private var sprContent:Sprite = new Sprite();
 		private var sprLine:Sprite = new Sprite();
-		private var myTimer:Timer = new Timer(300, 1);
 		
 		public function Miss_MatchThumb_Small(vo:Vo_Match)
 		{
@@ -145,20 +144,19 @@ package com.readdream.as3.miss.matchthumb
 
 			sprContent.addEventListener(MouseEvent.ROLL_OVER, MouseRollOverHandler);
 			sprContent.addEventListener(MouseEvent.ROLL_OUT, MouseRollOutHandler);
-			myTimer.addEventListener(TimerEvent.TIMER, TimerCompleteHandler);
 		}
 		
-		private function TimerCompleteHandler(e:Event):void 
-		{
-			sprContent.opaqueBackground = activateBackground;
-			TweenLite.to(sprContent, 0.3, { y: -200 } );
-		}
 			
 		private function MouseRollOverHandler(e:MouseEvent):void
 		{
 			sprLine.opaqueBackground = 0xD8D8D8;
 			
-			myTimer.start();
+			TweenLite.to(sprContent, 0.3, { delay:0.3,y: -200 , onStart:onStart } );
+		}
+		
+		private function onStart():void 
+		{
+			sprContent.opaqueBackground = activateBackground;
 		}
 		
 		private function MouseRollOutHandler(e:MouseEvent):void 
@@ -166,7 +164,6 @@ package com.readdream.as3.miss.matchthumb
 			sprContent.opaqueBackground = defaultBackground;
 			sprLine.opaqueBackground = 0xFFFFFF;
 			TweenLite.to(sprContent, 0.2, { y: 0 } );
-			myTimer.stop();
 			
 			
 		}
