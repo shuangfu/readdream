@@ -13,10 +13,10 @@ package com.readdream.as3.miss
 		public static var arrowWidth:int = 24;
 		public static var arrowHeight:int = 46;
 		
-		private var LeftNoSelect:Robot_PicLoader;
-		public var LeftSelect:Robot_PicLoader;
-		private var RightNoSelect:Robot_PicLoader;
-		public var RightSelect:Robot_PicLoader;
+		public var leftNoSelect:Robot_PicLoader;
+		public var leftSelect:Robot_PicLoader;
+		public var rightNoSelect:Robot_PicLoader;
+		public var rightSelect:Robot_PicLoader;
 		
 		/**
 		 * 翻页箭头
@@ -25,44 +25,57 @@ package com.readdream.as3.miss
 		 * */		
 		public function Miss_Arrow(leftArrowX:Number,leftArrowY:Number,rightArrowX:Number,rightArrowY:Number) 
 		{
-			LeftNoSelect = new Robot_PicLoader("assets/LeftCircleNoSelect.png",leftArrowX, leftArrowY, 24, 46);
-			LeftSelect = new Robot_PicLoader("assets/LeftCircleSelect.png",leftArrowX, leftArrowY, 24, 46);
-			RightNoSelect = new Robot_PicLoader("assets/RightCircleNoSelect.png",rightArrowX, rightArrowY, 24, 46);
-			RightSelect = new Robot_PicLoader("assets/RightCircleSelect.png", rightArrowX, rightArrowY, 24, 46);
-			addChild(LeftSelect);
-			addChild(LeftNoSelect);
-			addChild(RightSelect);
-			addChild(RightNoSelect);			
+			leftNoSelect = new Robot_PicLoader("assets/LeftCircleNoSelect.png",0, 0, 24, 46);
+			leftSelect = new Robot_PicLoader("assets/LeftCircleSelect.png",0, 0, 24, 46);
+			rightNoSelect = new Robot_PicLoader("assets/RightCircleNoSelect.png",0, 0, 24, 46);
+			rightSelect = new Robot_PicLoader("assets/RightCircleSelect.png", 0, 0, 24, 46);
+			leftNoSelect.x = leftArrowX;
+			leftNoSelect.y = leftArrowY;
+			leftSelect.x = leftArrowX+24;
+			leftSelect.y = leftArrowY;
+			rightNoSelect.x = rightArrowX;
+			rightNoSelect.y = rightArrowY;
+			rightSelect.x = rightArrowX - 24;
+			trace(rightSelect.x);
+			rightSelect.y = rightArrowY;
 			
-			LeftNoSelect.addEventListener(MouseEvent.ROLL_OVER, LeftNoSelectRollOverHandler);
-			LeftSelect.addEventListener(MouseEvent.ROLL_OUT, LeftSelectRollOutHandler);
-			RightNoSelect.addEventListener(MouseEvent.ROLL_OVER, RightNoSelectRollOverHandler);
-			RightSelect.addEventListener(MouseEvent.ROLL_OUT, RightSelectRollOutHandler);
+			rightSelect.visible = false;
+			leftSelect.visible = false;
+			
+			addChild(leftNoSelect);
+			addChild(leftSelect);
+			addChild(rightNoSelect);
+			addChild(rightSelect);
+			
+			leftNoSelect.addEventListener(MouseEvent.ROLL_OVER, leftNoSelectRollOverHandler);
+			leftSelect.addEventListener(MouseEvent.ROLL_OUT, leftSelectRollOutHandler);
+			rightNoSelect.addEventListener(MouseEvent.ROLL_OVER, rightNoSelectRollOverHandler);
+			rightSelect.addEventListener(MouseEvent.ROLL_OUT, rightSelectRollOutHandler);
 		}
 		
-		private function RightSelectRollOutHandler(e:MouseEvent):void 
+		private function rightSelectRollOutHandler(e:MouseEvent):void 
 		{
-			RightSelect.visible = false;
-			RightNoSelect.visible = true;
+			rightSelect.visible = false;
+			//rightNoSelect.visible = true;
 		}
 		
-		private function RightNoSelectRollOverHandler(e:MouseEvent):void 
+		private function rightNoSelectRollOverHandler(e:MouseEvent):void 
 		{
-			RightNoSelect.visible = false;
-			RightSelect.visible = true;
+			//rightNoSelect.visible = false;
+			rightSelect.visible = true;
 		}
 		
 		
-		private function LeftSelectRollOutHandler(e:MouseEvent):void 
+		private function leftSelectRollOutHandler(e:MouseEvent):void 
 		{
-			LeftSelect.visible = false;
-			LeftNoSelect.visible = true;
+			leftSelect.visible = false;
+			//leftNoSelect.visible = true;
 		}
 		
-		private function LeftNoSelectRollOverHandler(e:MouseEvent):void 
+		private function leftNoSelectRollOverHandler(e:MouseEvent):void 
 		{
-			LeftNoSelect.visible = false;
-			LeftSelect.visible = true;
+			//leftNoSelect.visible = false;
+			leftSelect.visible = true;
 		}
 		
 	}

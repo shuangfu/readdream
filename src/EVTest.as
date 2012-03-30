@@ -59,7 +59,7 @@ package
 			match.matchInformation3 = "活动元数据3";
 			match.matchInformation4 = "活动元数据4";
 			match.matchInformation5 = "活动元数据5";
-			match.matchImportint = 1;
+			match.matchImportant = 1;
 			match.picture = new Array("assets/focus1.jpg", "assets/observe1.jpg", "assets/observe2.jpg", "assets/observe3.jpg", "assets/observe4.jpg", "assets/observe5.jpg");
 			var match2:Vo_Match = new Vo_Match();
 			match2.matchApplyUsers = 12345;
@@ -74,7 +74,7 @@ package
 			match2.matchInformation3 = "活动元数据3";
 			match2.matchInformation4 = "活动元数据4";
 			match2.matchInformation5 = "活动元数据5";
-			match2.matchImportint = 0;
+			match2.matchImportant = 0;
 			match2.picture = new Array("assets/focus1.jpg", "assets/observe1.jpg", "assets/observe2.jpg", "assets/observe3.jpg", "assets/observe4.jpg", "assets/observe5.jpg");
 			var demo:Miss_MatchThumb = new Miss_MatchThumb(match);
 			var demo2:Miss_MatchThumb = new Miss_MatchThumb(match2);

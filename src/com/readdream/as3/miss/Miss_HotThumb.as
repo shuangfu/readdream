@@ -231,13 +231,16 @@ package com.readdream.as3.miss
 		{
 			//////////////
 			//添加箭头按钮
+			//buttonArrow = new Miss_Arrow(gap, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2), hotThumbWidth - Miss_Arrow.arrowWidth - gap , hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2));
 			buttonArrow = new Miss_Arrow(gap, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2), hotThumbWidth - Miss_Arrow.arrowWidth - gap , hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2));
+			buttonArrow.leftSelect.x -= 24;
+			buttonArrow.rightSelect.x += 24;
 			addChild(buttonArrow);
 			
 			//////////////////
 			//监听箭头点击事件
-			buttonArrow.LeftSelect.addEventListener(MouseEvent.CLICK, leftSelectClickHandler);
-			buttonArrow.RightSelect.addEventListener(MouseEvent.CLICK, rightSelectClickHandler);
+			buttonArrow.leftSelect.addEventListener(MouseEvent.CLICK, leftSelectClickHandler);
+			buttonArrow.rightSelect.addEventListener(MouseEvent.CLICK, rightSelectClickHandler);
 		}
 		
 		/**
@@ -248,8 +251,8 @@ package com.readdream.as3.miss
 		{
 			////////////////////////////////
 			//移除箭头点击事件，防止连续点击
-			buttonArrow.LeftSelect.removeEventListener(MouseEvent.CLICK, leftSelectClickHandler);
-			buttonArrow.RightSelect.removeEventListener(MouseEvent.CLICK, rightSelectClickHandler);	
+			buttonArrow.leftSelect.removeEventListener(MouseEvent.CLICK, leftSelectClickHandler);
+			buttonArrow.rightSelect.removeEventListener(MouseEvent.CLICK, rightSelectClickHandler);	
 			
 			//////////////////////
 			//当先显示图片下标偏移
@@ -303,8 +306,8 @@ package com.readdream.as3.miss
 		{
 			////////////////////////////////
 			//移除箭头点击事件，防止连续点击
-			buttonArrow.LeftSelect.removeEventListener(MouseEvent.CLICK, leftSelectClickHandler);
-			buttonArrow.RightSelect.removeEventListener(MouseEvent.CLICK, rightSelectClickHandler);	
+			buttonArrow.leftSelect.removeEventListener(MouseEvent.CLICK, leftSelectClickHandler);
+			buttonArrow.rightSelect.removeEventListener(MouseEvent.CLICK, rightSelectClickHandler);	
 			
 			//////////////////////
 			//当先显示图片下标偏移
@@ -348,8 +351,8 @@ package com.readdream.as3.miss
 		 */
 		private function onCompleteHandler():void
 		{
-			buttonArrow.LeftSelect.addEventListener(MouseEvent.CLICK, leftSelectClickHandler);
-			buttonArrow.RightSelect.addEventListener(MouseEvent.CLICK, rightSelectClickHandler);
+			buttonArrow.leftSelect.addEventListener(MouseEvent.CLICK, leftSelectClickHandler);
+			buttonArrow.rightSelect.addEventListener(MouseEvent.CLICK, rightSelectClickHandler);
 		}
 	}
 

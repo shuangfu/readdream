@@ -20,7 +20,7 @@ package com.readdream.as3.vo
 		private var _matchInformation3:String;			//活动元数据3
 		private var _matchInformation4:String;			//活动元数据4
 		private var _matchInformation5:String;			//活动元数据5
-		private var _matchImportint:int;				//活动重要性
+		private var _matchImportant:int;				//活动重要性
 		
 		
 		public function Vo_Match() 
@@ -218,14 +218,14 @@ package com.readdream.as3.vo
 		 * 活动重要性
 		 * 是否大图小图
 		 */
-		public function get matchImportint():int 
+		public function get matchImportant():int 
 		{
-			return _matchImportint;
+			return _matchImportant;
 		}
 		
-		public function set matchImportint(value:int):void 
+		public function set matchImportant(value:int):void 
 		{
-			_matchImportint = value;
+			_matchImportant = value;
 		}
 		
 	}
