@@ -31,11 +31,11 @@ package com.readdream.as3.miss
 			rightSelect = new Robot_PicLoader("assets/RightCircleSelect.png", 0, 0, 24, 46);
 			leftNoSelect.x = leftArrowX;
 			leftNoSelect.y = leftArrowY;
-			leftSelect.x = leftArrowX+24;
+			leftSelect.x = leftArrowX;
 			leftSelect.y = leftArrowY;
 			rightNoSelect.x = rightArrowX;
 			rightNoSelect.y = rightArrowY;
-			rightSelect.x = rightArrowX - 24;
+			rightSelect.x = rightArrowX;
 			trace(rightSelect.x);
 			rightSelect.y = rightArrowY;
 			

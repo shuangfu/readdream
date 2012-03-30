@@ -88,7 +88,7 @@ package com.readdream.as3.mr
 		 * @param	color
 		 * @param	alpha
 		 */
-		public static function drawBorderByLine(container:Sprite, uLP:Point, uRP:Point, dRP:Point, dLP:Point, thickness1:Number = 1 , color1:uint = 0 , alpha1:Number = 1):void 
+		public static function drawBorderByLine(container:Sprite, uLP:Point, uRP:Point, dRP:Point, dLP:Point, thickness1:Number = 0.5 , color1:uint = 0 , alpha1:Number = 1):void 
 		{			
 			container.graphics.lineStyle(thickness1, color1, alpha1, true);
 			container.graphics.moveTo(uLP.x, uLP.y);
@@ -112,7 +112,7 @@ package com.readdream.as3.mr
 		 */
 		public static function drawLine(container:Sprite, xPos1:Number, yPos1:Number, xPos2:Number, yPos2:Number, thickness:Number = NaN, color:uint = 0, alpha:Number = 1 ):void
 		{
-			container.graphics.lineStyle(thickness, color, alpha, true);
+			container.graphics.lineStyle(thickness, color, alpha, false);
 			container.graphics.moveTo(xPos1, yPos1);
 			container.graphics.lineTo(xPos2, yPos2);
 			container.graphics.lineStyle();

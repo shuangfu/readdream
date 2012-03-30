@@ -55,20 +55,22 @@ package com.readdream.as3.miss.matchthumb
 		public function Miss_MatchThumb_Big(vo:Vo_Match)
 		{
 			this.opaqueBackground = defaultBackground;
-			this.cacheAsBitmap = true;
+			//this.opaqueBackground = 0xff00ff;
 			
 			initData(vo);
 			initStyle();
 			setupImage();
 			
-
+			trace(this.x," ||| ",this.y);
+			trace(this.width, "|||---|||" ,this.height);
 		}
 		
 		private function initData(vo:Vo_Match):void
 		{
 			this.vo = vo;
-			vrPic[index] = Mr_Dresser.drawBorder(new Robot_PicLoader(vo.picture[index], 0, 0, compPicWidth - 1, compPicHeight - 1), 0xDDDDDD, 1, false);
 			
+			vrPic[index] = Mr_Dresser.drawBorder(new Robot_PicLoader(vo.picture[index], 0, 0, compPicWidth - 1, compPicHeight - 1), 0xDDDDDD, 1, false);
+
 			matchTitle = new TextField();
 			matchTitle.text = vo.matchTitle;
 			
@@ -81,9 +83,10 @@ package com.readdream.as3.miss.matchthumb
 		
 		private function initStyle():void
 		{
-			Mr_Dresser.drawBorderByLine(this, new Point(0, 0), new Point(480, 0), new Point(480, 400), new Point(0, 400), 1, 0xC6C6C6, 1);
+			Mr_Dresser.drawBorderByLine(this, new Point(0, 0), new Point(480, 0), new Point(480, 400), new Point(0, 400), 0.5, 0xC6C6C6, 1);
+			
 			sprLine.graphics.beginFill(0xffffff, 0);
-			sprLine.graphics.drawRect(0, 0, 478, 0.1);
+			sprLine.graphics.drawRect(0, 0, 478, 0.5);
 			sprLine.graphics.endFill();
 			sprLine.opaqueBackground = 0xFFFFFF;
 			
@@ -93,7 +96,7 @@ package com.readdream.as3.miss.matchthumb
 			maskerInfo = Mr_Dresser.getMasker(sizeWidth, SprCompHeight, 0xFF0000);
 			
 			sprComp.graphics.beginFill(0xffffff, 0);
-			sprComp.graphics.drawRect(0, 0, 480, 100);
+			sprComp.graphics.drawRect(0, 0, 478, 100);
 			sprComp.graphics.endFill();
 			
 			matchTitle.autoSize = TextFieldAutoSize.LEFT;
@@ -122,26 +125,38 @@ package com.readdream.as3.miss.matchthumb
 			Mr_Layouter.layouter(sprComp, objComp);
 			
 			sprComp.y = 50;
+			sprComp.x = 1;
+			trace("sprComp.width:   "+sprComp.width);
 			sprInfo.addChild(sprComp);
 			sprInfo.addChild(maskerInfo);
 			
 			sprInfo.y = 300;
+			
 			addChild(sprPicContainer);
 			
 			addChild(sprInfo);
 			
 			sprComp.mask = maskerInfo;
 			
-			sprPic.x = sprPic.y = 10;
 			
-			sprPicContainer.addChild(sprPic);
-			sprPicContainer.addChild(masker);
-			sprArrow = new Miss_Arrow(0, ((290 - Miss_Arrow.arrowHeight) / 2), masker.width-24, (290 - Miss_Arrow.arrowHeight) / 2);
+			
+			
+			sprArrow = new Miss_Arrow(0, ((290 - Miss_Arrow.arrowHeight) / 2), masker.width - 24, (290 - Miss_Arrow.arrowHeight) / 2);
+			sprArrow.leftNoSelect.visible = false;
+			sprArrow.rightNoSelect.visible = false;
 			sprArrow.leftSelect.x -= 1;
-			sprPic.mask = masker;
+
 			
+			sprPic.mask = masker;
+			trace("THERE: " + vrPic[0]);
 			sprPic.addChild(vrPic[0]);
 			sprPic.addChild(sprArrow);
+
+			sprPic.x = sprPic.y = 10;
+			sprPicContainer.addChild(sprPic);
+			sprPicContainer.addChild(masker);
+
+
 			var objArr:Array = new Array();
 			objArr.push({stuff: sprLine, xPos: 1, yPos: 1});
 			Mr_Layouter.layouter(this, objArr);
@@ -162,8 +177,13 @@ package com.readdream.as3.miss.matchthumb
 			leftMove();
 		}
 		
-		private function mouseRollOverHandler(e:MouseEvent):void
+		private function mouseRollOverHandler(e:MouseEvent):void	
 		{
+			sprArrow.leftNoSelect.visible = true;
+			sprArrow.rightNoSelect.visible = true;
+			sprArrow.leftNoSelect.x -= 24;
+			sprArrow.rightNoSelect.x += 24;
+
 			sprLine.opaqueBackground = 0xD8D8D8;
 			
 			TweenLite.to(sprComp, 0.15, {y: 0, delay: 0.2, onStart: onStartHandler, onComplete: onColorCompleteHandler});

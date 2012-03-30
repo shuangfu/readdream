@@ -1,6 +1,7 @@
 package com.readdream.as3.miss 
 {
 	import com.readdream.as3.miss.matchthumb.Miss_MatchThumb_Big;
+	import com.readdream.as3.miss.matchthumb.Miss_MatchThumb_Big_temp;
 	import com.readdream.as3.miss.matchthumb.Miss_MatchThumb_Small;
 	import com.readdream.as3.vo.Vo_Match;
 	import flash.display.Sprite;

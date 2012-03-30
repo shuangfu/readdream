@@ -101,7 +101,8 @@ package
 		
 		private function test():void 
 		{
-
+				Mr_Dresser.drawLine(this, 100, 100, 100, 200, 1, 0xff0000, 1);
+				Mr_Dresser.drawLine(this, 150, 150, 200, 150, 1, 0xff0000, 1);
 		}
 				
 		
