@@ -19,11 +19,11 @@ package com.readdream.as3.miss
 		
 		public function Miss_Architect(stuffArr:Array) 
 		{
-			//this.opaqueBackground = 0x000000;
+			//this.opaqueBackground = 0x00ffff;
 			this.stuffArr = stuffArr;
 			//initConnect();
 			build();
-			trace("kuan Du",this.width);
+			trace("一手高度： ",this.height);
 		}
 		
 		public function build() :void{
@@ -71,6 +71,7 @@ package com.readdream.as3.miss
 					stuffArr[smallFlag].x = xSpace * 240 + (rectNum % 2) * 480;
 					stuffArr[smallFlag].y = ySpace * 200 + 400 * Math.floor(rectNum / 2);
 					addChild(stuffArr[smallFlag]);
+					trace("一手高度： ",this.height);
 					trace("x: " + stuffArr[smallFlag].x);
 					trace("width: " + stuffArr[smallFlag].width);
 					usedFlag[smallFlag] = true;
@@ -97,6 +98,7 @@ package com.readdream.as3.miss
 				stuffArr[bigFlag].x = Math.floor(rectNum % 2) * 480;
 				stuffArr[bigFlag].y = (Math.floor(rectNum / 2)) * 400;
 				addChild(stuffArr[bigFlag]);
+				trace("一手高度： ",this.height);
 				trace("x: " + stuffArr[bigFlag].x);
 				trace("width: " + stuffArr[bigFlag].width);
 				usedFlag[bigFlag] = true;

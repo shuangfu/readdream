@@ -60,9 +60,6 @@ package com.readdream.as3.miss.matchthumb
 			initData(vo);
 			initStyle();
 			setupImage();
-			
-			trace(this.x," ||| ",this.y);
-			trace(this.width, "|||---|||" ,this.height);
 		}
 		
 		private function initData(vo:Vo_Match):void
