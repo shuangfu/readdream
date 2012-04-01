@@ -45,14 +45,14 @@ package com.readdream.as3.miss.matchthumb
 		public function Miss_MatchThumb_Small(vo:Vo_Match)
 		{
 			sprContent.opaqueBackground = defaultBackground;
+			//this.cacheAsBitmap = true;
 			
 			
 			
 			initData(vo);
 			initStyle();
 			setupImage();
-			
-			
+
 			
 		}
 		
@@ -88,22 +88,24 @@ package com.readdream.as3.miss.matchthumb
 			sprLine.opaqueBackground = 0xFFFFFF;
 			
 			sprUpLine.graphics.beginFill(0xffffff, 0);
-			sprUpLine.graphics.drawRect(0, 0, 240, 1);
+			sprUpLine.graphics.drawRect(0, 0, 240, 0.5);
 			sprUpLine.graphics.endFill();
 			sprUpLine.opaqueBackground = 0xC6C6C6;
 			
-			Mr_Dresser.drawLine(sprContent, 1, 200, 240, 200, 1, 0xc5c5c5, 1);
+			Mr_Dresser.drawLine(sprContent, 1, 200, 240, 200, 0.5, 0xc5c5c5, 1);
 
-			Mr_Dresser.drawLine(sprContent, 1, 201, 240, 201, 1, 0xD8D8D8, 1);
+			Mr_Dresser.drawLine(sprContent, 1, 201, 240, 201, 0.5, 0xD8D8D8, 1);
 
 			
 			
-			sprContent.graphics.beginFill(0x000000, 0);
-			sprContent.graphics.drawRect(0, 0, 240, 400);
+			sprContent.graphics.beginFill(0x00ff00, 0);
+			sprContent.graphics.drawRect(0, 0, 239, 400);
 			sprContent.graphics.endFill();
 			
 			var masker:Sprite = Mr_Dresser.getMasker(241, 201, 0xFFFFFF);
-			masker.x = masker.y = 0;
+			trace(masker.width,"---masker---" ,masker.height);
+			masker.x = 0;
+			masker.y = 0;
 			addChild(masker);
 			sprContent.mask = masker;
 			
@@ -148,8 +150,6 @@ package com.readdream.as3.miss.matchthumb
 			
 			Mr_Layouter.layouter(sprContent, objArr);
 			addChild(sprContent);
-			//sprUpLine.x = 20;
-			//sprUpLine.y = 20;
 			addChild(sprUpLine);
 
 			sprContent.addEventListener(MouseEvent.ROLL_OVER, MouseRollOverHandler);

@@ -25,6 +25,8 @@ package com.readdream.as3.robot
 		public static const MATCHTHUMB_MATCHTITLE:String = "matchthumb_matchtitle";
 		public static const MATCHTHUMB_MATCHFROM:String = "matchthumb_matchfrom";
 		public static const MATCHTHUMB_MATCHCOMP:String = "matchthumb_matchcomp";
+		public static const DIALOG_TITLE:String = "dialog_title";
+		public static const DIALOG_CONTENTTITLE:String = "dialog_contenttitle";
 		
 		
 		
@@ -202,8 +204,23 @@ package com.readdream.as3.robot
 					textFont.color = 0x666666;
 					textFont.leading = 5;
 					textFont.font = "宋体";
-					return textFont;				
-				
+					return textFont;	
+				case "dialog_title":	
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 15;
+					textFont.color = 0x000000;
+					textFont.bold = true;
+					textFont.font = "宋体";
+					return textFont;		
+				case "dialog_contenttitle":	
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 13;
+					textFont.color = 0x222222;
+					textFont.bold = true;
+					textFont.font = "宋体";
+					return textFont;	
 				
 				
 				

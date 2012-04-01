@@ -5,9 +5,13 @@ package
 	import com.readdream.as3.miss.Miss_MatchReveal;
 	import com.readdream.as3.miss.contentbar.Miss_TabButton;
 	import com.readdream.as3.miss.Miss_MatchThumb;
+	import com.readdream.as3.miss.Miss_StatusBar;
+	import com.readdream.as3.miss.Miss_TextInput;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.robot.Robot_PicLoader;
+	import com.readdream.as3.robot.Robot_TextFormater;
 	import com.readdream.as3.vo.Vo_Match;
+	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
@@ -15,6 +19,9 @@ package
     import flash.display.LineScaleMode;
 	import flash.events.MouseEvent;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	
 	/**
 	 * ...
@@ -30,18 +37,277 @@ package
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 			
-			helloMissMatchThumb();
 			
+			//Login();
+			//
+			//regist();
+			//
+			//account();
+			//
 			
+			helloMissStatusBar();
 			
-			
-			//test();		
+			//test();
 			
 			//drawDottedLine();
 			//helloMissHotThumb();
 			//helloMissTabButton();
 			//helloMissMatchReveal();
+			//helloMissMatchThumb();
 
+		}
+		
+		private function helloMissStatusBar():void 
+		{
+			var demo:Miss_StatusBar = new Miss_StatusBar();
+			demo.x = 100;
+			demo.y = 100;
+			addChild(demo);
+		}
+		
+		private function account():void 
+		{
+			var sprLogin:Sprite = new Sprite();
+			sprLogin.graphics.beginFill(0xF8F8F8);
+			sprLogin.graphics.drawRect(0, 0, 325, 400);
+			sprLogin.graphics.endFill();
+			
+			var sprTitle:Sprite = new Sprite();
+			sprTitle.graphics.beginFill(0xECECEC);
+			sprTitle.graphics.drawRect(0, 0, 325, 50);
+			sprTitle.graphics.endFill();
+			Mr_Dresser.drawLine(sprTitle, 0, 50, 325, 50, 1, 0XE7E7E7);
+			Mr_Dresser.drawLine(sprTitle, 0, 51, 325, 51, 1, 0XE8E8E8);
+	
+			
+			var txtLogin:TextField = new TextField();
+			txtLogin.autoSize = TextFieldAutoSize.LEFT;
+			txtLogin.text = "修改密码";
+			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_TITLE));
+			txtLogin.x = (sprTitle.width / 2) - (txtLogin.width / 2);
+			txtLogin.y = (sprTitle.height / 2) - (txtLogin.height / 2);
+			
+			var txtEmail:TextField = new TextField();
+			txtEmail.autoSize = TextFieldAutoSize.LEFT;
+			txtEmail.text = "电子邮件";
+			txtEmail.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtEmail.x = 25;;
+			txtEmail.y = sprTitle.height + 20;
+			
+			var inputEmail:TextField = new TextField();
+			inputEmail.autoSize = TextFieldAutoSize.LEFT;
+			inputEmail.text = "		evstar@vip.qq.com";
+			inputEmail.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			inputEmail.x = 25;
+			inputEmail.y = txtEmail.y + txtEmail.height + 5;
+			
+			var txtPassword:TextField = new TextField();
+			txtPassword.autoSize = TextFieldAutoSize.LEFT;
+			txtPassword.text = "原密码";
+			txtPassword.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtPassword.x = 25;
+			txtPassword.y = inputEmail.y + inputEmail.height + 20;
+			
+			var inputPassword:Miss_TextInput = new Miss_TextInput(275, 30, "", "password");
+			inputPassword.x = 25;
+			inputPassword.y = txtPassword.y + txtPassword.height + 5;
+			
+			var txtNewPassword:TextField = new TextField();
+			txtNewPassword.autoSize = TextFieldAutoSize.LEFT;
+			txtNewPassword.text = "新密码";
+			txtNewPassword.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtNewPassword.x = 25;
+			txtNewPassword.y = inputPassword.y + inputPassword.height + 20;
+			
+			var inputNewPassword:Miss_TextInput = new Miss_TextInput(275, 30, "", "password");
+			inputNewPassword.x = 25;
+			inputNewPassword.y = txtNewPassword.y + txtNewPassword.height + 5;
+			
+			var txtReNewPassword:TextField = new TextField();
+			txtReNewPassword.autoSize = TextFieldAutoSize.LEFT;
+			txtReNewPassword.text = "确认新密码";
+			txtReNewPassword.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtReNewPassword.x = 25;
+			txtReNewPassword.y = inputNewPassword.y + inputNewPassword.height + 20;
+			
+			var inputReNewPassword:Miss_TextInput = new Miss_TextInput(275, 30, "", "password");
+			inputReNewPassword.x = 25;
+			inputReNewPassword.y = txtReNewPassword.y + txtReNewPassword.height + 5;
+			
+			var picLogin:Robot_PicLoader = new Robot_PicLoader("assets/login.jpg", 0, 0, 47, 33);
+			picLogin.x = 25;
+			picLogin.y = inputReNewPassword.y + inputReNewPassword.height + 20;
+			Mr_Dresser.addShadowFilter(picLogin, 0, 90, 0.65, 2, 4, 2);
+			
+			
+			
+			var sta:Sprite = Mr_Dresser.drawBorder(sprLogin, 0xE5E5E5, 1, true);
+			sprLogin.addChild(sprTitle);
+			sprTitle.addChild(txtLogin);
+			sprLogin.addChild(txtEmail);
+			sprLogin.addChild(inputEmail);
+			sprLogin.addChild(txtPassword);
+			sprLogin.addChild(inputPassword);
+			sprLogin.addChild(txtNewPassword);
+			sprLogin.addChild(inputNewPassword);
+			sprLogin.addChild(txtReNewPassword);
+			sprLogin.addChild(inputReNewPassword);
+			sprLogin.addChild(picLogin);
+			sta.x = 800;
+			sta.y = 100;
+			addChild(sta);
+		}
+		
+		private function regist():void 
+		{
+			var sprLogin:Sprite = new Sprite();
+			sprLogin.graphics.beginFill(0xF8F8F8);
+			sprLogin.graphics.drawRect(0, 0, 325, 340);
+			sprLogin.graphics.endFill();
+			
+			var sprTitle:Sprite = new Sprite();
+			sprTitle.graphics.beginFill(0xECECEC);
+			sprTitle.graphics.drawRect(0, 0, 325, 50);
+			sprTitle.graphics.endFill();
+			Mr_Dresser.drawLine(sprTitle, 0, 50, 325, 50, 1, 0XE7E7E7);
+			Mr_Dresser.drawLine(sprTitle, 0, 51, 325, 51, 1, 0XE8E8E8);
+	
+			
+			var txtLogin:TextField = new TextField();
+			txtLogin.autoSize = TextFieldAutoSize.LEFT;
+			txtLogin.text = "用户注册";
+			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_TITLE));
+			txtLogin.x = (sprTitle.width / 2) - (txtLogin.width / 2);
+			txtLogin.y = (sprTitle.height / 2) - (txtLogin.height / 2);
+			
+			var txtEmail:TextField = new TextField();
+			txtEmail.autoSize = TextFieldAutoSize.LEFT;
+			txtEmail.text = "电子邮件";
+			txtEmail.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtEmail.x = 25;
+			txtEmail.y = sprTitle.height + 20;
+			
+			var inputEmail:Miss_TextInput = new Miss_TextInput(275, 30, "", "email");
+			inputEmail.x = 25;
+			inputEmail.y = txtEmail.y + txtEmail.height + 5;
+			
+			var txtPassword:TextField = new TextField();
+			txtPassword.autoSize = TextFieldAutoSize.LEFT;
+			txtPassword.text = "密码";
+			txtPassword.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtPassword.x = 25;
+			txtPassword.y = inputEmail.y + inputEmail.height + 20;
+			
+			var inputPassword:Miss_TextInput = new Miss_TextInput(275, 30, "", "password");
+			inputPassword.x = 25;
+			inputPassword.y = txtPassword.y + txtPassword.height + 5;
+			
+			var txtRePassword:TextField = new TextField();
+			txtRePassword.autoSize = TextFieldAutoSize.LEFT;
+			txtRePassword.text = "确认密码";
+			txtRePassword.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtRePassword.x = 25;
+			txtRePassword.y = inputPassword.y + inputPassword.height + 20;
+			
+			var inputRePassword:Miss_TextInput = new Miss_TextInput(275, 30, "", "password");
+			inputRePassword.x = 25;
+			inputRePassword.y = txtRePassword.y + txtRePassword.height + 5;
+			
+			var picRegist:Robot_PicLoader = new Robot_PicLoader("assets/regist.jpg", 0, 0, 64, 33);
+			picRegist.x = 25;
+			picRegist.y = inputRePassword.y + inputRePassword.height + 20;
+			Mr_Dresser.addShadowFilter(picRegist, 0, 90, 0.65, 2, 4, 2);
+			
+			trace(picRegist.y + picRegist.height + 20);
+			
+			
+			
+			var sta:Sprite = Mr_Dresser.drawBorder(sprLogin, 0xE5E5E5, 1, true);
+			sprLogin.addChild(sprTitle);
+			sprTitle.addChild(txtLogin);
+			sprLogin.addChild(txtEmail);
+			sprLogin.addChild(inputEmail);
+			sprLogin.addChild(txtPassword);
+			sprLogin.addChild(inputPassword);
+			sprLogin.addChild(txtRePassword);
+			sprLogin.addChild(inputRePassword);
+			sprLogin.addChild(picRegist);
+			sta.x = 450;
+			sta.y = 100;
+			addChild(sta);
+		}
+		
+		private function Login():void 
+		{
+			var sprLogin:Sprite = new Sprite();
+			sprLogin.graphics.beginFill(0xF8F8F8);
+			sprLogin.graphics.drawRect(0, 0, 325, 270);
+			sprLogin.graphics.endFill();
+			
+			var sprTitle:Sprite = new Sprite();
+			sprTitle.graphics.beginFill(0xECECEC);
+			sprTitle.graphics.drawRect(0, 0, 325, 50);
+			sprTitle.graphics.endFill();
+			Mr_Dresser.drawLine(sprTitle, 0, 50, 325, 50, 1, 0XE7E7E7);
+			Mr_Dresser.drawLine(sprTitle, 0, 51, 325, 51, 1, 0XE8E8E8);
+	
+			
+			var txtLogin:TextField = new TextField();
+			txtLogin.autoSize = TextFieldAutoSize.LEFT;
+			txtLogin.text = "用户登录";
+			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_TITLE));
+			txtLogin.x = (sprTitle.width / 2) - (txtLogin.width / 2);
+			txtLogin.y = (sprTitle.height / 2) - (txtLogin.height / 2);
+			
+			var txtEmail:TextField = new TextField();
+			txtEmail.autoSize = TextFieldAutoSize.LEFT;
+			txtEmail.text = "电子邮件";
+			txtEmail.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtEmail.x = 25;
+			txtEmail.y = sprTitle.height + 20;
+			
+			var inputEmail:Miss_TextInput = new Miss_TextInput(275, 30, "", "email");
+			inputEmail.x = 25;
+			inputEmail.y = txtEmail.y + txtEmail.height + 5;
+			
+			var txtPassword:TextField = new TextField();
+			txtPassword.autoSize = TextFieldAutoSize.LEFT;
+			txtPassword.text = "密码";
+			txtPassword.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
+			txtPassword.x = 25;
+			txtPassword.y = inputEmail.y + inputEmail.height + 20;
+			
+			var inputPassword:Miss_TextInput = new Miss_TextInput(275, 30, "", "password");
+			inputPassword.x = 25;
+			inputPassword.y = txtPassword.y + txtPassword.height + 5;
+			
+			var picLogin:Robot_PicLoader = new Robot_PicLoader("assets/login.jpg", 0, 0, 47, 33);
+			picLogin.x = 25;
+			picLogin.y = inputPassword.y + inputPassword.height + 20;
+			Mr_Dresser.addShadowFilter(picLogin, 0, 90, 0.65, 2, 4, 2);
+			
+			var picRegist:Robot_PicLoader = new Robot_PicLoader("assets/regist.jpg", 0, 0, 64, 33);
+			picRegist.x = 25 + picLogin.width + 20;
+			picRegist.y = inputPassword.y + inputPassword.height + 20;
+			Mr_Dresser.addShadowFilter(picRegist, 0, 90, 0.65, 2, 4, 2);
+			
+			
+			
+			
+			
+			var sta:Sprite = Mr_Dresser.drawBorder(sprLogin, 0xE5E5E5, 1, true);
+			sprLogin.addChild(sprTitle);
+			sprTitle.addChild(txtLogin);
+			sprLogin.addChild(txtEmail);
+			sprLogin.addChild(inputEmail);
+			sprLogin.addChild(txtPassword);
+			sprLogin.addChild(inputPassword);
+			sprLogin.addChild(picLogin);
+			sprLogin.addChild(picRegist);
+			sta.x = 100;
+			sta.y = 100;
+			addChild(sta);
+			
 		}
 		
 		private function helloMissMatchThumb():void 
@@ -80,8 +346,8 @@ package
 			var demo2:Miss_MatchThumb = new Miss_MatchThumb(match2);
 			var demo3:Miss_MatchThumb = new Miss_MatchThumb(match2);
 			var demo4:Miss_MatchThumb = new Miss_MatchThumb(match2);
-			var demo5:Miss_MatchThumb = new Miss_MatchThumb(match2);
-			//var demo5:Miss_MatchThumb = new Miss_MatchThumb(match);
+			//var demo5:Miss_MatchThumb = new Miss_MatchThumb(match2);
+			var demo5:Miss_MatchThumb = new Miss_MatchThumb(match);
 			demo2.x = 340;
 			demo2.y = 100;
 			addChild(demo2);
@@ -96,15 +362,28 @@ package
 			addChild(demo5);
 			demo.x = 340 + demo2.width;
 			demo.y = 100;
-			//addChild(demo);
+			addChild(demo);
 		}
 		
 		private function test():void 
 		{
-				Mr_Dresser.drawLine(this, 100, 100, 100, 200, 1, 0xff0000, 1);
-				Mr_Dresser.drawLine(this, 150, 150, 200, 150, 1, 0xff0000, 1);
-		}
+				//var circle:Sprite = new Sprite();
+				//circle.graphics.beginFill(0xFFCC00);
+				//circle.graphics.drawCircle(200, 200, 200);
+				//circle.scrollRect = new Rectangle(0, 0, 200, 200);
+				//addChild(circle);
+//
+				//circle.addEventListener(MouseEvent.CLICK, clicked);
+						//function clicked(event:MouseEvent):void {
+					//var rect:Rectangle = event.target.scrollRect;
+					//rect.y -= 5;
+					//event.target.scrollRect = rect;
+				//}
 				
+				
+
+		}
+
 		
 		/**
 		 * 画虚线

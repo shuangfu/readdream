@@ -43,13 +43,9 @@ package com.readdream.as3.miss
 				trace(tempThumb_small.width, "|||---|||", tempThumb_small.height);
 			}
 			
-			initData(vo);
 		}
 		
-		private function initData(vo:Vo_Match):void
-		{
-		
-		}
+
 		
 		public function get vo():Vo_Match
 		{
