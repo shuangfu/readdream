@@ -53,8 +53,6 @@ package com.readdream.as3.miss.matchthumb
 			initStyle();
 			setupImage();
 
-			trace(this.x," ||||| ",this.y);
-			trace(this.width, "|||-----|||" ,this.height);
 			
 		}
 		
