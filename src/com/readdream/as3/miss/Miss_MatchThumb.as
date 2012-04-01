@@ -25,13 +25,8 @@ package com.readdream.as3.miss
 				addChild(new Miss_MatchThumb_Small(vo));
 			}
 			
-			initData(vo);
 		}
 		
-		private function initData(vo:Vo_Match):void 
-		{
-		
-		}
 		
 		public function get vo():Vo_Match 
 		{
