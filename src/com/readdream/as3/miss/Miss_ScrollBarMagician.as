@@ -72,7 +72,7 @@ package com.readdream.as3.miss
 				addChild(scrollButton);
 				scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 			}
-			//contentObj.addEventListener(MouseEvent.CLICK, changeHandler);
+			contentObj.addEventListener(MouseEvent.CLICK, changeHandler);
 		}
 			
 		
@@ -103,17 +103,14 @@ package com.readdream.as3.miss
 		{
 			//trace(stage.hasEventListener(MouseEvent.MOUSE_WHEEL));
 
-			//if(!stage.hasEventListener(MouseEvent.MOUSE_WHEEL)){
-					//stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
-				//}
+			if(!stage.hasEventListener(MouseEvent.MOUSE_WHEEL)){
+					stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+			}
 			trace(scrollBar.stage);
 			trace("----"+contentObj.height);
+		
 			if (contentObj.height > _maskerHeight && scrollBar.stage == null) 
-
-
-
-
-			scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
+				scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
 			if (contentObj.height + contentObj.y <  _maskerHeight && contentObj.y < 0) {
 
 				//如果变小了，并且比滑动区域小，就改变坐标
