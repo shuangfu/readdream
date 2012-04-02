@@ -2,6 +2,7 @@ package com.readdream.as3.miss
 {
 	import com.readdream.as3.miss.Miss_MatchThumb;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author fs
@@ -71,6 +72,7 @@ package com.readdream.as3.miss
 					stuffArr[smallFlag].x = xSpace * 240 + (rectNum % 2) * 480;
 					stuffArr[smallFlag].y = ySpace * 200 + 400 * Math.floor(rectNum / 2);
 					addChild(stuffArr[smallFlag]);
+					stuffArr[smallFlag].addEventListener(MouseEvent.CLICK,clickThumbHandler);
 					trace("一手高度： ",this.height);
 					trace("x: " + stuffArr[smallFlag].x);
 					trace("width: " + stuffArr[smallFlag].width);
@@ -98,6 +100,7 @@ package com.readdream.as3.miss
 				stuffArr[bigFlag].x = Math.floor(rectNum % 2) * 480;
 				stuffArr[bigFlag].y = (Math.floor(rectNum / 2)) * 400;
 				addChild(stuffArr[bigFlag]);
+				stuffArr[bigFlag].addEventListener(MouseEvent.CLICK,clickThumbHandler);
 				trace("一手高度： ",this.height);
 				trace("x: " + stuffArr[bigFlag].x);
 				trace("width: " + stuffArr[bigFlag].width);
@@ -109,6 +112,11 @@ package com.readdream.as3.miss
 				onlySmallFlag = true;
 				placeSmall();
 			}
+		}
+		
+		private function clickThumbHandler(e:MouseEvent):void 
+		{
+			trace("ni dian le ");
 		}
 		//private function initConnect():void
 		//{

@@ -1,6 +1,7 @@
 package com.readdream.as3.miss.navigatorBar
 {
 	import com.greensock.TweenLite;
+	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.vo.Vo_NavigatorElement;
 	import de.polygonal.ds.TreeIterator;
 	import de.polygonal.ds.TreeNode;
@@ -37,8 +38,9 @@ package com.readdream.as3.miss.navigatorBar
 			//将根节点的第几个孩子节点的data设为默认激活的节点
 			//activeNoteData = (rootNode.getTreeIterator() as TreeIterator).childData;
 			//activeNoteData.expanding = true;
-			
+		
 			showChildList(rootNode);
+			
 		}
 		
 		private function drawBackground():void 

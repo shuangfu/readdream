@@ -2,6 +2,7 @@ package com.readdream.as3.miss
 {
 	import com.readdream.as3.miss.navigatorBar.Miss_NavigatorBar;
 	import com.readdream.as3.robot.Robot_MissMatchThumbFactory;
+	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.vo.Vo_NavigatorElement;
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -58,6 +59,7 @@ package com.readdream.as3.miss
 			dataArr.push(voElement19);  
 			
 			navBar = new Miss_NavigatorBar(dataArr);
+			navBar.y = 100;
 			addChild(navBar);
 			
 			var tempDataArr:Array = 
@@ -86,6 +88,7 @@ package com.readdream.as3.miss
 			var architect: Miss_ScrollBarMagician;
 			var missMatchThumbs :Array =  Robot_MissMatchThumbFactory.getMissMatchThumbs(tempDataArr)
 			var nos:Miss_Architect = new Miss_Architect(missMatchThumbs);
+			
 			//trace("content height" + nos.height + "``" + nos.scaleY);
 			architect = new Miss_ScrollBarMagician(nos,800,10);
 			architect.x = 240;
@@ -94,8 +97,9 @@ package com.readdream.as3.miss
 			//nos.x = 251;
 			trace("nos width : " , nos.width);
 			//trace("architect width : " , architect.width);
-
 			addChild(architect);
+				var logo:Robot_PicLoader = new Robot_PicLoader("assets/logo.jpg", 0, 0, 65, 60);
+			this.addChild(logo);
 			//trace("mask" + architect.height);
 			//addChild(nos);
 			
