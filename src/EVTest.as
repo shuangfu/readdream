@@ -2,6 +2,7 @@ package
 {
 	import com.readdream.as3.miss.Miss_Arrow;
 	import com.readdream.as3.miss.Miss_HotThumb;
+	import com.readdream.as3.miss.Miss_LoginPanel;
 	import com.readdream.as3.miss.Miss_MatchReveal;
 	import com.readdream.as3.miss.contentbar.Miss_TabButton;
 	import com.readdream.as3.miss.Miss_MatchThumb;
@@ -36,16 +37,16 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
+			Login();
+			
+			regist();
+			
+			account();
 			
 			
-			//Login();
-			//
-			//regist();
-			//
-			//account();
-			//
-			
-			helloMissStatusBar();
+			//var demo:Miss_LoginPanel = new Miss_LoginPanel();
+			//addChild(demo);
+			//helloMissStatusBar();
 			
 			//test();
 			
@@ -54,7 +55,6 @@ package
 			//helloMissTabButton();
 			//helloMissMatchReveal();
 			//helloMissMatchThumb();
-
 		}
 		
 		private function helloMissStatusBar():void 
@@ -219,8 +219,6 @@ package
 			Mr_Dresser.addShadowFilter(picRegist, 0, 90, 0.65, 2, 4, 2);
 			
 			trace(picRegist.y + picRegist.height + 20);
-			
-			
 			
 			var sta:Sprite = Mr_Dresser.drawBorder(sprLogin, 0xE5E5E5, 1, true);
 			sprLogin.addChild(sprTitle);
