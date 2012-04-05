@@ -21,9 +21,11 @@ package com.readdream.as3.miss.navigatorBar
 		private var rootNode:TreeNode;
 		private var tempX :int = 0;
 		private var tempCount:int = 0;
-		private var activeNoteData:Miss_NavigatorElement;
+		private var activeNoteData:Miss_NavigatorElement_try;
 		private var tempNoteForCount:TreeNode;
 		private var tempNoteForCountResult:int;
+		
+		private var yDistance:Number = 0;
 		
 		
 		
@@ -40,7 +42,6 @@ package com.readdream.as3.miss.navigatorBar
 			//activeNoteData.expanding = true;
 		
 			showChildList(rootNode);
-			
 		}
 		
 		private function drawBackground():void 
@@ -57,7 +58,7 @@ package com.readdream.as3.miss.navigatorBar
 
 		private function setupTree():void
 		{
-			var rootElement:Miss_NavigatorElement = new Miss_NavigatorElement(new Vo_NavigatorElement(0, "", ""));
+			var rootElement:Miss_NavigatorElement_try = new Miss_NavigatorElement_try(new Vo_NavigatorElement(0, "", ""));
 			rootNode = new TreeNode(rootElement);
 			
 			for (var j:int = 0; j < _dataArr.length; j++)
@@ -65,13 +66,13 @@ package com.readdream.as3.miss.navigatorBar
 				if ((_dataArr[j] as Vo_NavigatorElement).fatherNid == 0)
 				{
 					//为_dataArr[j]新建node并设为_dataArr[i]的儿子
-					var tempObj:Miss_NavigatorElement = new Miss_NavigatorElement(_dataArr[j]);
+					var tempObj:Miss_NavigatorElement_try = new Miss_NavigatorElement_try(_dataArr[j]);
 					//tempObj.addEventListener(MouseEvent.CLICK,elementClickHandler);
 					var node:TreeNode = new TreeNode(tempObj, rootNode);
 					tempObj.nodeObj = node;
 				}
 			}
-			
+				
 			var treeIterator:TreeIterator = new TreeIterator(rootNode);
 			
 			
@@ -80,10 +81,10 @@ package com.readdream.as3.miss.navigatorBar
 				var i:int = 0;
 				for (; i < _dataArr.length; i++)
 				{
-					if ((_dataArr[i] as Vo_NavigatorElement).fatherNid == (treeIterator.childData as Miss_NavigatorElement).vo.nid)
+					if ((_dataArr[i] as Vo_NavigatorElement).fatherNid == (treeIterator.childData as Miss_NavigatorElement_try).vo.nid)
 					{
 						//为_dataArr[i]新建node并设为treeIterator.node的儿子
-						var tempObj1:Miss_NavigatorElement = new Miss_NavigatorElement(_dataArr[i]);
+						var tempObj1:Miss_NavigatorElement_try = new Miss_NavigatorElement_try(_dataArr[i]);
 						var node1:TreeNode = new TreeNode(tempObj1, treeIterator.childNode);
 						tempObj1.nodeObj = node1;
 					}
@@ -94,7 +95,7 @@ package com.readdream.as3.miss.navigatorBar
 		
 		private function elementClickHandler(e:MouseEvent):void 
 		{
-			var clickedNodeData:Miss_NavigatorElement = (e.currentTarget as Miss_NavigatorElement);
+			var clickedNodeData:Miss_NavigatorElement_try = (e.currentTarget as Miss_NavigatorElement_try);
 			expandMenu(clickedNodeData);
 			//if (activeNoteData.expanding) {
 				//收起原激活节点的子菜单
@@ -106,7 +107,7 @@ package com.readdream.as3.miss.navigatorBar
 			//}
 		}
 		
-		private function expandMenu(nodeData:Miss_NavigatorElement) :void{
+		private function expandMenu(nodeData:Miss_NavigatorElement_try) :void{
 			var node:TreeNode = nodeData.nodeObj;
 			var nodeIterator:TreeIterator = node.getTreeIterator();
 			
@@ -120,8 +121,8 @@ package com.readdream.as3.miss.navigatorBar
 			//向容器中加入孩子
 			var tempYpos:Number = 0;
 			while (nodeIterator.childValid()) {
-				(nodeIterator.childData as Miss_NavigatorElement).y = tempYpos * 30;
-				(nodeIterator.childData as Miss_NavigatorElement).x = 12.5;
+				(nodeIterator.childData as Miss_NavigatorElement_try).y = tempYpos * 30;
+				(nodeIterator.childData as Miss_NavigatorElement_try).x = 12.5;
 				
 				childContainer.addChild(nodeIterator.childData);
 				nodeIterator.nextChild();
@@ -156,7 +157,10 @@ package com.readdream.as3.miss.navigatorBar
 			//改状态位
 			nodeData.expanding = true;
 		}
-		
+		private function moveMyself():void {
+			this.y += yDistance;
+			yDistance = 0;
+		}
 		private function counter(node:TreeNode):int 
 		{
 			var tempIt:TreeIterator = node.getTreeIterator();
@@ -200,9 +204,9 @@ package com.readdream.as3.miss.navigatorBar
 		private function addElement(node1:TreeNode):void 
 		{
 			if (node1.data.vo.nid > 0 && node1.data.vo.fatherNid == 0) {
-				addChild(node1.data);
 				node1.data.x = 12.5;
 				node1.data.y = tempX * 30;
+				addChild(node1.data);
 				tempX++;
 			}
 		}

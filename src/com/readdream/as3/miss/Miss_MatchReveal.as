@@ -38,8 +38,6 @@ package com.readdream.as3.miss
 			initData(vo);
 			drawBorder();
 			setupBar();
-			
-			
 		}
 		
 		private function drawBorder():void 

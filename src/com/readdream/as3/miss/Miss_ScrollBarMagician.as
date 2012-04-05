@@ -1,7 +1,10 @@
 package com.readdream.as3.miss
 {
+	import com.greensock.TweenLite;
+	import flash.display.CapsStyle;
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.display.JointStyle;
 	import flash.display.Shape;
 	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
@@ -20,13 +23,21 @@ package com.readdream.as3.miss
 		private var contentObj:DisplayObjectContainer;
 		private var _maskerHeight:Number;
 		private var tempMouseY:Number = 0;
-
+		private var autoResize:Boolean;
 		private var scrollBarX:Number;
-		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer,_maskerHeight:Number,scrollBarX:Number = 0) 
+		private var yGapToTop:Number;
+		private var memoryOfProportion:Number = 1;
+		private var mouseFlag:Boolean = false;
+		private var rollFlag:Boolean = false;
+		
+		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer, _maskerHeight :Number = 0, scrollBarX:Number = 0, autoResize:Boolean = false, yGapToTop:Number = 40)
 		{
 			trace("内容的高度是:" + contentObj.height + ",宽度是:" + contentObj.width);
 			trace("显示区域高度是:" + _maskerHeight);
+			this.yGapToTop = yGapToTop;
 			scrollBarX = contentObj.width + scrollBarX;
+			this.autoResize = autoResize;
+			
 
 			trace("滑动条位置：" + scrollBarX);
 			
@@ -35,54 +46,130 @@ package com.readdream.as3.miss
 			this.scrollBarX = scrollBarX;
 			
 			//this.opaqueBackground = 0xffff00;
-					
-			initStuff();
+			this.addEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			
 			trace("我的宽度：" + this.width);
 			trace("我的高度：" + this.height);
 		}
 		
+		private function addToStageHandler(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			this.stage.addEventListener(Event.RESIZE,changeHandler);
+			if (autoResize) {
+				_maskerHeight = this.stage.stageHeight - yGapToTop;
+			}
+			this.addEventListener(MouseEvent.MOUSE_OVER, wheelHandler);
+			this.addEventListener(MouseEvent.MOUSE_OUT,mouseWheelRemoveHandler)
+			initStuff();
+		}
+		
+		private function mouseWheelRemoveHandler(e:MouseEvent):void 
+		{
+			this.stage.removeEventListener(MouseEvent.MOUSE_WHEEL,mouseWheelHandler);
+		}
+		
+		private function wheelHandler(e:MouseEvent):void 
+		{
+			this.stage.addEventListener(MouseEvent.MOUSE_WHEEL,mouseWheelHandler);
+		}
+		
+		
 		private function initStuff():void 
 		{
-			masker = new Sprite();
-			scrollButton = new Sprite();
-			scrollBar = new Sprite();
 			
+			scrollButton = new Sprite();
+			scrollButton.graphics.lineStyle(1, 0xA6A6A6, 1, true, "normal", CapsStyle.ROUND, JointStyle.ROUND)
+			scrollButton.graphics.drawRoundRectComplex(0, 0, 10, _maskerHeight + 4, 15, 15, 15, 15);
+			scrollButton.graphics.lineStyle();
+			scrollButton.graphics.beginFill(0xE9E9E9,0);
+			scrollButton.graphics.drawRect(1, 3, 10, _maskerHeight);
+			scrollButton.opaqueBackground = 0xE9E9E9;
+			scrollButton.graphics.endFill();
+
+			scrollBar = new Sprite();
+			scrollBar.graphics.lineStyle(1, 0xA6A6A6, 1,true, "normal", CapsStyle.ROUND, JointStyle.ROUND);
+			scrollBar.graphics.drawRoundRectComplex(0, 0, 10, _maskerHeight, 15, 15, 15, 15);
+			scrollBar.graphics.endFill();
+			
+			masker = new Sprite();
 			masker.graphics.beginFill(0x00ff00);
 			masker.graphics.drawRect(0, 0, contentObj.width, _maskerHeight);
 			masker.graphics.endFill();
 			
-			scrollButton.graphics.beginFill(0xff0000);
-			scrollButton.graphics.drawRect(0,0,10,_maskerHeight);
-			scrollButton.graphics.endFill();
-			scrollButton.x = scrollBarX - 10;
-
-			scrollBar.graphics.beginFill(0x00ff00);
-			scrollBar.graphics.drawRect(0,0,4,_maskerHeight);
-			scrollBar.graphics.endFill();
-			scrollBar.x = scrollBarX - 6;
-
-			addChild(contentObj);
 			
-			if (contentObj.height > _maskerHeight) 
+			
+			if (scrollBarX == 0) 
 			{
-				contentObj.mask = masker;
-				scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
-				addChild(masker);
-				addChild(scrollBar);
-				addChild(scrollButton);
-				scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+				scrollBar.x = contentObj.width +50;
+				scrollButton.x = contentObj.width + 50;
+			} else {
+				scrollButton.x = scrollBarX - 10;
+				scrollBar.x = scrollBarX - 10;
 			}
-			contentObj.addEventListener(MouseEvent.CLICK, changeHandler);
-		}
 			
+			
+			contentObj.mask = masker;
+
+			addChild(masker);
+			addChild(contentObj);
+
+			if (((_maskerHeight > 0) && (contentObj.height > _maskerHeight)) || (autoResize && contentObj.height > stage.stageHeight - yGapToTop ))
+			{
+				scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
+				addChild(scrollBar);
+				addChild(scrollButton); 
+				scrollBar.addEventListener(MouseEvent.CLICK,scrollBarClickHandler);
+				scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+				scrollButton.addEventListener(MouseEvent.ROLL_OVER, scrollButtonRollOverHandler);
+				scrollButton.addEventListener(MouseEvent.ROLL_OUT, scrollButtonRollOutHandler);
+			}
+		}
 		
+		private function scrollBarClickHandler(e:MouseEvent):void 
+		{
+			var clickYPosition:Number = e.localY * e.target.scaleY;
+			//trace(e.target.scaleY);
+			var tempMoveDistance:Number;
+			if (autoResize) {
+				tempMoveDistance = this.stage.stageHeight - yGapToTop;
+			} else {
+				tempMoveDistance = _maskerHeight;
+			}
+			if (clickYPosition < scrollButton.y) {
+				trace("click: " + clickYPosition);
+				trace("button: " + scrollButton.y);
+				trace("高头");
+				if ( -contentObj.y <= tempMoveDistance) {
+					contentObj.y = 0;
+					scrollButton.y = 0;
+				} else {
+					contentObj.y += tempMoveDistance;
+					scrollButton.y = -(contentObj.y * scrollBar.height) / contentObj.height;
+				}
+			} else if(clickYPosition > scrollButton.y + scrollButton.height){
+				trace("click: " + clickYPosition);
+				trace("button: " + scrollButton.y);
+				trace("底哈");
+				if (contentObj.height - _maskerHeight - (-contentObj.y) < tempMoveDistance) {
+					contentObj.y = _maskerHeight - contentObj.height;
+					scrollButton.y = scrollBar.height - scrollButton.height;
+				} else {
+					contentObj.y -= tempMoveDistance;
+					scrollButton.y = -(contentObj.y * scrollBar.height) / contentObj.height;
+				}
+			}
+		}
+
+
 		private function mouseDownHandler(e:MouseEvent):void 
 		{
-			if (stage != null) {
-				stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
-				stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+			stage.addEventListener(MouseEvent.MOUSE_MOVE, mouseMoveHandler);
+			stage.addEventListener(MouseEvent.MOUSE_UP, mouseUpHandler);
+			if (scrollBarX == 0) {
+				scrollButton.startDrag(false, new Rectangle(contentObj.width + 50, 0, 0, _maskerHeight - scrollButton.height));
+			} else {
 				scrollButton.startDrag(false, new Rectangle(scrollBarX - 10, 0, 0, _maskerHeight - scrollButton.height));
-				//tempMouseY = e.stageY;
 			}
 		}
 		private function mouseUpHandler(e:MouseEvent):void 
@@ -94,23 +181,24 @@ package com.readdream.as3.miss
 		}
 		private function mouseMoveHandler(e:MouseEvent):void 
 		{
-			//contentObj.y = - contentObj.height * (scrollButton.y / _maskerHeight);
 			contentObj.y = - (scrollButton.y * (contentObj.height - _maskerHeight)) / (scrollBar.height - scrollButton.height);
-			//scrollButton.y = tempMouseY + e.localY;
 		}
 		
-		private function changeHandler(e:MouseEvent):void 
+		private function changeHandler(e:Event):void 
 		{
-			//trace(stage.hasEventListener(MouseEvent.MOUSE_WHEEL));
-
-			if(!stage.hasEventListener(MouseEvent.MOUSE_WHEEL)){
-					stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+			if (autoResize) {
+				memoryOfProportion = scrollButton.y / (scrollBar.height - scrollButton.height);
+				_maskerHeight = this.stage.stageHeight - yGapToTop;
+				masker.height = _maskerHeight;
+				scrollBar.height = _maskerHeight;
+				scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
+				scrollButton.y = memoryOfProportion * (scrollBar.height - scrollButton.height);
+				contentObj.y = - (scrollButton.y * (contentObj.height - _maskerHeight)) / (scrollBar.height - scrollButton.height);
 			}
+
 			trace(scrollBar.stage);
 			trace("----"+contentObj.height);
 		
-			if (contentObj.height > _maskerHeight && scrollBar.stage == null) 
-				scrollButton.height = scrollBar.height * (_maskerHeight / contentObj.height);
 			if (contentObj.height + contentObj.y <  _maskerHeight && contentObj.y < 0) {
 
 				//如果变小了，并且比滑动区域小，就改变坐标
@@ -118,19 +206,17 @@ package com.readdream.as3.miss
 				scrollButton.y = scrollBar.height - scrollButton.height;
 			}
 			if (contentObj.height + contentObj.y > _maskerHeight && contentObj.y > 0) 
-
 			{
 				contentObj.y = 0;
 				scrollButton.y = 0;
 			}
-			//trace(scrollBar.stage);
-			//trace("----"+contentObj.height);
-			trace("点了");
+
+			
 			if (contentObj.height > _maskerHeight && scrollBar.stage == null) 
 			{
 				trace("加滚动条");
 				//trace("=-=-=-" + masker.height);
-				stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+				//stage.addEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
 				scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
 				addChild(masker);
 				addChild(scrollBar);
@@ -140,47 +226,66 @@ package com.readdream.as3.miss
 				contentObj.y = 0;
 				scrollButton.y = 0;
 				//trace("=-=-=-" + masker.height);
-				stage.removeEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+				//stage.removeEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
 				scrollButton.removeEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+				scrollBar.removeEventListener(MouseEvent.CLICK,scrollBarClickHandler);
 				removeChild(masker);
 				removeChild(scrollBar);
 				removeChild(scrollButton);
 			}
+			//if (scrollButton.y > (this.stage.stageHeight - 30)) {
+				//scrollButton.y = this.stage.stageHeight - 30 - yGapToTop;
+				//contentObj.y = - (scrollButton.y * (contentObj.height - _maskerHeight)) / (scrollBar.height - scrollButton.height);
+			//}
 		}
 		
 		private function mouseWheelHandler(e:MouseEvent):void 
 		{
-			//var _delta:int = e.delta;
-			//var newYpos:Number = scrollButton.y + -_delta * 3;
-			//trace(newYpos);
-//
-			//if (newYpos >= 0 && newYpos < _maskerHeight - scrollButton.height) {
-//
+			var _delta:int = e.delta;
+			var newYpos:Number = scrollButton.y + -_delta * 5;
+			trace(newYpos);
+
+			if (newYpos >= 0 && newYpos < _maskerHeight - scrollButton.height) {
+
 				//trace("not bottom");
 				//trace(newYpos);
 				//trace(_maskerHeight);
 				//trace(contentObj.height);
 				//trace(contentObj.y);
 				//trace(_maskerHeight - scrollButton.height);
-				//scrollButton.y = newYpos;
-				//contentObj.y =- contentObj.height * (scrollButton.y / _maskerHeight);
-			//}
-			//if (newYpos >= _maskerHeight - scrollButton.height) 
-			//{
+				scrollButton.y = newYpos;
+				contentObj.y =- contentObj.height * (scrollButton.y / _maskerHeight);
+			}
+			if (newYpos >= _maskerHeight - scrollButton.height) 
+			{
 				//trace("bottom");
 				//trace(newYpos);
 				//trace(_maskerHeight);
 				//trace(contentObj.height);
 				//trace(contentObj.y);
 				//trace(_maskerHeight - scrollButton.height);
-				//scrollButton.y = _maskerHeight - scrollButton.height;
-				//contentObj.y = _maskerHeight - contentObj.height;
-			//}
-			//if (newYpos < 0)
-			//{
-				//contentObj.y = 0;
-				//scrollButton.y = 0;
-			//}
+				scrollButton.y = _maskerHeight - scrollButton.height;
+				contentObj.y = _maskerHeight - contentObj.height;
+			}
+			if (newYpos < 0)
+			{
+				contentObj.y = 0;
+				scrollButton.y = 0;
+			}
+		}
+		private function scrollButtonRollOutHandler(e:MouseEvent):void 
+		{
+			rollFlag = false;
+			if (!mouseFlag) {
+				TweenLite.to(scrollButton, 0, { opaqueBackground:0xE9E9E9 } );
+			}
+			
+		}
+		
+		private function scrollButtonRollOverHandler(e:MouseEvent):void 
+		{
+			rollFlag = true;
+			TweenLite.to(scrollButton, 0, { opaqueBackground:0xF0F0F0 } );
 		}
 	}
 }

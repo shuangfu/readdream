@@ -30,7 +30,7 @@ package
 	 * ...
 	 * @author fs
 	 */
-	[SWF(width="1200",frameRate="60",backgroundColor="#ffffff")]
+	[SWF(frameRate="40",backgroundColor="#ffffff")]
 	
 	public class FSTest extends Sprite
 	{
@@ -117,7 +117,7 @@ package
 			//var urlVars:URLVariables = new URLVariables();
 			//var urlRequest:URLRequest = new URLRequest(urlAddress);
 			//var urlLoader:URLLoader = new URLLoader();
-			
+			//
 			//configureListeners(urlLoader);
 			//try
 			//{
