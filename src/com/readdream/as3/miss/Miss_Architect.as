@@ -2,6 +2,7 @@ package com.readdream.as3.miss
 {
 	import com.readdream.as3.miss.Miss_MatchThumb;
 	import flash.display.Sprite;
+	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author fs
@@ -19,11 +20,11 @@ package com.readdream.as3.miss
 		
 		public function Miss_Architect(stuffArr:Array) 
 		{
-			//this.opaqueBackground = 0x00ffff;
+			this.opaqueBackground = 0xececec;
 			this.stuffArr = stuffArr;
 			//initConnect();
 			build();
-			trace("一手高度： ",this.height);
+			//trace("一手高度： ",this.height);
 		}
 		
 		public function build() :void{
@@ -35,8 +36,8 @@ package com.readdream.as3.miss
 					noOfSmallImg++;
 				}
 			}
-			trace("big: " + noOfBigImg);
-			trace("small: " + noOfSmallImg);
+			//trace("big: " + noOfBigImg);
+			//trace("small: " + noOfSmallImg);
 			while (noOfBigImg > 0 || noOfSmallImg > 0){
 				if (swapFlagInt == 2) {
 						swapFlagInt = 0;
@@ -48,7 +49,7 @@ package com.readdream.as3.miss
 					placeSmall();
 				}
 			}
-			trace("come " + this.height + this.scaleY);
+			//trace("come " + this.height + this.scaleY);
 		}
 		private function placeSmall():void
 		{
@@ -71,9 +72,10 @@ package com.readdream.as3.miss
 					stuffArr[smallFlag].x = xSpace * 240 + (rectNum % 2) * 480;
 					stuffArr[smallFlag].y = ySpace * 200 + 400 * Math.floor(rectNum / 2);
 					addChild(stuffArr[smallFlag]);
-					trace("一手高度： ",this.height);
-					trace("x: " + stuffArr[smallFlag].x);
-					trace("width: " + stuffArr[smallFlag].width);
+					stuffArr[smallFlag].addEventListener(MouseEvent.CLICK,clickThumbHandler);
+					//trace("一手高度： ",this.height);
+					//trace("x: " + stuffArr[smallFlag].x);
+					//trace("width: " + stuffArr[smallFlag].width);
 					usedFlag[smallFlag] = true;
 					noOfSmallImg--;
 					smallImgNum++;
@@ -98,9 +100,10 @@ package com.readdream.as3.miss
 				stuffArr[bigFlag].x = Math.floor(rectNum % 2) * 480;
 				stuffArr[bigFlag].y = (Math.floor(rectNum / 2)) * 400;
 				addChild(stuffArr[bigFlag]);
-				trace("一手高度： ",this.height);
-				trace("x: " + stuffArr[bigFlag].x);
-				trace("width: " + stuffArr[bigFlag].width);
+				stuffArr[bigFlag].addEventListener(MouseEvent.CLICK,clickThumbHandler);
+				//trace("一手高度： ",this.height);
+				//trace("x: " + stuffArr[bigFlag].x);
+				//trace("width: " + stuffArr[bigFlag].width);
 				usedFlag[bigFlag] = true;
 				rectNum++;
 				noOfBigImg--;
@@ -109,6 +112,11 @@ package com.readdream.as3.miss
 				onlySmallFlag = true;
 				placeSmall();
 			}
+		}
+		
+		private function clickThumbHandler(e:MouseEvent):void 
+		{
+			trace("ni dian le ");
 		}
 		//private function initConnect():void
 		//{
