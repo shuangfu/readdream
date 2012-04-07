@@ -1,4 +1,4 @@
-package com.readdream.as3.mr 
+package com.readdream.as3.mr
 {
 	import com.readdream.as3.miss.contentbar.Miss_ContentBar;
 	import flash.display.Graphics;
@@ -13,48 +13,50 @@ package com.readdream.as3.mr
 	 * 美女化妆师
 	 * @author evstar
 	 */
-	public class Mr_Dresser extends Sprite 
+	public class Mr_Dresser extends Sprite
 	{
 		/**
 		 * 美女化妆师
 		 */
-		public function Mr_Dresser() 
+		public function Mr_Dresser()
 		{
-			
+		
 		}
 		
 		/**
 		 * 制作遮罩 以及 自定义矩形填充
 		 * 矩形宽 | 矩形高 | 颜色
-		 * 
+		 *
 		 * @param	sizeWidth
 		 * @param	sizeHeight
 		 * @param	colors
 		 */
-		public static function getMasker(sizeWidth:Number,sizeHeight:Number,color:uint = 0xff0000) :Sprite
+		public static function getMasker(sizeWidth:Number, sizeHeight:Number, color:uint = 0xff0000):Sprite
 		{
 			var sp:Sprite = new Sprite();
 			sp.graphics.beginFill(color);
-			sp.graphics.drawRect(0, 0, sizeWidth, sizeHeight );
+			sp.graphics.drawRect(0, 0, sizeWidth, sizeHeight);
 			sp.graphics.endFill();
 			return sp;
 		}
 		
 		/**
 		 * 自定义背景
-		 * 背景sprite | 颜色 | 背景大小 | 是否阴影 
+		 * 背景sprite | 颜色 | 背景大小 | 是否阴影
 		 * @param	spr
 		 * @param	color
 		 * @param	borderWidth
 		 * @param	shadow
 		 * @return
 		 */
-		public static function drawBorder(spr:Sprite, color:uint, borderWidth:Number = 2,shadow:Boolean = false ):Sprite {
+		public static function drawBorder(spr:Sprite, color:uint, borderWidth:Number = 2, shadow:Boolean = false):Sprite
+		{
 			var background:Sprite = new Sprite();
-			background.graphics.beginFill(color);
-			background.graphics.drawRect(0, 0, spr.width + borderWidth*2, spr.height + borderWidth*2);
+			background.graphics.beginFill(color, 0);
+			background.graphics.drawRect(0, 0, spr.width + borderWidth * 2, spr.height + borderWidth * 2);
 			background.graphics.endFill();
-						
+			background.opaqueBackground = color;
+			
 			spr.x = borderWidth;
 			spr.y = borderWidth;
 			
@@ -62,13 +64,14 @@ package com.readdream.as3.mr
 			
 			/////////////////////////
 			//添加阴影
-			if(shadow){
+			if (shadow)
+			{
 				addShadowFilter(background);
 			}
 			return background;
 		}
 		
-		public static function addShadowFilter(spr:Sprite,color:Number = 0x000000,angle:Number = 90,alpha:Number = 0.65,blurX:Number = 4,blurY:Number = 8,distance:Number = 4,strength:Number = 0.65,inner:Boolean = false,knockout:Boolean = false,quality:Number = BitmapFilterQuality.HIGH):void
+		public static function addShadowFilter(spr:Sprite, color:Number = 0x000000, angle:Number = 90, alpha:Number = 0.65, blurX:Number = 4, blurY:Number = 8, distance:Number = 4, strength:Number = 0.65, inner:Boolean = false, knockout:Boolean = false, quality:Number = BitmapFilterQuality.HIGH):void
 		{
 			var filter:BitmapFilter = new DropShadowFilter(distance, angle, color, alpha, blurX, blurY, strength, quality, inner, knockout);
 			var myFilters:Array = new Array();
@@ -88,8 +91,8 @@ package com.readdream.as3.mr
 		 * @param	color
 		 * @param	alpha
 		 */
-		public static function drawBorderByLine(container:Sprite, uLP:Point, uRP:Point, dRP:Point, dLP:Point, thickness1:Number = 0.5 , color1:uint = 0 , alpha1:Number = 1):void 
-		{			
+		public static function drawBorderByLine(container:Sprite, uLP:Point, uRP:Point, dRP:Point, dLP:Point, thickness1:Number = 0.5, color1:uint = 0, alpha1:Number = 1):void
+		{
 			container.graphics.lineStyle(thickness1, color1, alpha1, true);
 			container.graphics.moveTo(uLP.x, uLP.y);
 			container.graphics.lineTo(uRP.x, uRP.y);
@@ -110,7 +113,7 @@ package com.readdream.as3.mr
 		 * @param	color
 		 * @param	alpha
 		 */
-		public static function drawLine(container:Sprite, xPos1:Number, yPos1:Number, xPos2:Number, yPos2:Number, thickness:Number = NaN, color:uint = 0, alpha:Number = 1 ):void
+		public static function drawLine(container:Sprite, xPos1:Number, yPos1:Number, xPos2:Number, yPos2:Number, thickness:Number = NaN, color:uint = 0, alpha:Number = 1):void
 		{
 			container.graphics.lineStyle(thickness, color, alpha, false);
 			container.graphics.moveTo(xPos1, yPos1);
@@ -118,10 +121,9 @@ package com.readdream.as3.mr
 			container.graphics.lineStyle();
 		}
 		
-		
 		/**
 		 * 画虚线
-		 * 
+		 *
 		 * graphics对象 | 开始坐标 | 结束坐标 | 线粗 | 颜色 | 间隙
 		 * @param	g
 		 * @param	fp
@@ -190,10 +192,13 @@ package com.readdream.as3.mr
 		
 		}
 		
+		public static function trim(s:String):String
+		{
+			return s.replace(/^([\s|\t|\n]+)?(.*)([\s|\t|\n]+)?$/gm, "$2");
+		}
 		
 		
-		
-			
+	
 	}
 
 }

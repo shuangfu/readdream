@@ -41,6 +41,7 @@ package com.readdream.as3.miss
 			this._defaultText = _defaultText;
 			this._contentType = _contentType;
 			TweenPlugin.activate([TintPlugin]);
+			drawBackground();
 			drawBorder();
 			addTextField();
 			registerEvent();
@@ -66,7 +67,7 @@ package com.readdream.as3.miss
 		{
 			if (stage.focus != textField) 
 			{
-				TweenLite.to(borderShape, 0.3, {tint:0x000000});
+				TweenLite.to(borderShape, 0.3, {tint:0xBDBDBD});
 			}
 		}
 		
@@ -96,7 +97,7 @@ package com.readdream.as3.miss
 			textField.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.TEXTINPUT_UNFOCUS));
 			////////////////////
 			//apply border effect
-			TweenLite.to(borderShape, 0.3, {tint:0x000000});
+			TweenLite.to(borderShape, 0.3, {tint:0xBDBDBD});
 		}
 		
 		private function mouseClickHandler(e:MouseEvent):void 
@@ -150,6 +151,9 @@ package com.readdream.as3.miss
 				case "normal":
 					
 				break;
+				case "number":
+					textField.restrict = "0-9";
+				break;
 				default:
 			}
 			//get the size of font
@@ -181,7 +185,7 @@ package com.readdream.as3.miss
 		private function drawBorder():void {
 			//draw border
 			borderShape = new Shape();
-			borderShape.graphics.lineStyle(1, 0x000000, 1, true, LineScaleMode.NONE);
+			borderShape.graphics.lineStyle(1, 0xBDBDBD, 1, true, LineScaleMode.NONE);
 			borderShape.graphics.moveTo(0, 0);
 			borderShape.graphics.lineTo(_tiWidth,0);
 			borderShape.graphics.lineTo(_tiWidth,_tiHeight);
@@ -189,12 +193,22 @@ package com.readdream.as3.miss
 			borderShape.graphics.lineTo(0, 0);
 			addChild(borderShape);
 			
+			
+			
 			//add filter
 			var dropShadow:DropShadowFilter = new DropShadowFilter(2,75,0x000000,0.8,4,4,0.4,1); 
 			var filtersArray:Array = new Array(dropShadow); 
 			borderShape.filters = filtersArray;
 		}
 		
+		private function drawBackground():void 
+		{
+			var sprBackground:Shape = new Shape();
+			sprBackground.graphics.beginFill(0xFFFFFF);
+			sprBackground.graphics.drawRect(0, 0, _tiWidth, _tiHeight);
+			sprBackground.graphics.endFill();
+			addChild(sprBackground);
+		}
 
 		public function get tiHeight():Number 
 		{

@@ -1,5 +1,6 @@
 package com.readdream.as3.miss.contentbar 
 {
+	import com.readdream.as3.miss.Miss_Button;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.mr.Mr_Layouter;
 	import com.readdream.as3.robot.Robot_PicLoader;
@@ -34,6 +35,8 @@ package com.readdream.as3.miss.contentbar
 		private var dottedLine:Sprite;
 		private var dottedLine2:Sprite;
 		private var border:Sprite;
+		private var btnCheckIn:Miss_Button;
+		private var sprButton:Sprite = new Sprite();
 		/**
 		 * 活动详情内标题栏
 		 * @param	vr
@@ -90,6 +93,12 @@ package com.readdream.as3.miss.contentbar
 			
 			border = new Sprite(); 
 			Mr_Dresser.drawLine(border, 0, 100, 980, 100, 1, 0xCCCCCC, 1);
+			
+			btnCheckIn = new Miss_Button("报名", 180, 30);
+			trace("btnHeight"+btnCheckIn.height);
+			sprButton.addChild(btnCheckIn);
+			trace("sprHeight"+sprButton.height);
+			//Mr_Dresser.addShadowFilter(sprButton, 0, 90, 0.8, 2, 3, 2, 0.25);
 		}
 		
 		private function setupImage():void 
@@ -102,8 +111,9 @@ package com.readdream.as3.miss.contentbar
 			objArr[4] = { stuff:txtFrom, xPos:(matchTitleX + txtType.width + 5 + 7), yPos:(matchTitleY + txtTitle.height + 5) };
 			objArr[5] =	{ stuff:dottedLine2, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5), yPos:(matchTitleY + txtTitle.height + 5) };
 			objArr[6] = { stuff:txtUsersNum, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5 + 7), yPos:(matchTitleY + txtTitle.height + 5 - 2.5) };
-			objArr[7] = { stuff:txtApplyUsers, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5 + 7+ txtUsersNum.width - 2), yPos:(matchTitleY + txtTitle.height + 5 - 0.5) };
-			objArr[8] = { stuff:border, xPos:0, yPos:0 };
+			objArr[7] = { stuff:txtApplyUsers, xPos:(matchTitleX + txtType.width + 5 + 7 + txtFrom.width + 5 + 7 + txtUsersNum.width - 2), yPos:(matchTitleY + txtTitle.height + 5 - 0.5) };
+			objArr[8] = { stuff:sprButton, xPos:730, yPos:25 };
+			objArr[9] = { stuff:border, xPos:0, yPos:0 };
 			Mr_Layouter.layouter(this, objArr);
 		}
 		

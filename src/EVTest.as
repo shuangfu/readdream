@@ -1,13 +1,17 @@
-package  
+package
 {
+	import com.greensock.TweenMax;
 	import com.readdream.as3.miss.Miss_Arrow;
+	import com.readdream.as3.miss.Miss_Button;
 	import com.readdream.as3.miss.Miss_HotThumb;
 	import com.readdream.as3.miss.Miss_LoginPanel;
 	import com.readdream.as3.miss.Miss_MatchReveal;
 	import com.readdream.as3.miss.contentbar.Miss_TabButton;
 	import com.readdream.as3.miss.Miss_MatchThumb;
+	import com.readdream.as3.miss.Miss_SelectComponent;
 	import com.readdream.as3.miss.Miss_StatusBar;
 	import com.readdream.as3.miss.Miss_TextInput;
+	import com.readdream.as3.miss.Miss_UserCenter;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.robot.Robot_PicLoader;
 	import com.readdream.as3.robot.Robot_TextFormater;
@@ -17,10 +21,12 @@ package
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.display.CapsStyle;
-    import flash.display.LineScaleMode;
+	import flash.display.LineScaleMode;
 	import flash.events.MouseEvent;
+	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
+	import flash.net.SharedObject;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 	
@@ -28,25 +34,31 @@ package
 	 * ...
 	 * @author evstar
 	 */
-	[SWF(width="1440",height="900",frameRate="90",backgroundColor="#ffffff")]
-	public class EVTest extends Sprite 
+	[SWF(width="1440",height="900",frameRate="90",backgroundColor="#ECECEC")]
+	
+	public class EVTest extends Sprite
 	{
 		
-		public function EVTest() 
+		public function EVTest()
 		{
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
-			Login();
 			
-			regist();
-			
-			account();
+			//helloTextInput();
 			
 			
-			//var demo:Miss_LoginPanel = new Miss_LoginPanel();
-			//addChild(demo);
-			//helloMissStatusBar();
+			//Login();
+			//
+			//regist();
+			//
+			//account();
+			//
+			//helloMissSelectComponent();
+			helloMissUserCenter();
+			//SharedObjectDemo();
+			
+			//helloMissButton();
 			
 			//test();
 			
@@ -55,9 +67,73 @@ package
 			//helloMissTabButton();
 			//helloMissMatchReveal();
 			//helloMissMatchThumb();
+			//helloMissStatusBar();
+			
 		}
 		
-		private function helloMissStatusBar():void 
+		private function helloTextInput():void 
+		{
+			var demo:Miss_TextInput = new Miss_TextInput(240, 30);
+			Mr_Dresser.drawLine(demo, 0, 31, 241, 31, 0.5, 0xFFFFFF, 1);
+			demo.x = demo.y = 200;
+			addChild(demo);
+		}
+		
+		private function helloMissSelectComponent():void 
+		{
+			var demo:Miss_SelectComponent = new Miss_SelectComponent();
+			demo.x = demo.y = 400;
+			addChild(demo);
+		}
+		
+		private function helloMissCalendar():void 
+		{
+			//var demo:Miss_Calendar = new Miss_Calendar();
+			//addChild(demo);
+		}
+		
+		private function helloMissUserCenter():void 
+		{
+			var demo:Miss_UserCenter = new Miss_UserCenter();
+			demo.x = demo.y = 100;
+			addChild(demo);
+		}
+		
+		//private function SharedObjectDemo():void 
+		//{
+		//var mySO:SharedObject = SharedObject.getLocal("testDemo");
+		//var userName:String = "EVST";
+		//mySO.data.userName = userName;
+		//
+		//trace(mySO.data.userName);
+		//trace(mySO.size);
+		//
+		//}
+		
+		private function helloMissButton():void
+		{
+			var demo:Miss_Button = new Miss_Button("确定", 120, 30);
+			demo.x = 50;
+			demo.y = 50;
+			addChild(demo);
+			//var demo2:Miss_Button = new Miss_Button("确定", 120, 30);
+			//demo2.x = 50;
+			//demo2.y = 90;
+			//addChild(demo2);
+			//demo2.addEventListener(MouseEvent.ROLL_OVER, demohandler);
+			//var demo3:Miss_Button = new Miss_Button("确定", 120, 30);
+			//demo3.x = 50;
+			//demo3.y = 130;
+			//addChild(demo3);
+			//demo3.addEventListener(MouseEvent.ROLL_OVER, demohandler);
+			//var demo4:Miss_Button = new Miss_Button("确定", 120, 30);
+			//demo4.x = 50;
+			//demo4.y = 170;
+			//addChild(demo4);
+			//demo4.addEventListener(MouseEvent.ROLL_OVER, demohandler);
+		}
+		
+		private function helloMissStatusBar():void
 		{
 			var demo:Miss_StatusBar = new Miss_StatusBar();
 			demo.x = 100;
@@ -65,7 +141,7 @@ package
 			addChild(demo);
 		}
 		
-		private function account():void 
+		private function account():void
 		{
 			var sprLogin:Sprite = new Sprite();
 			sprLogin.graphics.beginFill(0xF8F8F8);
@@ -78,7 +154,6 @@ package
 			sprTitle.graphics.endFill();
 			Mr_Dresser.drawLine(sprTitle, 0, 50, 325, 50, 1, 0XE7E7E7);
 			Mr_Dresser.drawLine(sprTitle, 0, 51, 325, 51, 1, 0XE8E8E8);
-	
 			
 			var txtLogin:TextField = new TextField();
 			txtLogin.autoSize = TextFieldAutoSize.LEFT;
@@ -91,7 +166,8 @@ package
 			txtEmail.autoSize = TextFieldAutoSize.LEFT;
 			txtEmail.text = "电子邮件";
 			txtEmail.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DIALOG_CONTENTTITLE));
-			txtEmail.x = 25;;
+			txtEmail.x = 25;
+			;
 			txtEmail.y = sprTitle.height + 20;
 			
 			var inputEmail:TextField = new TextField();
@@ -139,8 +215,6 @@ package
 			picLogin.y = inputReNewPassword.y + inputReNewPassword.height + 20;
 			Mr_Dresser.addShadowFilter(picLogin, 0, 90, 0.65, 2, 4, 2);
 			
-			
-			
 			var sta:Sprite = Mr_Dresser.drawBorder(sprLogin, 0xE5E5E5, 1, true);
 			sprLogin.addChild(sprTitle);
 			sprTitle.addChild(txtLogin);
@@ -158,7 +232,7 @@ package
 			addChild(sta);
 		}
 		
-		private function regist():void 
+		private function regist():void
 		{
 			var sprLogin:Sprite = new Sprite();
 			sprLogin.graphics.beginFill(0xF8F8F8);
@@ -171,7 +245,6 @@ package
 			sprTitle.graphics.endFill();
 			Mr_Dresser.drawLine(sprTitle, 0, 50, 325, 50, 1, 0XE7E7E7);
 			Mr_Dresser.drawLine(sprTitle, 0, 51, 325, 51, 1, 0XE8E8E8);
-	
 			
 			var txtLogin:TextField = new TextField();
 			txtLogin.autoSize = TextFieldAutoSize.LEFT;
@@ -235,7 +308,7 @@ package
 			addChild(sta);
 		}
 		
-		private function Login():void 
+		private function Login():void
 		{
 			var sprLogin:Sprite = new Sprite();
 			sprLogin.graphics.beginFill(0xF8F8F8);
@@ -248,7 +321,6 @@ package
 			sprTitle.graphics.endFill();
 			Mr_Dresser.drawLine(sprTitle, 0, 50, 325, 50, 1, 0XE7E7E7);
 			Mr_Dresser.drawLine(sprTitle, 0, 51, 325, 51, 1, 0XE8E8E8);
-	
 			
 			var txtLogin:TextField = new TextField();
 			txtLogin.autoSize = TextFieldAutoSize.LEFT;
@@ -289,10 +361,6 @@ package
 			picRegist.y = inputPassword.y + inputPassword.height + 20;
 			Mr_Dresser.addShadowFilter(picRegist, 0, 90, 0.65, 2, 4, 2);
 			
-			
-			
-			
-			
 			var sta:Sprite = Mr_Dresser.drawBorder(sprLogin, 0xE5E5E5, 1, true);
 			sprLogin.addChild(sprTitle);
 			sprTitle.addChild(txtLogin);
@@ -305,10 +373,10 @@ package
 			sta.x = 100;
 			sta.y = 100;
 			addChild(sta);
-			
+		
 		}
 		
-		private function helloMissMatchThumb():void 
+		private function helloMissMatchThumb():void
 		{
 			var match:Vo_Match = new Vo_Match();
 			match.matchApplyUsers = 12345;
@@ -363,35 +431,59 @@ package
 			addChild(demo);
 		}
 		
-		private function test():void 
+		private function test():void
 		{
-				//var circle:Sprite = new Sprite();
-				//circle.graphics.beginFill(0xFFCC00);
-				//circle.graphics.drawCircle(200, 200, 200);
-				//circle.scrollRect = new Rectangle(0, 0, 200, 200);
-				//addChild(circle);
+			//var circle:Sprite = new Sprite();
+			//circle.graphics.beginFill(0xFFCC00);
+			//circle.graphics.drawCircle(200, 200, 200);
+			//circle.scrollRect = new Rectangle(0, 0, 200, 200);
+			//addChild(circle);
 //
-				//circle.addEventListener(MouseEvent.CLICK, clicked);
-						//function clicked(event:MouseEvent):void {
-					//var rect:Rectangle = event.target.scrollRect;
-					//rect.y -= 5;
-					//event.target.scrollRect = rect;
-				//}
-				
-				
-
+			//circle.addEventListener(MouseEvent.CLICK, clicked);
+			//function clicked(event:MouseEvent):void {
+			//var rect:Rectangle = event.target.scrollRect;
+			//rect.y -= 5;
+			//event.target.scrollRect = rect;
+			//}
+			
+			var matrix:Matrix = new Matrix();
+			var i:uint
+			for (i = 0; i < 2; i++)
+			{
+				var mc:Sprite = new Sprite();
+				addChild(mc);
+				matrix.createGradientBox(550, 25, Math.PI / 2);
+				mc.graphics.beginGradientFill("linear", [0x996600, 0xFFDB94, 0x996600, 0xFDC673, 0x875101], [1, 1, 1, 1, 1], [10, 30, 80, 190, 235], matrix);
+				mc.graphics.lineTo(550, 0);
+				mc.graphics.lineTo(525, 25);
+				mc.graphics.lineTo(25, 25);
+				mc.graphics.lineTo(0, 0);
+				i == 1 ? [mc.scaleY = -1, mc.y = 400] : 0;
+			}
+			for (i = 0; i < 2; i++)
+			{
+				var mc1:Sprite = new Sprite();
+				addChild(mc1);
+				matrix.createGradientBox(25, 400);
+				mc1.graphics.beginGradientFill("linear", [0x996600, 0xFFDB94, 0x996600, 0xFDC673, 0x875101], [1, 1, 1, 1, 1], [10, 30, 80, 190, 235], matrix);
+				mc1.graphics.lineTo(25, 25);
+				mc1.graphics.lineTo(25, 400 - 25);
+				mc1.graphics.lineTo(0, 400);
+				mc1.graphics.lineTo(0, 0);
+				i == 1 ? [mc1.scaleX = -1, mc1.x = 550] : 0;
+			}
+		
 		}
-
 		
 		/**
 		 * 画虚线
 		 */
-		private function drawDottedLine():void 
+		private function drawDottedLine():void
 		{
 			Mr_Dresser.drawDottedLine(graphics, new Point(50, 50), new Point(50, 65), 1, 0x000000, 1);
 		}
 		
-		private function helloMissMatchReveal():void 
+		private function helloMissMatchReveal():void
 		{
 			var match:Vo_Match = new Vo_Match();
 			match.matchApplyUsers = 12345;
@@ -413,15 +505,14 @@ package
 			addChild(miss);
 		}
 		
-		
-		
-		private function helloMissTabButton():void 
+		private function helloMissTabButton():void
 		{
 			var miss:Miss_TabButton = new Miss_TabButton("概况");
 			addChild(miss);
 		}
 		
-		private function helloMissHotThumb() :void {
+		private function helloMissHotThumb():void
+		{
 			var vr:Vector.<Vo_Match> = new Vector.<Vo_Match>;
 			vr[0] = new Vo_Match();
 			vr[1] = new Vo_Match();
@@ -448,7 +539,7 @@ package
 			var demo:Miss_HotThumb = new Miss_HotThumb(vr);
 			addChild(demo);
 		}
-		
+	
 	}
 
 }

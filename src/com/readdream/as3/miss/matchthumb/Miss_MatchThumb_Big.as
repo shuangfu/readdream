@@ -4,6 +4,7 @@ package com.readdream.as3.miss.matchthumb
 	import com.greensock.easing.Linear;
 	import com.greensock.TweenLite;
 	import com.readdream.as3.miss.Miss_Arrow;
+	import com.readdream.as3.miss.Miss_Button;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.mr.Mr_Layouter;
 	import com.readdream.as3.robot.Robot_PicLoader;
@@ -51,6 +52,7 @@ package com.readdream.as3.miss.matchthumb
 		private var sprInfo:Sprite = new Sprite();
 		private var sprArrow:Miss_Arrow;
 		private var vo:Vo_Match;
+		private var btnCheckIn:Miss_Button;
 		
 		public function Miss_MatchThumb_Big(vo:Vo_Match)
 		{
@@ -77,6 +79,7 @@ package com.readdream.as3.miss.matchthumb
 			
 			matchComp = new TextField();
 			matchComp.text = vo.matchComp.slice(0, 75);
+			btnCheckIn = new Miss_Button("报名", 140, 25);
 		}
 		
 		private function initStyle():void
@@ -111,6 +114,8 @@ package com.readdream.as3.miss.matchthumb
 			matchComp.wordWrap = true;
 			matchComp.width = 455;
 			matchComp.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.MATCHTHUMB_MATCHCOMP));
+			
+			btnCheckIn.visible = false;
 		
 		}
 		
@@ -119,7 +124,9 @@ package com.readdream.as3.miss.matchthumb
 			var objComp:Array = new Array();
 			objComp.push({stuff: matchTitle, xPos: matchTitleX, yPos: 10})
 			objComp.push({stuff: matchFrom, xPos: matchTitleX, yPos: 10 + matchTitle.textHeight + 5});
-			objComp.push({stuff: matchComp, xPos: matchTitleX, yPos: 10 + matchTitle.textHeight + matchFrom.height + 15});
+			objComp.push({ stuff: matchComp, xPos: matchTitleX, yPos: 10 + matchTitle.textHeight + matchFrom.height + 15 } );
+			objComp.push({ stuff:btnCheckIn, xPos:300, yPos:10 } );
+			
 			Mr_Layouter.layouter(sprComp, objComp);
 			
 			sprComp.y = 50;
@@ -184,7 +191,8 @@ package com.readdream.as3.miss.matchthumb
 
 			sprLine.opaqueBackground = 0xD8D8D8;
 			
-			TweenLite.to(sprComp, 0.15, {y: 0, delay: 0.2, onStart: onStartHandler, onComplete: onColorCompleteHandler});
+			TweenLite.to(sprComp, 0.15, { y: 0, delay: 0.2, onStart: onStartHandler, onComplete: onColorCompleteHandler } );
+			TweenLite.to(btnCheckIn, 0.3, { visible:true });
 		}
 		
 		private function onColorCompleteHandler():void
@@ -204,7 +212,8 @@ package com.readdream.as3.miss.matchthumb
 			TweenLite.to(sprArrow.leftNoSelect, 0.15, {x: -24,overwrite:true});
 			TweenLite.to(sprArrow.rightNoSelect, 0.15, {x: (masker.width), onComplete: onRollOutCompleteHandler,overwrite:true});
 			
-			TweenLite.to(sprComp, 0.15, {y: 50,overwrite:true});
+			TweenLite.to(sprComp, 0.15, { y: 50, overwrite:true } );
+			TweenLite.to(btnCheckIn, 0.16, { visible:false });
 		}
 		
 		private function onRollOutCompleteHandler():void

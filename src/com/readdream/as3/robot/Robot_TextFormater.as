@@ -1,6 +1,7 @@
 package com.readdream.as3.robot
 {
 	import flash.text.TextFormat;
+	import flash.text.TextFormatAlign;
 	
 	/**
 	 * ...
@@ -27,6 +28,12 @@ package com.readdream.as3.robot
 		public static const MATCHTHUMB_MATCHCOMP:String = "matchthumb_matchcomp";
 		public static const DIALOG_TITLE:String = "dialog_title";
 		public static const DIALOG_CONTENTTITLE:String = "dialog_contenttitle";
+		public static const BUTTON_TEXT:String = "button_text";
+		public static const USERCENT_TITLE:String = "usercent_title";
+		public static const USERCENT_TITLECOMP:String = "usercent_titlecomp";
+		public static const SELECTCOMPONENT_SELECTED:String = "selectcomponent_selected";
+		public static const SELECTCOMPONENT_BUTTONRESET:String = "selectcomponent_buttonreset";
+		public static const SELECTCOMPONENT_BUTTONSUBMIT:String = "selectcomponent_buttonsubmit";
 		
 		
 		
@@ -220,9 +227,61 @@ package com.readdream.as3.robot
 					textFont.color = 0x222222;
 					textFont.bold = true;
 					textFont.font = "宋体";
-					return textFont;	
-				
-				
+					return textFont;
+				case "button_text":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0xFFFFFF;
+					textFont.bold = true;
+					textFont.font = "宋体";
+					return textFont;
+				case "usercent_title":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 23;
+					textFont.color = 0x000000;
+					textFont.bold = true;
+					textFont.font = "宋体";
+					return textFont;
+				case "usercent_titlecomp":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 12;
+					textFont.color = 0x666666;
+					textFont.bold = true;
+					textFont.font = "宋体";
+					return textFont;
+				case "selectcomponent_selected":
+					//font settings
+					textFont = new TextFormat();
+					//textFont.size = 14;
+					textFont.color = 0x5588D8;
+					textFont.bold = true;
+					//textFont.leading = 5;
+					//textFont.bold = true;
+					//textFont.font = "宋体";
+					return textFont;
+				case "selectcomponent_buttonreset":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0xD14836;
+					textFont.bold = true;
+					textFont.align = TextFormatAlign.CENTER;
+					//textFont.leading = 5;
+					textFont.font = "宋体";
+					return textFont;
+				case "selectcomponent_buttonsubmit":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 14;
+					textFont.color = 0x3079ED;
+					textFont.bold = true;
+					textFont.align = TextFormatAlign.CENTER;
+					//textFont.leading = 5;
+					textFont.font = "宋体";
+					return textFont;
 				
 				
 				
@@ -318,14 +377,14 @@ package com.readdream.as3.robot
 				case "textinput_unfocus": 
 					//font settings
 					textFont = new TextFormat();
-					textFont.size = 14;
+					textFont.size = 13;
 					textFont.color = 0xa1a1a1;
 					textFont.font = "宋体";
 					return textFont;
 				case "textinput_focus":
 					//font settings
 					textFont = new TextFormat();
-					textFont.size = 14;
+					textFont.size = 13;
 					textFont.color = 0x000000;
 					textFont.font = "宋体";
 					return textFont;
