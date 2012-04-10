@@ -32,10 +32,11 @@ package com.readdream.as3.miss
 		
 		public function Miss_ScrollBarMagician(contentObj:DisplayObjectContainer, _maskerHeight :Number = 0, scrollBarX:Number = 0, autoResize:Boolean = false, yGapToTop:Number = 40)
 		{
+			
 			trace("内容的高度是:" + contentObj.height + ",宽度是:" + contentObj.width);
 			trace("显示区域高度是:" + _maskerHeight);
 			this.yGapToTop = yGapToTop;
-			scrollBarX = contentObj.width + scrollBarX;
+		
 			this.autoResize = autoResize;
 			
 
@@ -59,18 +60,46 @@ package com.readdream.as3.miss
 			if (autoResize) {
 				_maskerHeight = this.stage.stageHeight - yGapToTop;
 			}
-			this.addEventListener(MouseEvent.MOUSE_OVER, wheelHandler);
-			this.addEventListener(MouseEvent.MOUSE_OUT,mouseWheelRemoveHandler)
+			this.addEventListener(MouseEvent.ROLL_OVER, wheelHandler);
+			this.addEventListener(MouseEvent.ROLL_OUT, mouseWheelRemoveHandler);
+			var backgroundSprite:Sprite = new Sprite();
+			backgroundSprite.graphics.beginFill(0x00ff00, 0);
+			backgroundSprite.graphics.drawRect(0, 0, contentObj.width, _maskerHeight);
+			backgroundSprite.graphics.endFill();
+			addChild(backgroundSprite);
 			initStuff();
 		}
 		
 		private function mouseWheelRemoveHandler(e:MouseEvent):void 
 		{
-			this.stage.removeEventListener(MouseEvent.MOUSE_WHEEL,mouseWheelHandler);
+			this.stage.removeEventListener(MouseEvent.MOUSE_WHEEL, mouseWheelHandler);
+			
+			TweenLite.to(scrollBar, 0.3, { alpha:0 });
+			TweenLite.to(scrollButton, 0.3, { alpha:0 ,onComplete:scrollButtonAlphaToZero} );
+			
+			
+			scrollBar.removeEventListener(MouseEvent.CLICK,scrollBarClickHandler);
+			scrollButton.removeEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+			scrollButton.removeEventListener(MouseEvent.ROLL_OVER, scrollButtonRollOverHandler);
+			scrollButton.removeEventListener(MouseEvent.ROLL_OUT, scrollButtonRollOutHandler);
+		}
+		
+		private function scrollButtonAlphaToZero():void 
+		{
+			//scrollButton.visible = false;
+			//scrollBar.visible = false;
 		}
 		
 		private function wheelHandler(e:MouseEvent):void 
 		{
+			scrollBar.visible = true;
+			scrollButton.visible = true; 
+			TweenLite.to(scrollButton,0.3,{alpha:0.7});
+			TweenLite.to(scrollBar,0.3,{alpha:0.7});
+			scrollBar.addEventListener(MouseEvent.CLICK,scrollBarClickHandler);
+			scrollButton.addEventListener(MouseEvent.MOUSE_DOWN, mouseDownHandler);
+			scrollButton.addEventListener(MouseEvent.ROLL_OVER, scrollButtonRollOverHandler);
+			scrollButton.addEventListener(MouseEvent.ROLL_OUT, scrollButtonRollOutHandler);
 			this.stage.addEventListener(MouseEvent.MOUSE_WHEEL,mouseWheelHandler);
 		}
 		
@@ -78,31 +107,39 @@ package com.readdream.as3.miss
 		private function initStuff():void 
 		{
 			
-			scrollButton = new Sprite();
-			scrollButton.graphics.lineStyle(1, 0xA6A6A6, 1, true, "normal", CapsStyle.ROUND, JointStyle.ROUND)
-			scrollButton.graphics.drawRoundRectComplex(0, 0, 10, _maskerHeight + 4, 15, 15, 15, 15);
-			scrollButton.graphics.lineStyle();
-			scrollButton.graphics.beginFill(0xE9E9E9,0);
-			scrollButton.graphics.drawRect(1, 3, 10, _maskerHeight);
-			scrollButton.opaqueBackground = 0xE9E9E9;
+			scrollButton = new Sprite();  
+			//scrollButton.graphics.lineStyle();
+			scrollButton.graphics.beginFill(0xb1b1b1);
+			scrollButton.graphics.drawRoundRect(0,0,10,_maskerHeight,5,5);
+			//scrollButton.opaqueBackground = 0xE9E9E9;
 			scrollButton.graphics.endFill();
-
+			//scrollButton.graphics.lineStyle(1, 0xA6A6A6, 1, true, "normal", CapsStyle.ROUND, JointStyle.ROUND)
+			//scrollButton.graphics.drawRoundRectComplex(0, 0, 10, _maskerHeight+4, 15, 15, 15, 15);
+			//scrollButton.graphics.lineStyle();
+			//scrollButton.graphics.beginFill(0xE9E9E9,0);
+			//scrollButton.graphics.drawRect(1, 3, 10, _maskerHeight);
+			//scrollButton.opaqueBackground = 0xE9E9E9;
+			//scrollButton.graphics.endFill();
 			scrollBar = new Sprite();
-			scrollBar.graphics.lineStyle(1, 0xA6A6A6, 1,true, "normal", CapsStyle.ROUND, JointStyle.ROUND);
-			scrollBar.graphics.drawRoundRectComplex(0, 0, 10, _maskerHeight, 15, 15, 15, 15);
-			scrollBar.graphics.endFill();
+		
+			scrollBar.graphics.lineStyle(2, 0xc6c6c6);
+			//scrollBar.graphics.drawRoundRectComplex(0, 0, 10, _maskerHeight, 15, 15, 15, 15);
+			scrollBar.graphics.moveTo(5, 0);
+			scrollBar.graphics.lineTo(5, _maskerHeight);
+			scrollBar.graphics.lineStyle();
+		
 			
 			masker = new Sprite();
 			masker.graphics.beginFill(0x00ff00);
 			masker.graphics.drawRect(0, 0, contentObj.width, _maskerHeight);
 			masker.graphics.endFill();
 			
-			
+			//this.addEventListener(Event.ADDED_TO_STAGE, hanler);
 			
 			if (scrollBarX == 0) 
 			{
-				scrollBar.x = contentObj.width +50;
-				scrollButton.x = contentObj.width + 50;
+				scrollBar.x = contentObj.width +10;
+				scrollButton.x = contentObj.width + 10;
 			} else {
 				scrollButton.x = scrollBarX - 10;
 				scrollBar.x = scrollBarX - 10;
@@ -125,6 +162,7 @@ package com.readdream.as3.miss
 				scrollButton.addEventListener(MouseEvent.ROLL_OUT, scrollButtonRollOutHandler);
 			}
 		}
+		
 		
 		private function scrollBarClickHandler(e:MouseEvent):void 
 		{
@@ -241,8 +279,9 @@ package com.readdream.as3.miss
 		
 		private function mouseWheelHandler(e:MouseEvent):void 
 		{
+
 			var _delta:int = e.delta;
-			var newYpos:Number = scrollButton.y + -_delta * 5;
+			var newYpos:Number = scrollButton.y + -_delta * 15;
 			trace(newYpos);
 
 			if (newYpos >= 0 && newYpos < _maskerHeight - scrollButton.height) {
@@ -254,7 +293,9 @@ package com.readdream.as3.miss
 				//trace(contentObj.y);
 				//trace(_maskerHeight - scrollButton.height);
 				scrollButton.y = newYpos;
-				contentObj.y =- contentObj.height * (scrollButton.y / _maskerHeight);
+				//TweenLite.to(scrollButton,0.2,{y:newYpos,overwrite:true});
+				contentObj.y = - contentObj.height * (scrollButton.y / _maskerHeight);
+				//TweenLite.to(contentObj,0.2,{y:- contentObj.height * (scrollButton.y / _maskerHeight),overwrite:true});
 			}
 			if (newYpos >= _maskerHeight - scrollButton.height) 
 			{
@@ -266,10 +307,13 @@ package com.readdream.as3.miss
 				//trace(_maskerHeight - scrollButton.height);
 				scrollButton.y = _maskerHeight - scrollButton.height;
 				contentObj.y = _maskerHeight - contentObj.height;
+				//TweenLite.to(scrollButton, 0.2, { y:_maskerHeight - scrollButton.height ,overwrite:true} );
+				//TweenLite.to(contentObj, 0.2, { y:_maskerHeight - contentObj.height ,overwrite:true} );
 			}
 			if (newYpos < 0)
 			{
 				contentObj.y = 0;
+				
 				scrollButton.y = 0;
 			}
 		}
@@ -277,7 +321,7 @@ package com.readdream.as3.miss
 		{
 			rollFlag = false;
 			if (!mouseFlag) {
-				TweenLite.to(scrollButton, 0, { opaqueBackground:0xE9E9E9 } );
+				TweenLite.to(scrollButton, 0, { alpha:0.7 } );
 			}
 			
 		}
@@ -285,7 +329,7 @@ package com.readdream.as3.miss
 		private function scrollButtonRollOverHandler(e:MouseEvent):void 
 		{
 			rollFlag = true;
-			TweenLite.to(scrollButton, 0, { opaqueBackground:0xF0F0F0 } );
+			TweenLite.to(scrollButton, 0, { alpha:1 } );
 		}
 	}
 }

@@ -53,7 +53,7 @@ package
 			//drawDottedLine();
 			//helloMissHotThumb();
 			//helloMissTabButton();
-			//helloMissMatchReveal();
+			helloMissMatchReveal();
 			//helloMissMatchThumb();
 		}
 		

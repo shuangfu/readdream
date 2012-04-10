@@ -70,6 +70,8 @@ package com.readdream.as3.miss
 		private var MatchTitle:TextField;												//声明活动标题文本域
 		private var MatchComp:TextField;												//声明活动介绍文本域
 		private var buttonArrow:Miss_Arrow;												//声明容器左右两边箭头
+		private var sprPicture:Sprite = new Sprite();									//用于存放图片内容
+		private var sprContent:Sprite = new Sprite();									//所有对象容器
 		
 		
 		
@@ -123,7 +125,7 @@ package com.readdream.as3.miss
 		private function setMask():void 
 		{
 			var masker:Sprite = Mr_Dresser.getMasker(hotThumbWidth - (gap * 2), hotThumbHeight - (gap * 2) );
-			this.mask = masker;
+			sprPicture.mask = masker;
 			masker.x = 10;
 			masker.y = 10;
 			addChild(masker);
@@ -134,10 +136,14 @@ package com.readdream.as3.miss
 		 * */		
 		private function setupImage():void 
 		{
+			sprContent.graphics.lineStyle(0.5, 0xC6C6C6, 1);
+			sprContent.graphics.beginFill(0xF8F8F8);
+			sprContent.graphics.drawRect(0, 0, hotThumbWidth, hotThumbHeight);
+			sprContent.graphics.endFill();
 			////////////////////////
 			//所有图片加载到父容器内
 			for (temp = -3 ; temp < 3; temp++) {
-				addChildAt(loader[(index + temp + loader.length) % loader.length], 0);
+				sprPicture.addChild(loader[(index + temp + loader.length) % loader.length]);
 			}
 			
 			////////////////////////
@@ -148,6 +154,9 @@ package com.readdream.as3.miss
 			TweenLite.to(loader[(index + loader.length) % loader.length], 0.01, { x: centerImageX, y: allImageY, ease: Linear.easeNone } )
 			TweenLite.to(loader[(index + 1 + loader.length) % loader.length], 0.01, { x: rightFlankImageX, y: allImageY, ease: Linear.easeNone } )
 			TweenLite.to(loader[(index + 2 + loader.length) % loader.length], 0.01, { x: right2FlankImageX, y: allImageY, ease: Linear.easeNone } )
+			addChild(sprContent);
+			addChild(sprPicture);
+			
 		}
 		
 		/**
@@ -232,9 +241,9 @@ package com.readdream.as3.miss
 			//////////////
 			//添加箭头按钮
 			//buttonArrow = new Miss_Arrow(gap, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2), hotThumbWidth - Miss_Arrow.arrowWidth - gap , hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2));
-			buttonArrow = new Miss_Arrow(gap, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2), hotThumbWidth - Miss_Arrow.arrowWidth - gap , hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2));
-			buttonArrow.leftSelect.x -= 24;
-			buttonArrow.rightSelect.x += 24;
+			buttonArrow = new Miss_Arrow(0, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2), hotThumbWidth - Miss_Arrow.arrowWidth, hotThumbHeight / 2 - (Miss_Arrow.arrowHeight/2));
+			//buttonArrow.leftSelect.x -= 24;
+			//buttonArrow.rightSelect.x += 24;
 			addChild(buttonArrow);
 			
 			//////////////////
@@ -269,7 +278,7 @@ package com.readdream.as3.miss
 			if (loader[(index - 2 + loader.length) % loader.length].parent == null) {
 				loader[(index - 2 + loader.length) % loader.length].x = left2FlankImageX;
 				loader[(index - 2 + loader.length) % loader.length].y = allImageY;
-				addChildAt(loader[(index - 2 + loader.length) % loader.length],0);
+				sprPicture.addChild(loader[(index - 2 + loader.length) % loader.length]);
 			}
 			
 			////////////////////////
@@ -318,7 +327,7 @@ package com.readdream.as3.miss
 			if (loader[(index + 2 + loader.length) % loader.length].parent == null) {
 				loader[(index + 2 + loader.length) % loader.length].x = right2FlankImageX;
 				loader[(index + 2 + loader.length) % loader.length].y = allImageY;
-				addChildAt(loader[(index + 2 + loader.length) % loader.length],0);
+				sprPicture.addChild(loader[(index + 2 + loader.length) % loader.length]);
 			}
 			
 			////////////////////////

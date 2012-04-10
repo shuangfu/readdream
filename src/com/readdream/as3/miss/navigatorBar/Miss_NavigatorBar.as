@@ -47,7 +47,7 @@ package com.readdream.as3.miss.navigatorBar
 		private function drawBackground():void 
 		{
 			var scaleHeight:Number;
-			scaleHeight = Capabilities.screenResolutionY;
+			scaleHeight = Capabilities.screenResolutionY - 500;
 			//trace(scaleHeight);
 			this.graphics.beginFill(0xECECEC);
 			//this.graphics.beginFill(0x00ff00);
