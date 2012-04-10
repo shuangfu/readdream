@@ -1,6 +1,7 @@
 package com.readdream.as3.miss.matchthumb
 {
 	import com.greensock.TweenLite;
+	import com.readdream.as3.miss.Miss_Button;
 	import com.readdream.as3.mr.Mr_Dresser;
 	import com.readdream.as3.mr.Mr_Layouter;
 	import com.readdream.as3.robot.Robot_PicLoader;
@@ -41,6 +42,7 @@ package com.readdream.as3.miss.matchthumb
 		private var sprContent:Sprite = new Sprite();
 		private var sprLine:Sprite = new Sprite();
 		private var sprUpLine:Sprite = new Sprite();
+		private var btnCheckIn:Miss_Button;
 		
 		public function Miss_MatchThumb_Small(vo:Vo_Match)
 		{
@@ -76,6 +78,8 @@ package com.readdream.as3.miss.matchthumb
 			matchIcon = new Robot_PicLoader(vo.matchIcon, 0, 0, 40, 40);
 			
 			matchPicture = Mr_Dresser.drawBorder(new Robot_PicLoader(vo.picture[0], 0, 0, compPicWidth - 1, compPicHeight - 1), 0xDDDDDD, 1, false);
+			
+			btnCheckIn = new Miss_Button("报名", 140, 25);
 		
 		}
 		
@@ -102,12 +106,12 @@ package com.readdream.as3.miss.matchthumb
 			sprContent.graphics.drawRect(0, 0, 239, 400);
 			sprContent.graphics.endFill();
 			
-			var masker:Sprite = Mr_Dresser.getMasker(241, 201, 0xFFFFFF);
-			trace(masker.width,"---masker---" ,masker.height);
-			masker.x = 0;
-			masker.y = 0;
-			addChild(masker);
-			sprContent.mask = masker;
+			//var masker:Sprite = Mr_Dresser.getMasker(241, 201, 0xFFFFFF);
+			//trace(masker.width,"---masker---" ,masker.height);
+			//masker.x = 0;
+			//masker.y = 0;
+			//addChild(masker);
+			//sprContent.mask = masker;
 			
 			matchTitle.autoSize = TextFieldAutoSize.LEFT;
 			matchTitle.selectable = false;
@@ -146,7 +150,8 @@ package com.readdream.as3.miss.matchthumb
 			objArr.push({stuff: matchTitle2, xPos: 20, yPos: 225});
 			objArr.push({stuff: matchFrom2, xPos: 20, yPos: 225 + matchTitle2.textHeight + 10});
 			objArr.push({stuff: matchIcon, xPos: 180, yPos: 225});
-			objArr.push({stuff: matchComp, xPos: 18, yPos: 290});
+			objArr.push( { stuff: matchComp, xPos: 18, yPos: 290 } );
+			objArr.push( { stuff: btnCheckIn, xPos:50, yPos:365 } );
 			
 			Mr_Layouter.layouter(sprContent, objArr);
 			addChild(sprContent);

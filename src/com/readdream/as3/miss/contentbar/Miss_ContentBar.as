@@ -96,7 +96,8 @@ package com.readdream.as3.miss.contentbar
 		{
 			/////////////////
 			//Init Overview
-			lblPicture = Mr_Dresser.drawBorder((new Miss_LabelPicture(vo)), 0xFFFFFF, 2, true);
+			lblPicture = Mr_Dresser.drawBorder((new Miss_LabelPicture(vo)), 0xFFFFFF, 2);
+			//Mr_Dresser.addShadowFilter(lblPicture,0x000000,90,0.65,4,4,4,0.65);
 			
 			lblList = new Miss_LabelPictureList(vo);
 			lblList.addEventListener(MatchReveal_ContentBarEvent.PICTURE_CHANGE, pictureHandler);

@@ -25,7 +25,7 @@ package com.readdream.as3.miss
 			{
 				var tempThumb_big:Miss_MatchThumb_Big;
 				tempThumb_big = new Miss_MatchThumb_Big(vo);
-				tempThumb_big.scrollRect = new Rectangle(0, 0, 480, 400);
+				tempThumb_big.scrollRect = new Rectangle(0, 0, 481, 401);
 				
 				bmpData.draw(tempThumb_big);
 				addChild(tempThumb_big);
@@ -36,7 +36,7 @@ package com.readdream.as3.miss
 			{
 				var tempThumb_small:Miss_MatchThumb_Small;
 				tempThumb_small = new Miss_MatchThumb_Small(vo);
-				tempThumb_small.scrollRect = new Rectangle(0, 0, 241, 200);
+				tempThumb_small.scrollRect = new Rectangle(0, 0, 241, 201);
 				bmpData.draw(tempThumb_small);
 				addChild(tempThumb_small);
 				trace(tempThumb_small.x, " ||| ", tempThumb_small.y);

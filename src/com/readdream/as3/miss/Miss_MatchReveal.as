@@ -53,6 +53,7 @@ package com.readdream.as3.miss
 			tabBar = new Miss_TabBar();
 			tabBar.addEventListener(MatchReveal_TabbarEvent.TABBAR_CHANGE, tabBarChangeHandler);
 			contentBar = new Miss_ContentBar(vo);		
+			
 
 		}
 		
