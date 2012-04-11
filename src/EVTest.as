@@ -19,6 +19,7 @@ package
 	import flash.display.SpreadMethod;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
+	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
 	import flash.display.CapsStyle;
 	import flash.display.LineScaleMode;
@@ -44,8 +45,9 @@ package
 			stage.align = StageAlign.TOP_LEFT;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
+			//stage.displayState = StageDisplayState.FULL_SCREEN;
 			
-			//helloTextInput();
+			helloTextInput();
 			
 			
 			//Login();
@@ -55,7 +57,7 @@ package
 			//account();
 			//
 			//helloMissSelectComponent();
-			helloMissUserCenter();
+			//helloMissUserCenter();
 			//SharedObjectDemo();
 			
 			//helloMissButton();
@@ -73,9 +75,13 @@ package
 		
 		private function helloTextInput():void 
 		{
-			var demo:Miss_TextInput = new Miss_TextInput(240, 30);
-			Mr_Dresser.drawLine(demo, 0, 31, 241, 31, 0.5, 0xFFFFFF, 1);
-			demo.x = demo.y = 200;
+			var logo:Robot_PicLoader = new Robot_PicLoader("assets/rdLogo.jpg", 0, 0, 220, 200);
+			logo.x = 300;
+			logo.y = 80;
+			addChild(logo);
+			var demo:Miss_TextInput = new Miss_TextInput(220, 30);
+			Mr_Dresser.drawLine(demo, 0, 31, 221, 31, 0.5, 0xFFFFFF, 1);
+			demo.x = demo.y = 300;
 			addChild(demo);
 		}
 		

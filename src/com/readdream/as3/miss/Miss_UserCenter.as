@@ -104,7 +104,7 @@ package com.readdream.as3.miss
 			vrMonth.push("1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月");
 			selMonth = new Miss_SelectComponent(130, elementHeight+1, vrMonth);
 			selMonth.prompt = "月";
-			inputDay = new Miss_TextInput(60, elementHeight, "日", "number");
+			inputDay = new Miss_TextInput(55, elementHeight, "日", "number");
 			
 			
 			txtDistrict.text = "地区";
@@ -189,7 +189,7 @@ package com.readdream.as3.miss
 			objContent.push( { stuff:txtSex, xPos:elementX, yPos:40 + txtName.height+inputName.height + 25 } );
 			objContent.push( { stuff:txtBirthday, xPos:elementX, yPos:40 + txtName.height*2+inputName.height + 25*2 + 30 } );
 			objContent.push( { stuff:inputYear, xPos:elementX, yPos:40 + txtName.height*3+inputName.height + 25*2 + 30 } );
-			objContent.push( { stuff:inputDay, xPos:290, yPos:40 + txtName.height*3+inputName.height + 25*2 + 30 } );
+			objContent.push( { stuff:inputDay, xPos:295, yPos:40 + txtName.height*3+inputName.height + 25*2 + 30 } );
 			objContent.push( { stuff:txtDistrict, xPos:elementX, yPos:40 + txtName.height*3+inputName.height*2 + 25*3 + 30 } );
 			objContent.push( { stuff:inputDistrict, xPos:elementX, yPos:40 + txtName.height*4+inputName.height*2 + 25*3 + 30 } );
 			objContent.push( { stuff:txtAddress, xPos:elementX, yPos:40 + txtName.height*4+inputName.height*3 + 25*4 + 30 } );
@@ -209,7 +209,7 @@ package com.readdream.as3.miss
 			objContent.push( { stuff:selFavMusic, xPos:elementX2, yPos:40 + txtName.height*4+inputName.height*2 + 25*3 + 30  } );
 			objContent.push( { stuff:selFavMovie, xPos:elementX2, yPos:40 + txtName.height*3+inputName.height + 25*2 + 30   } );
 			
-			objContent.push( { stuff:selMonth, xPos:153, yPos:40 + txtName.height*3+inputName.height + 25*2 + 30 } ); 
+			objContent.push( { stuff:selMonth, xPos:155, yPos:40 + txtName.height*3+inputName.height + 25*2 + 30 } ); 
 			objContent.push( { stuff:selSex, xPos:elementX, yPos:40 + txtName.height * 2 + inputName.height + 25 } );
 			
 			Mr_Layouter.layouter(sprContent, objContent);

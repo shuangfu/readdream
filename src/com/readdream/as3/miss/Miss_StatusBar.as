@@ -22,6 +22,7 @@ package com.readdream.as3.miss
 		private const txtLoginX:Number = 880;
 		private const backgroundColor:uint = 0xECECEC;
 		private const borderColor:uint = 0xBDBDBD;
+		private const userName:String = "evstarcn@gmail.com";
 
 		
 		public var txtLogin:TextField = new TextField();
@@ -31,6 +32,7 @@ package com.readdream.as3.miss
 		private var sprPic:Sprite = new Sprite();
 		
 		private var sprContent:Sprite = new Sprite();
+		private var picLogin:Robot_PicLoader;
 		
 		
 		
@@ -46,12 +48,15 @@ package com.readdream.as3.miss
 		{
 			sprContent = Mr_Dresser.getMasker(sizeWidth, sizeHeight, backgroundColor);
 			txtLogin.text = "登录";
-			txtLogin.autoSize = TextFieldAutoSize.LEFT;
-			txtLogin.x = txtLoginX;
+			//txtLogin.autoSize = TextFieldAutoSize.LEFT;
+			//txtLogin.opaqueBackground = 0xff0000;
+			txtLogin.width = 218;
+			txtLogin.height = 19
+			txtLogin.x = 700;
 			txtLogin.y = (sprContent.height / 2) - (txtLogin.height / 2) + 2;
 			txtLogin.selectable = false;
 			//txtLogin.
-			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.DETAILSBAR_MATCHINFORMATION));
+			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.STATUSBAR_LOGINTEXT));
 			
 			picDefault = new Robot_PicLoader("assets/setdefault.png", 0, 0, 30, 25);
 			picActivate = new Robot_PicLoader("assets/setmoveon.png", 0, 0, 30, 25);
@@ -66,7 +71,7 @@ package com.readdream.as3.miss
 			sprPic.addChild(picActivate);
 			sprPic.addChild(picDefault);
 			
-			sprPic.x = txtLogin.x + txtLogin.width + 7;
+			sprPic.x = 923;
 			sprPic.y = (sprContent.height / 2) - (sprPic.height / 2);
 			
 			
@@ -83,6 +88,34 @@ package com.readdream.as3.miss
 			sprPic.addEventListener(MouseEvent.MOUSE_UP, picMouseUpHandler);
 			txtLogin.addEventListener(MouseEvent.ROLL_OVER, txtLoginRollOverHandler);
 			txtLogin.addEventListener(MouseEvent.ROLL_OUT, txtLoginRollOutHandler);
+			txtLogin.addEventListener(MouseEvent.CLICK, txtLoginClickHandler);
+		}
+		
+		private function txtLoginClickHandler(e:MouseEvent):void 
+		{
+			if (txtLogin.text == "登录") {
+				loginIn();
+			}else {
+				loginOut();
+			}
+		}
+		
+		public function loginIn():void {
+			txtLogin.text = userName;
+			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.STATUSBAR_LOGINTEXT));
+			picLogin = new Robot_PicLoader("assets/picLogin.png", 0, 0, 7, 4);
+			txtLogin.x = 685;
+			picLogin.x = 908;
+			picLogin.y = (sprContent.height / 2) - (picLogin.height / 2) + 2;
+			sprContent.addChild(picLogin);
+		}
+		
+		public function loginOut():void {
+			txtLogin.text = "登录";
+			txtLogin.setTextFormat(Robot_TextFormater.getTextFormat(Robot_TextFormater.STATUSBAR_LOGINTEXT));
+			txtLogin.x = 700;
+			sprContent.removeChild(picLogin);
+			
 		}
 		
 		private function txtLoginRollOutHandler(e:MouseEvent):void 

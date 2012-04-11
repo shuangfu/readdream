@@ -34,6 +34,7 @@ package com.readdream.as3.robot
 		public static const SELECTCOMPONENT_SELECTED:String = "selectcomponent_selected";
 		public static const SELECTCOMPONENT_BUTTONRESET:String = "selectcomponent_buttonreset";
 		public static const SELECTCOMPONENT_BUTTONSUBMIT:String = "selectcomponent_buttonsubmit";
+		public static const STATUSBAR_LOGINTEXT:String = "statusbar_logintext";
 		
 		
 		
@@ -281,6 +282,15 @@ package com.readdream.as3.robot
 					textFont.align = TextFormatAlign.CENTER;
 					//textFont.leading = 5;
 					textFont.font = "宋体";
+					return textFont;				
+				case "statusbar_logintext":
+					//font settings
+					textFont = new TextFormat();
+					textFont.size = 12;
+					textFont.leading = 5;
+					textFont.align = TextFormatAlign.RIGHT;
+					textFont.color = 0x262626;
+					textFont.font = "宋体";
 					return textFont;
 				
 				
@@ -377,14 +387,14 @@ package com.readdream.as3.robot
 				case "textinput_unfocus": 
 					//font settings
 					textFont = new TextFormat();
-					textFont.size = 13;
+					textFont.size = 12;
 					textFont.color = 0xa1a1a1;
 					textFont.font = "宋体";
 					return textFont;
 				case "textinput_focus":
 					//font settings
 					textFont = new TextFormat();
-					textFont.size = 13;
+					textFont.size = 12;
 					textFont.color = 0x000000;
 					textFont.font = "宋体";
 					return textFont;
