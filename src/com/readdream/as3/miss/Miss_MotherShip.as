@@ -3,8 +3,10 @@ package com.readdream.as3.miss
 	import com.readdream.as3.miss.navigatorBar.Miss_NavigatorBar;
 	import com.readdream.as3.robot.Robot_MissMatchThumbFactory;
 	import com.readdream.as3.robot.Robot_PicLoader;
+	import com.readdream.as3.vo.Vo_Match;
 	import com.readdream.as3.vo.Vo_NavigatorElement;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.geom.Rectangle;
 	/**
@@ -13,7 +15,14 @@ package com.readdream.as3.miss
 	 */
 	public class Miss_MotherShip extends Sprite
 	{
+		private var scaleWidth:Number;
+		private var thisWidth:Number;
+		private var magician: Miss_ScrollBarUpfitter;
+		private var magician2: Miss_ScrollBarUpfitter;
 		
+		private var navBar : Miss_NavigatorBar;
+		private var statusBar : Miss_StatusBar;
+		private var architect:Miss_Architect
 		public function Miss_MotherShip() 
 		{
 			var dataArr:Array = new Array();
@@ -81,20 +90,69 @@ package com.readdream.as3.miss
 {"picture":"assets/law1.jpg,assets/law2.jpg,assets/law3.jpg,assets/law4.jpg,assets/law5.jpg","matchIcon": "assets/lawicon.jpg","matchTitle":"今日说法","matchComp":"1999年1月2日中央电视台推出一个全新的法制栏目—《今日说法》，每天中午12：40在央视一套节目播出，每期15分钟。周一至周五13：45在中央电视台一套重播。《说法》采取以案说法、大众参与、专家评说的节目样式。 栏目宗旨：重在普法，监督执法，推动立法，为百姓办实事。","matchType":"电视栏目","matchFrom":"CCTV1","matchApplyUsers":286435,"matchContent":"2001年起，栏目陆续出版了《今日说法》丛书、《法治的力量》、《见证中国法制进程》、《聚焦婚姻》几部书籍. 2001年12月4日，是我国第一个法制宣传日，为了迎接宣传日的到来，全国普法办与中央电视台《今日说法》栏目联合举办一台九十分钟的专题晚会——法制的力量。晚会上来自全国各地的观众与政府部门的一些官员做了一次心与心的交流，面对面的沟通，观众们率直的提问，官员们真诚的回答赢得了现场观众热烈的掌声。\n\n2002年4月，为配合新《婚姻法》颁布一周年，《今日说法》制作的《婚姻法一周年特别节目》，通过对一系列社会关注的热点问题来诠释婚姻家庭中的法律问题，引起多方关注，获得较高的收视率。\n\n2002年5月，为配合6·26国际禁毒日的到来，和公安部禁毒局、云南省公安厅合作制作的60分钟特别节目《聚焦金三角》是国内媒体首次对其作全景式的独家报道，极具新闻价值和研究价值。\n\n　2002年5月13日，在中国国际电视总公司为《今日说法》举行了热烈而隆重的“全国青年文明号”揭牌仪式。团中央书记赵勇、中直机关工委党委副书记伍绍祖和国家广电总局副局长赵实、中央电视台等单位的部分领导参加了这一仪式。“全国青年文明号”是由江泽民总书记亲笔题写的，它是全国青年集体的最高荣誉。\n\n2002年5月30日播出的《公民道德知识竞赛》因其巧妙地将知识性、趣味性、教育性及娱乐性融为一体，不仅得到了中宣部领导的表扬和肯定，也得到了社会各界的好评。","matchInformation1":"活动元数据1","matchInformation2":"活动元数据2","matchInformation3":"活动元数据3","matchInformation4":"活动元数据4","matchInformation5":"活动元数据5","matchImportant":0},
 {"picture":"assets/happydict1.jpg,assets/happydict2.jpg,assets/happydict3.jpg,assets/happydict4.jpg", "matchIcon": "assets/happydicticon.jpg", "matchTitle":"开心辞典", "matchComp":"《开心辞典》是中央电视台倾力奉献的名牌栏目；面向大众的益智节目；提供广泛的参与空间和机制；搭建刺激的智慧擂台。一个集齐趣味、益智、知识、紧张、惊险、幽默于一身的有奖问答节目；一个引进国外先进电视形态、由高科技网络、声讯手段支撑的游戏节目；一个现场气氛空前紧张激烈、引人入胜、扣人心弦的全新大型娱乐节目；一个从参与到收视完全面向普通百姓，参赛人数无限多，选手选拔机制更科学、更公平，决赛选手水平更高的平民化节目。", "matchType":"电视栏目", "matchFrom":"CCTV3", "matchApplyUsers":89729981, "matchContent":"《开心辞典》——一个中央电视台经济频道倾力奉献的名牌栏目；一个由高科技网络、声讯手段支撑、完全面向普通大众的大型益智节目；提供最广泛的参与空间和公平的参与机制；搭建最刺激的智慧擂台。\n\n《开心辞典》是中央电视台经济频道2000年全面改版时为响应党中央“科教兴国”号召，结合本频道特点，于7月7日推出的新型益智类节目。《开心辞典》在央视各级领导的关心和指导下，节目组全体人员共同努力，使节目开播伊始便以强劲势头迅速切入益智节目市场。仅用6个月时间，收视率就跃居央视二套第一，最高时达3.79%；此后收视率稳居央视二套前两位，成为每周五22：05中央电视台所有频道同一时间档固定节目中观众最多的节目。作为一档新型的益智类娱乐节目，不仅在开播之初给人耳目一新的感觉，经过四年的锻造，《开心辞典》更加完善和成熟，逐步成长为央视二套的品牌节目之一。\n\n《开心辞典》准确锁定以“家庭”为基础的收视群体，围绕着中国传统亲情观念，成功引进国外益智节目的全新理念，利用“家庭梦想”和“平民智力英雄”等核心概念，满足了观众日益旺盛的娱乐消费需要，取得了非同凡响的市场效果。节目开播到现在，共播出190余期，收视率稳居央视二套前茅，并于2003年6月以央视二套的精品节目之一率先闯进央视一套播出，拓展了节目的收视平台。", "matchInformation1":"活动元数据1", "matchInformation2":"活动元数据2", "matchInformation3":"活动元数据3", "matchInformation4":"活动元数据4", "matchInformation5":"活动元数据5", "matchImportant":0 }
 ];
-			var magician: Miss_ScrollBarMagician;
-			var missMatchThumbs :Array =  Robot_MissMatchThumbFactory.getMissMatchThumbs(tempDataArr)
-			var architect:Miss_Architect = new Miss_Architect(missMatchThumbs);
-			var statusBar:Miss_StatusBar = new Miss_StatusBar();
-			var navBar : Miss_NavigatorBar = new Miss_NavigatorBar(dataArr);
 			
-			magician = new Miss_ScrollBarMagician(architect,0, 20, true, 40);
+			var missMatchThumbs :Array =  Robot_MissMatchThumbFactory.getMissMatchThumbs(tempDataArr)
+			architect = new Miss_Architect(missMatchThumbs);
+			statusBar = new Miss_StatusBar();
+			navBar = new Miss_NavigatorBar(dataArr);
+			
+			magician = new Miss_ScrollBarUpfitter(architect, 40);
+			magician2 = new Miss_ScrollBarUpfitter(navBar, 0);
+			
 			magician.x = 240;
-			magician.y = 40;
+			magician.y = 39;
 			
 			statusBar.x = 240;
-			addChild(magician);
+			statusBar.y = -1;
+			architect.x = 240;
+			architect.y = 40;
+			addChild(architect);
 			addChild(statusBar);
 			addChild(navBar);
+			this.addEventListener(Event.ADDED_TO_STAGE,addToStageHandler);
+		}
+		
+		private function addToStageHandler(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, addToStageHandler);
+			scaleWidth = this.stage.stageWidth;
+			trace(scaleWidth);
+			if (scaleWidth >= 1200) 
+			{
+				statusBar.x = (scaleWidth - 1200) / 2 + 240 -9;
+				magician.x = (scaleWidth - 1200) / 2 + 240 -9;
+				architect.x = (scaleWidth - 1200) / 2 + 240 -9;
+				navBar.x = (scaleWidth - 1200) / 2 -9;
+				magician2.x = (scaleWidth - 1200) / 2 -9
+			} else {
+				statusBar.x = 240;
+				magician.x = 240;
+				architect.x = 240;
+				navBar.x = 0;
+				magician2.x = 0;
+			}
+			this.stage.addEventListener(Event.RESIZE,resizeHandler);
+		}
+		
+		private function resizeHandler(e:Event):void 
+		{
+			scaleWidth = this.stage.stageWidth;
+			//trace("\\\111"+architect.width);
+			trace(scaleWidth);
+			if (scaleWidth >= 1200) 
+			{
+				architect.x = (scaleWidth - 1200) / 2 + 240 -9;
+				statusBar.x = (scaleWidth - 1200) / 2 + 240 -9;
+				magician.x = (scaleWidth - 1200) / 2 + 240 -9;
+				navBar.x = (scaleWidth - 1200) / 2 -9;
+				magician2.x = (scaleWidth - 1200) / 2 -9;
+			} else {
+				statusBar.x = 240;
+				magician.x = 240;
+				architect.x = (scaleWidth - 1200) / 2 + 240 -9;
+				navBar.x = 0;
+				magician2.x = 0;
+			}
 		}
 	}
 }

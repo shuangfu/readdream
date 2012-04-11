@@ -30,7 +30,7 @@ package
 	 * ...
 	 * @author fs
 	 */
-	[SWF(frameRate="40",backgroundColor="#ffffff")]
+	[SWF(width = "1200", height = "1600",frameRate="40",backgroundColor="#ffffff")]
 	
 	public class FSTest extends Sprite
 	{
